@@ -2,7 +2,7 @@
 
 This directory is a concise, local reference for Akaunting product concepts. It helps readers orient themselves across the product without turning the reference into a task guide or a description of framework internals.
 
-The Help Centre inventory used here is a snapshot checked on 2026-08-06. All prose in this set is original synthesis: it does not mirror Help Centre instructions, examples, or imagery. Downstream work reads this committed set instead of consulting the web.
+The [Help Centre category index](https://akaunting.com/hc/docs/) used here is a snapshot checked on 2026-08-06. All prose in this set is original synthesis: it does not mirror Help Centre instructions, examples, or imagery. Downstream work reads this committed set instead of consulting the web.
 
 Use these labels consistently throughout the reference:
 
