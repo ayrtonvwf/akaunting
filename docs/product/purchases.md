@@ -24,5 +24,5 @@ See [sales](sales.md) for the customer-facing counterpart. [Banking](banking.md)
 
 ## Sources
 
-- [Bills](https://akaunting.com/hc/docs/bills/).
+- [Bills](https://akaunting.com/hc/docs/bills/), checked as part of the Help Centre snapshot on 2026-08-06.
 - [Navigation menu](https://akaunting.com/hc/docs/the-user-interface/navigation-menu/).

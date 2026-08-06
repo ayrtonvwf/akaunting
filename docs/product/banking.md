@@ -26,5 +26,5 @@ Banking records money movement and reconciliation relates account activity to th
 
 ## Sources
 
-- [Banking feeds and reconciliations](https://akaunting.com/hc/docs/banking-feeds-reconciliations/).
+- [Banking feeds and reconciliations](https://akaunting.com/hc/docs/banking-feeds-reconciliations/), checked as part of the Help Centre snapshot on 2026-08-06.
 - [Managing transactions](https://akaunting.com/hc/docs/banking-feeds-reconciliations/managing-transactions/).

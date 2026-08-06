@@ -31,9 +31,13 @@ The corrections below come from the [developer-documentation drift audit](../../
 
 **Verified against source** — `SettingsCreated` is a current settings-menu event (`app/Events/Menu/SettingsCreated.php`; `app/Http/Livewire/Menu/Settings.php`). The local evidence does not prove that it is a behavioral replacement for the vanished `SettingShowing` event. Treat that relationship as unresolved until a module or migration history demonstrates it; see the [drift audit](../../specs/northstar/DOCS-DRIFT-AUDIT.md).
 
+## Related product concepts
+
+Extensions can add capabilities without redefining the canonical product vocabulary in [shared concepts](concepts.md). Module settings and installable capabilities relate to [administration](administration.md), while payment methods relate to the settlement and transaction vocabulary in [sales](sales.md) and [banking](banking.md).
+
 ## Published sources
 
-- [Developer Help Centre index](https://akaunting.com/hc/docs/developers/)
+- [Developer Help Centre index](https://akaunting.com/hc/docs/developers/), checked as part of the Help Centre snapshot on 2026-08-06.
 - [Modules](https://akaunting.com/hc/docs/developers/modules/)
 - [Menu](https://akaunting.com/hc/docs/developers/menu/)
 - [Settings](https://akaunting.com/hc/docs/developers/settings/)

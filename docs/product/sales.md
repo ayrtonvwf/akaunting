@@ -26,6 +26,6 @@ When a payment has a banking counterpart, [banking](banking.md) explains the tra
 
 ## Sources
 
-- [Invoices and estimates](https://akaunting.com/hc/docs/invoices-estimates/).
+- [Invoices and estimates](https://akaunting.com/hc/docs/invoices-estimates/), checked as part of the Help Centre snapshot on 2026-08-06.
 - [Payments](https://akaunting.com/hc/docs/payments/).
 - [Navigation menu](https://akaunting.com/hc/docs/the-user-interface/navigation-menu/).

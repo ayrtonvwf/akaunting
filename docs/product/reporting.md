@@ -26,6 +26,6 @@ The shared meanings of company, category, currency, tax, document, and payment a
 
 ## Sources
 
-- [Reports](https://akaunting.com/hc/docs/reports/).
+- [Reports](https://akaunting.com/hc/docs/reports/), checked as part of the Help Centre snapshot on 2026-08-06.
 - [Accessing and viewing reports](https://akaunting.com/hc/docs/reports/accessing-and-viewing-reports/).
 - [Creating a new report](https://akaunting.com/hc/docs/reports/creating-a-new-report/).
