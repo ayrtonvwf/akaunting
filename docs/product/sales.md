@@ -20,7 +20,7 @@ The [Payments Help Centre reference](https://akaunting.com/hc/docs/payments/) de
 
 ## Related concepts
 
-The principal sales relationship is customer -> estimate or invoice -> payment. A payment can settle an invoice in full, as a split payment, or through an online payment option. The common labels for contact, document, and payment are defined in [concepts](concepts.md).
+The principal sales relationship is customer -> estimate -> invoice -> payment; an invoice can also originate without an estimate. A payment can settle an invoice in full, as a split payment, or through an online payment option. The common labels for contact, document, and payment are defined in [concepts](concepts.md).
 
 When a payment has a banking counterpart, [banking](banking.md) explains the transaction connection. [Reporting](reporting.md) analyzes the sales records and their resulting activity rather than replacing the invoice or payment. These relationships follow the [Invoices and estimates](https://akaunting.com/hc/docs/invoices-estimates/) and [Payments](https://akaunting.com/hc/docs/payments/) product references.
 
