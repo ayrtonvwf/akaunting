@@ -31,6 +31,18 @@ Run these from the repository root.
 - Query the committed graph JSON with the locked local Graphify project:
   - `uv run --project tools/graphify --locked graphify query "<question>" --graph graphify-out/graph.json`
 
+### Query discovery workflow
+
+Agents should not guess Graphify's generated node IDs. Start with a human-readable symbol, method, or repository-relative file path:
+
+1. Resolve the symbol and inspect its source path:
+   - `uv run --project tools/graphify --locked graphify explain "<symbol-or-file>" --graph graphify-out/graph.json`
+2. If Graphify reports multiple matches, choose the match by its repository-relative `src` path and copy the corresponding `id`.
+3. Run the precise traversal using that ID, selecting the relevant edge context:
+   - `uv run --project tools/graphify --locked graphify query "<node-id>" --context call --budget 1500 --graph graphify-out/graph.json`
+
+For example, `explain "getSelectedRecords"` identifies the matching method in `app/Abstracts/BulkAction.php`; use the reported node ID for a precise call-graph query. `EXTRACTED` edges can be cited as structural evidence, while `INFERRED` and `AMBIGUOUS` edges require source inspection.
+
 The rebuild wrapper must be run from the repository root. It uses the locked local Graphify project in `tools/graphify/`, requires no API key, and does not depend on any machine-global Graphify or Codex installation.
 
 ### Output set
