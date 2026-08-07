@@ -1,0 +1,11 @@
+*
+!app/
+!app/**
+!modules/
+!modules/**
+!config/
+!config/**
+!routes/
+!routes/**
+!tests/
+!tests/**
