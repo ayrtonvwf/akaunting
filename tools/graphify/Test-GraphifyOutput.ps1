@@ -58,6 +58,92 @@ function Add-SourcePaths {
     }
 }
 
+function Test-IsAllowedGraphifySourcePath {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string] $SourcePath,
+
+        [Parameter(Mandatory = $true)]
+        [string[]] $AllowedRoots
+    )
+
+    $normalizedSourcePath = $SourcePath.Replace('\', '/')
+
+    if (
+        [System.IO.Path]::IsPathRooted($SourcePath) -or
+        $normalizedSourcePath.StartsWith('/', [System.StringComparison]::Ordinal) -or
+        $normalizedSourcePath -match '^[A-Za-z]:'
+    ) {
+        return $false
+    }
+
+    $pathSegments = @($normalizedSourcePath.Split('/'))
+
+    if ($pathSegments -contains '..') {
+        return $false
+    }
+
+    $relativeSegments = @($pathSegments | Where-Object { $_ -and $_ -ne '.' })
+
+    if ($relativeSegments.Count -lt 2) {
+        return $false
+    }
+
+    $normalizedRelativePath = $relativeSegments -join '/'
+
+    foreach ($allowedRoot in $AllowedRoots) {
+        if ($normalizedRelativePath.StartsWith($allowedRoot, [System.StringComparison]::Ordinal)) {
+            return $true
+        }
+    }
+
+    return $false
+}
+
+function Assert-SelfContainedGraphHtml {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string] $HtmlPath
+    )
+
+    $htmlContent = Get-Content -LiteralPath $HtmlPath -Raw
+    $scriptTags = [regex]::Matches($htmlContent, '<script\b[^>]*>', [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)
+
+    foreach ($scriptTag in $scriptTags) {
+        if ($scriptTag.Value -match '(?i)\bsrc\s*=') {
+            throw "Graphify graph.html includes an external script dependency: $($scriptTag.Value)"
+        }
+    }
+
+    $linkTags = [regex]::Matches($htmlContent, '<link\b[^>]*>', [System.Text.RegularExpressions.RegexOptions]::IgnoreCase)
+    $relPattern = '(?i)\brel\s*=\s*(?:"(?<value>[^"]*)"|''(?<value>[^'']*)''|(?<value>[^\s>]+))'
+
+    foreach ($linkTag in $linkTags) {
+        $relMatch = [regex]::Match($linkTag.Value, $relPattern)
+
+        if (
+            $relMatch.Success -and
+            @($relMatch.Groups['value'].Value -split '\s+') -contains 'stylesheet' -and
+            $linkTag.Value -match '(?i)\bhref\s*='
+        ) {
+            throw "Graphify graph.html includes an external stylesheet dependency: $($linkTag.Value)"
+        }
+    }
+
+    $styleTags = [regex]::Matches(
+        $htmlContent,
+        '<style\b[^>]*>(?<content>.*?)</style>',
+        [System.Text.RegularExpressions.RegexOptions]::IgnoreCase -bor [System.Text.RegularExpressions.RegexOptions]::Singleline
+    )
+
+    foreach ($styleTag in $styleTags) {
+        if ($styleTag.Groups['content'].Value -match '(?i)@import\b') {
+            throw 'Graphify graph.html includes an external stylesheet import.'
+        }
+    }
+
+}
+
 foreach ($manifestPath in $requiredModuleManifests) {
     if (-not (Test-Path -LiteralPath $manifestPath)) {
         throw "Missing required module manifest: $manifestPath"
@@ -69,6 +155,8 @@ foreach ($requiredOutputPath in @($graphJsonPath, $reportPath, $htmlPath)) {
         throw "Missing Graphify output file: $requiredOutputPath"
     }
 }
+
+Assert-SelfContainedGraphHtml -HtmlPath $htmlPath
 
 try {
     $graph = Get-Content -LiteralPath $graphJsonPath -Raw | ConvertFrom-Json -Depth 100
@@ -85,22 +173,13 @@ if ($sourcePaths.Count -eq 0) {
 }
 
 foreach ($sourcePath in $sourcePaths) {
-    $normalizedSourcePath = $sourcePath.Replace('\', '/').TrimStart('./')
+    $normalizedSourcePath = $sourcePath.Replace('\', '/')
 
     if ($normalizedSourcePath -match '(^|/)(vendor|node_modules)(/|$)') {
         throw "Graphify graph.json includes out-of-scope dependency source path: $sourcePath"
     }
 
-    $isAllowedPath = $false
-
-    foreach ($allowedRoot in $allowedRoots) {
-        if ($normalizedSourcePath.StartsWith($allowedRoot, [System.StringComparison]::Ordinal)) {
-            $isAllowedPath = $true
-            break
-        }
-    }
-
-    if (-not $isAllowedPath) {
+    if (-not (Test-IsAllowedGraphifySourcePath -SourcePath $sourcePath -AllowedRoots $allowedRoots)) {
         throw "Graphify graph.json includes out-of-scope source path: $sourcePath"
     }
 }
