@@ -12,6 +12,10 @@ $agentsContent = Get-Content -LiteralPath $agentsPath -Raw
 $requiredPatterns = [ordered]@{
     'Python 3.10+ prerequisite' = '(?im)Python 3\.10\+'
     'uv prerequisite' = '(?im)(^|\s)`?uv`?(\s|$)'
+    'global Graphify install guidance' = '(?im)uv tool install --force "graphifyy==0\.9\.34"'
+    'direct Graphify CLI guidance' = '(?im)graphify explain "<symbol-or-file>"'
+    'official project skill guidance' = '(?im)\.agents/skills/graphify/SKILL\.md'
+    'optional hooks and MCP guidance' = '(?im)optional hook and MCP workflows'
     'repository-root rebuild guidance' = '(?im)repository root'
     'generator wrapper path' = '(?im)tools/graphify/Invoke-Graphify\.ps1'
     'verifier wrapper path' = '(?im)tools/graphify/Test-GraphifyOutput\.ps1'

@@ -8,6 +8,7 @@ Use Graphify for structural code-graph questions in this repository. The committ
 
 - Python 3.10+
 - `uv`
+- Global interactive CLI (one-time user install): `uv tool install --force "graphifyy==0.9.34"`, followed by `uv tool update-shell` and a new terminal. This provides the `graphify` command on PATH.
 - Composer-installed modules present at:
   - `modules/OfflinePayments/composer.json`
   - `modules/PaypalStandard/composer.json`
@@ -30,20 +31,24 @@ Run these from the repository root.
   - `pwsh -File .\tools\graphify\Test-GraphifyGuidance.ps1`
 - Query the committed graph JSON with the locked local Graphify project:
   - `uv run --project tools/graphify --locked graphify query "<question>" --graph graphify-out/graph.json`
+- Query the committed graph JSON with the globally installed CLI:
+  - `graphify query "<question>" --graph graphify-out/graph.json`
+
+The repository-local locked command is authoritative for reproducible checks. The global `graphify` command is the normal interactive form for agents and developers after the one-time user install above.
 
 ### Query discovery workflow
 
 Agents should not guess Graphify's generated node IDs. Start with a human-readable symbol, method, or repository-relative file path:
 
 1. Resolve the symbol and inspect its source path:
-   - `uv run --project tools/graphify --locked graphify explain "<symbol-or-file>" --graph graphify-out/graph.json`
+   - `graphify explain "<symbol-or-file>" --graph graphify-out/graph.json`
 2. If Graphify reports multiple matches, choose the match by its repository-relative `src` path and copy the corresponding `id`.
 3. Run the precise traversal using that ID, selecting the relevant edge context:
-   - `uv run --project tools/graphify --locked graphify query "<node-id>" --context call --budget 1500 --graph graphify-out/graph.json`
+   - `graphify query "<node-id>" --context call --budget 1500 --graph graphify-out/graph.json`
 
 For example, `explain "getSelectedRecords"` identifies the matching method in `app/Abstracts/BulkAction.php`; use the reported node ID for a precise call-graph query. `EXTRACTED` edges can be cited as structural evidence, while `INFERRED` and `AMBIGUOUS` edges require source inspection.
 
-The rebuild wrapper must be run from the repository root. It uses the locked local Graphify project in `tools/graphify/`, requires no API key, and does not depend on any machine-global Graphify or Codex installation.
+The rebuild wrapper must be run from the repository root. It uses the locked local Graphify project in `tools/graphify/`, requires no API key, and does not depend on the machine-global Graphify install. The official project-scoped agent skill is at `.agents/skills/graphify/SKILL.md`; its optional hook and MCP workflows are not installed or required for this repository.
 
 ### Output set
 
