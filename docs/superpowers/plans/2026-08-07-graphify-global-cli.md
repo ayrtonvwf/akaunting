@@ -28,7 +28,7 @@
 - Consumes: published package `graphifyy==0.9.34`
 - Produces: a user-shell command named `graphify`
 
-- [ ] **Step 1: Install the pinned CLI**
+- [x] **Step 1: Install the pinned CLI**
 
 Run from PowerShell:
 
@@ -37,7 +37,7 @@ uv tool install --force "graphifyy==0.9.34"
 uv tool update-shell
 ```
 
-- [ ] **Step 2: Verify the executable and version**
+- [x] **Step 2: Verify the executable and version**
 
 Run:
 
@@ -59,7 +59,7 @@ Expected: PowerShell resolves an executable named `graphify`, and the help outpu
 - Consumes: the globally resolved `graphify` command and the repository’s `graphify-out/graph.json`
 - Produces: project-scoped instructions agents can discover for Graphify queries
 
-- [ ] **Step 1: Generate the project-scoped official skill**
+- [x] **Step 1: Generate the project-scoped official skill**
 
 Run the Graphify project installer that creates the cross-framework agent skill, then inspect its output:
 
@@ -70,11 +70,11 @@ git status --short
 
 Keep the generated skill and reference files. Do not retain any generated `.codex/hooks.json`, hook installer output, MCP configuration, or API-key configuration.
 
-- [ ] **Step 2: Update `AGENTS.md`**
+- [x] **Step 2: Update `AGENTS.md`**
 
 Document that `graphify` is the normal interactive command after the user-level `uv` installation, while the locked `uv run --project tools/graphify --locked graphify ...` form remains the deterministic fallback and rebuild path. Preserve the existing scope and evidence rules.
 
-- [ ] **Step 3: Verify agent query discovery guidance**
+- [x] **Step 3: Verify agent query discovery guidance**
 
 Run:
 
@@ -95,7 +95,7 @@ Expected: the guidance verifier passes; the skill explains symbol/file discovery
 - Consumes: the installed CLI, official skill, and existing committed Graphify baseline
 - Produces: a reviewed commit pushed to `chore/graphify-setup` and an updated draft PR
 
-- [ ] **Step 1: Run Graphify checks**
+- [x] **Step 1: Run Graphify checks**
 
 ```powershell
 pwsh -File .\tools\graphify\Test-GraphifyConfig.ps1
@@ -106,14 +106,14 @@ pwsh -File .\tools\graphify\Test-GraphifyGuidance.ps1
 git diff --check HEAD -- .agents AGENTS.md tools/graphify
 ```
 
-- [ ] **Step 2: Commit only the scoped changes**
+- [x] **Step 2: Commit only the scoped changes**
 
 ```powershell
 git add AGENTS.md .agents docs/superpowers/plans/2026-08-07-graphify-global-cli.md
 git commit -m "docs: install graphify cli and agent skill"
 ```
 
-- [ ] **Step 3: Push and verify the draft PR**
+- [x] **Step 3: Push and verify the draft PR**
 
 ```powershell
 git push origin chore/graphify-setup
