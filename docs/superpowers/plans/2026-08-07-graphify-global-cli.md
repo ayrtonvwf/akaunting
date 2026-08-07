@@ -14,6 +14,7 @@
 - The repository-local `tools/graphify/uv.lock` remains authoritative for deterministic graph rebuilds.
 - No Graphify hooks, MCP server, API key, or machine-global repository dependency may be added.
 - The project skill must teach agents to discover symbols/files with `graphify explain` and investigate relationships with `graphify query`.
+- Claude Code must discover the same official skill under `.claude/skills/graphify/` without generated hooks or `CLAUDE.md` integration.
 - Existing unrelated working-tree changes must not be staged or modified.
 
 ---
@@ -121,3 +122,26 @@ gh pr view 2 --json url,isDraft,headRefName,statusCheckRollup
 ```
 
 Expected: the new commit is on the existing draft PR, and unrelated working-tree files remain unstaged.
+
+### Task 4: Add Claude Code skill discovery without hooks
+
+**Files:**
+- Create: `.claude/skills/graphify/SKILL.md` and the official references generated beside it
+- Modify: `AGENTS.md`
+- Modify: `tools/graphify/Test-GraphifyGuidance.ps1`
+
+**Interfaces:**
+- Consumes: the official skill payload already installed under `.agents/skills/graphify/`
+- Produces: Claude Code project skill discovery through `.claude/skills/graphify/`
+
+- [x] **Step 1: Add the Claude Code guidance regression**
+
+Require `.claude/skills/graphify/SKILL.md` to exist and document its path in `AGENTS.md`. Run the verifier before copying the skill; it must fail with the missing Claude Code skill error.
+
+- [x] **Step 2: Copy the official skill payload**
+
+Copy the complete `.agents/skills/graphify/` directory to `.claude/skills/graphify/`, preserving `SKILL.md`, `.graphify_version`, and all reference files. Confirm that `.claude/settings.json` and `CLAUDE.md` are absent.
+
+- [x] **Step 3: Verify parity and repository checks**
+
+Run the guidance verifier, compare the SHA-256 hashes of both `SKILL.md` files, and rerun the full Graphify verification suite. Stage only the Claude skill, guidance, and plan files, then push the updated draft PR.

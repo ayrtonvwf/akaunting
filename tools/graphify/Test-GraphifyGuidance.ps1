@@ -2,9 +2,14 @@ $ErrorActionPreference = 'Stop'
 
 $repoRoot = Resolve-Path (Join-Path $PSScriptRoot '..\..')
 $agentsPath = Join-Path $repoRoot 'AGENTS.md'
+$claudeSkillPath = Join-Path $repoRoot '.claude\skills\graphify\SKILL.md'
 
 if (-not (Test-Path -LiteralPath $agentsPath)) {
     throw "Missing agent guidance file: $agentsPath"
+}
+
+if (-not (Test-Path -LiteralPath $claudeSkillPath)) {
+    throw "Missing Claude Code Graphify skill: $claudeSkillPath"
 }
 
 $agentsContent = Get-Content -LiteralPath $agentsPath -Raw
@@ -15,6 +20,7 @@ $requiredPatterns = [ordered]@{
     'global Graphify install guidance' = '(?im)uv tool install --force "graphifyy==0\.9\.34"'
     'direct Graphify CLI guidance' = '(?im)graphify explain "<symbol-or-file>"'
     'official project skill guidance' = '(?im)\.agents/skills/graphify/SKILL\.md'
+    'Claude Code project skill guidance' = '(?im)\.claude/skills/graphify/SKILL\.md'
     'optional hooks and MCP guidance' = '(?im)optional hook and MCP workflows'
     'repository-root rebuild guidance' = '(?im)repository root'
     'generator wrapper path' = '(?im)tools/graphify/Invoke-Graphify\.ps1'

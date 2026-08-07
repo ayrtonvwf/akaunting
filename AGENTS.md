@@ -48,7 +48,7 @@ Agents should not guess Graphify's generated node IDs. Start with a human-readab
 
 For example, `explain "getSelectedRecords"` identifies the matching method in `app/Abstracts/BulkAction.php`; use the reported node ID for a precise call-graph query. `EXTRACTED` edges can be cited as structural evidence, while `INFERRED` and `AMBIGUOUS` edges require source inspection.
 
-The rebuild wrapper must be run from the repository root. It uses the locked local Graphify project in `tools/graphify/`, requires no API key, and does not depend on the machine-global Graphify install. The official project-scoped agent skill is at `.agents/skills/graphify/SKILL.md`; its optional hook and MCP workflows are not installed or required for this repository.
+The rebuild wrapper must be run from the repository root. It uses the locked local Graphify project in `tools/graphify/`, requires no API key, and does not depend on the machine-global Graphify install. The official project-scoped agent skills are at `.agents/skills/graphify/SKILL.md` for cross-agent runtimes and `.claude/skills/graphify/SKILL.md` for Claude Code. Their optional hook and MCP workflows are not installed or required for this repository.
 
 ### Output set
 
