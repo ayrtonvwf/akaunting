@@ -5,6 +5,8 @@ $repoRootPath = $repoRoot.ProviderPath
 $currentLocationPath = (Resolve-Path '.').ProviderPath
 $graphifyProjectPath = Join-Path $repoRootPath 'tools/graphify'
 $graphJsonPath = Join-Path $repoRootPath 'graphify-out/graph.json'
+$graphHtmlPath = Join-Path $repoRootPath 'graphify-out/graph.html'
+$portableGraphHtmlTitle = 'graphify - graphify-out/graph.html'
 $requiredModuleManifests = @(
     (Join-Path $repoRootPath 'modules/OfflinePayments/composer.json')
     (Join-Path $repoRootPath 'modules/PaypalStandard/composer.json')
@@ -31,6 +33,31 @@ function Get-UvExecutablePath {
     }
 
     return $null
+}
+
+function Set-PortableGraphifyHtmlTitle {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string] $HtmlPath,
+
+        [Parameter(Mandatory = $true)]
+        [string] $PortableTitle
+    )
+
+    if (-not (Test-Path -LiteralPath $HtmlPath)) {
+        throw "Graphify did not produce graph.html at $HtmlPath"
+    }
+
+    $htmlContent = Get-Content -LiteralPath $HtmlPath -Raw
+    $titlePattern = '<title>graphify - .*?</title>'
+    $replacement = "<title>$PortableTitle</title>"
+    $updatedHtmlContent = [regex]::Replace($htmlContent, $titlePattern, $replacement, 1)
+
+    if ($updatedHtmlContent -eq $htmlContent -and $htmlContent -notmatch [regex]::Escape($replacement)) {
+        throw "Graphify graph.html title could not be normalized at $HtmlPath"
+    }
+
+    Set-Content -LiteralPath $HtmlPath -Value $updatedHtmlContent -Encoding utf8NoBOM
 }
 
 if ($currentLocationPath -ne $repoRootPath) {
@@ -116,3 +143,5 @@ $htmlArguments = @(
 if ($LASTEXITCODE -ne 0) {
     throw "Graphify export html failed with exit code $LASTEXITCODE."
 }
+
+Set-PortableGraphifyHtmlTitle -HtmlPath $graphHtmlPath -PortableTitle $portableGraphHtmlTitle
