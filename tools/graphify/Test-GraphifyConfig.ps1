@@ -42,10 +42,17 @@ $expectedIgnoreEntries = @(
     '!tests/**'
 )
 
-foreach ($entry in $expectedIgnoreEntries) {
-    if ($ignoreEntries -notcontains $entry) {
-        throw "Graphify ignore policy is missing required entry: $entry"
-    }
+$normalizedExpectedIgnoreContent = $expectedIgnoreEntries -join "`n"
+$normalizedActualIgnoreContent = $ignoreEntries -join "`n"
+
+if ($normalizedActualIgnoreContent -cne $normalizedExpectedIgnoreContent) {
+    throw @"
+Graphify ignore policy must exactly match the normalized allow-list.
+Expected:
+$normalizedExpectedIgnoreContent
+Actual:
+$normalizedActualIgnoreContent
+"@
 }
 
 Write-Host 'Graphify configuration is valid.'
