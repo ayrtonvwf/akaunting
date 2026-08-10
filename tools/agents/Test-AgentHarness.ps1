@@ -30,4 +30,15 @@ foreach ($skill in $externalSkills) {
     }
 }
 
+$projectSkills = @('akaunting-codebase-navigation')
+foreach ($skill in $projectSkills) {
+    $canonical = Join-Path $repoRoot ".agents\skills\$skill\SKILL.md"
+    $claudeMirror = Join-Path $repoRoot ".claude\skills\$skill\SKILL.md"
+    if (-not (Test-Path -LiteralPath $canonical)) { throw "Missing canonical project skill: $canonical" }
+    if (-not (Test-Path -LiteralPath $claudeMirror)) { throw "Missing Claude mirror: $claudeMirror" }
+    if ((Get-FileHash $canonical -Algorithm SHA256).Hash -ne (Get-FileHash $claudeMirror -Algorithm SHA256).Hash) { throw "Skill mirror drift: $skill" }
+    $frontmatter = Get-Content -LiteralPath $canonical -Raw
+    if ($frontmatter -notmatch "(?ms)^---\r?\nname: $skill\r?\ndescription: .+?\r?\n---") { throw "Invalid frontmatter: $skill" }
+}
+
 Write-Host 'Root agent guidance is valid.'
