@@ -18,7 +18,7 @@ if ((Get-FileHash -LiteralPath $agentsPath -Algorithm SHA256).Hash -ne (Get-File
 }
 
 $content = Get-Content -LiteralPath $agentsPath -Raw
-foreach ($text in @('openwiki/index.md', 'openwiki/quickstart.md', 'openwiki/testing.md', 'Graphify', 'EXTRACTED', 'INFERRED', 'AMBIGUOUS', 'Do not edit the OpenWiki bundle')) {
+foreach ($text in @('<!-- OPENWIKI:START -->', '<!-- OPENWIKI:END -->', 'openwiki/index.md', 'openwiki/quickstart.md', 'openwiki/testing.md', 'Graphify', 'EXTRACTED', 'INFERRED', 'AMBIGUOUS', 'Do not edit the OpenWiki bundle')) {
     Test-RequiredText -Content $content -Text $text
 }
 
