@@ -30,7 +30,7 @@ foreach ($skill in $externalSkills) {
     }
 }
 
-$projectSkills = @('akaunting-codebase-navigation')
+$projectSkills = @('akaunting-codebase-navigation', 'akaunting-test-coverage')
 foreach ($skill in $projectSkills) {
     $canonical = Join-Path $repoRoot ".agents\skills\$skill\SKILL.md"
     $claudeMirror = Join-Path $repoRoot ".claude\skills\$skill\SKILL.md"
@@ -39,6 +39,11 @@ foreach ($skill in $projectSkills) {
     if ((Get-FileHash $canonical -Algorithm SHA256).Hash -ne (Get-FileHash $claudeMirror -Algorithm SHA256).Hash) { throw "Skill mirror drift: $skill" }
     $frontmatter = Get-Content -LiteralPath $canonical -Raw
     if ($frontmatter -notmatch "(?ms)^---\r?\nname: $skill\r?\ndescription: .+?\r?\n---") { throw "Invalid frontmatter: $skill" }
+}
+
+$coveragePath = Join-Path $repoRoot '.agents\skills\akaunting-test-coverage\SKILL.md'
+foreach ($text in @('openwiki/testing.md', 'phpunit.xml', 'SQLite', 'tests/Feature', 'tests/Unit', 'modules/*/Tests', 'Do not edit OpenWiki')) {
+    if (-not (Get-Content -LiteralPath $coveragePath -Raw).Contains($text)) { throw "Test-coverage skill is missing: $text" }
 }
 
 Write-Host 'Root agent guidance is valid.'
