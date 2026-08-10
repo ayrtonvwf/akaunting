@@ -21,4 +21,13 @@ $content = Get-Content -LiteralPath $agentsPath -Raw
 foreach ($text in @('openwiki/index.md', 'openwiki/quickstart.md', 'openwiki/testing.md', 'Graphify', 'EXTRACTED', 'INFERRED', 'AMBIGUOUS', 'Do not edit the OpenWiki bundle')) {
     Test-RequiredText -Content $content -Text $text
 }
+
+$externalSkills = @('test-driven-development', 'systematic-debugging', 'verification-before-completion')
+foreach ($skill in $externalSkills) {
+    foreach ($root in @('.agents\skills', '.claude\skills')) {
+        $path = Join-Path $repoRoot "$root\$skill\SKILL.md"
+        if (-not (Test-Path -LiteralPath $path)) { throw "Missing deployed external skill: $path" }
+    }
+}
+
 Write-Host 'Root agent guidance is valid.'
