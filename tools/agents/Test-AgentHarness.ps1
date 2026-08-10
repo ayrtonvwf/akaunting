@@ -22,7 +22,7 @@ foreach ($text in @('openwiki/index.md', 'openwiki/quickstart.md', 'openwiki/tes
     Test-RequiredText -Content $content -Text $text
 }
 
-$externalSkills = @('test-driven-development', 'systematic-debugging', 'verification-before-completion')
+$externalSkills = @('test-driven-development', 'systematic-debugging', 'verification-before-completion', 'using-superpowers')
 foreach ($skill in $externalSkills) {
     foreach ($root in @('.agents\skills', '.claude\skills')) {
         $path = Join-Path $repoRoot "$root\$skill\SKILL.md"
