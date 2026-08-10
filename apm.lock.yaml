@@ -1,14 +1,16 @@
 lockfile_version: '1'
-generated_at: '2026-08-10T13:50:34.463729+00:00'
+generated_at: '2026-08-10T14:06:36.129791+00:00'
 apm_version: 0.28.0
 dependencies:
 - repo_url: obra/superpowers
-  name: superpowers
+  name: systematic-debugging
   host: github.com
   resolved_commit: d884ae04edebef577e82ff7c4e143debd0bbec99
   resolved_ref: v6.1.1
-  version: 6.1.1
-  package_type: marketplace_plugin
+  version: unknown
+  virtual_path: skills/systematic-debugging
+  is_virtual: true
+  package_type: claude_skill
   deployed_files:
   - .agents/skills/systematic-debugging
   - .agents/skills/systematic-debugging/CREATION-LOG.md
@@ -22,18 +24,6 @@ dependencies:
   - .agents/skills/systematic-debugging/test-pressure-1.md
   - .agents/skills/systematic-debugging/test-pressure-2.md
   - .agents/skills/systematic-debugging/test-pressure-3.md
-  - .agents/skills/test-driven-development
-  - .agents/skills/test-driven-development/SKILL.md
-  - .agents/skills/test-driven-development/testing-anti-patterns.md
-  - .agents/skills/using-superpowers
-  - .agents/skills/using-superpowers/SKILL.md
-  - .agents/skills/using-superpowers/references/antigravity-tools.md
-  - .agents/skills/using-superpowers/references/codex-tools.md
-  - .agents/skills/using-superpowers/references/pi-tools.md
-  - .agents/skills/verification-before-completion
-  - .agents/skills/verification-before-completion/SKILL.md
-  - .claude/hooks/superpowers/hooks/run-hook.cmd
-  - .claude/hooks/superpowers/hooks/session-start
   - .claude/skills/systematic-debugging
   - .claude/skills/systematic-debugging/CREATION-LOG.md
   - .claude/skills/systematic-debugging/SKILL.md
@@ -46,18 +36,6 @@ dependencies:
   - .claude/skills/systematic-debugging/test-pressure-1.md
   - .claude/skills/systematic-debugging/test-pressure-2.md
   - .claude/skills/systematic-debugging/test-pressure-3.md
-  - .claude/skills/test-driven-development
-  - .claude/skills/test-driven-development/SKILL.md
-  - .claude/skills/test-driven-development/testing-anti-patterns.md
-  - .claude/skills/using-superpowers
-  - .claude/skills/using-superpowers/SKILL.md
-  - .claude/skills/using-superpowers/references/antigravity-tools.md
-  - .claude/skills/using-superpowers/references/codex-tools.md
-  - .claude/skills/using-superpowers/references/pi-tools.md
-  - .claude/skills/verification-before-completion
-  - .claude/skills/verification-before-completion/SKILL.md
-  - .codex/hooks/superpowers/hooks/run-hook.cmd
-  - .codex/hooks/superpowers/hooks/session-start
   deployed_file_hashes:
     .agents/skills/systematic-debugging/CREATION-LOG.md: sha256:c24733a5b1821bd6bed1fc950261f0b9f4e90097e0bbb96459d8179713730789
     .agents/skills/systematic-debugging/SKILL.md: sha256:3b20719eca4f0461cb51a195221320d775dcf03b6859271066a03a5132a6ce7a
@@ -70,15 +48,6 @@ dependencies:
     .agents/skills/systematic-debugging/test-pressure-1.md: sha256:0b6a915db0054577819834c79be9eb614e97bddba10d73768e1fbe91cfed048a
     .agents/skills/systematic-debugging/test-pressure-2.md: sha256:b2030aeffba07050e8ad573ddf87486457c4a016a786bb326235bebd856f2016
     .agents/skills/systematic-debugging/test-pressure-3.md: sha256:96b50a52e2c7989c9cf20fb752c47c1e9a3a70dc362f8f7989f8f5b64dac7708
-    .agents/skills/test-driven-development/SKILL.md: sha256:b5b4717b8b761cce15a6cfe9022e33fd959e0894c0c39d72c9cb49c23486c10e
-    .agents/skills/test-driven-development/testing-anti-patterns.md: sha256:bde453bc258f06543987477c837939afaa774ea2acbd9f308d702fc452bc4283
-    .agents/skills/using-superpowers/SKILL.md: sha256:55379fe7c1c473a02c61961c822996bff30e1320d6921d9062509bc508482c05
-    .agents/skills/using-superpowers/references/antigravity-tools.md: sha256:d0bcfa94dd0fa399fb9606a0f7c9562b43040cad02be167a2b999c3913a1d5e9
-    .agents/skills/using-superpowers/references/codex-tools.md: sha256:9310bb2315eed2c1cebea02cd1c9e8fe121cb788fc6b41e8b8f8b5ff46f85f37
-    .agents/skills/using-superpowers/references/pi-tools.md: sha256:703dbc83d23ecab9c6f388460c38abc482e9dee2fe6772a8c7a255152ad3a4d5
-    .agents/skills/verification-before-completion/SKILL.md: sha256:ea52d15aabaf72bc6b558efe2c126f161b53961090ddcd712000273bfe8c7b6c
-    .claude/hooks/superpowers/hooks/run-hook.cmd: sha256:d3d9c6199678dab2858e60509dde5e7414f13c2a2b5e48a38b1d368b6e1d6abb
-    .claude/hooks/superpowers/hooks/session-start: sha256:88a060272ca8047e0d1cd73a016e1cebba8396807a44be1e296d7c02dcbb9934
     .claude/skills/systematic-debugging/CREATION-LOG.md: sha256:c24733a5b1821bd6bed1fc950261f0b9f4e90097e0bbb96459d8179713730789
     .claude/skills/systematic-debugging/SKILL.md: sha256:3b20719eca4f0461cb51a195221320d775dcf03b6859271066a03a5132a6ce7a
     .claude/skills/systematic-debugging/condition-based-waiting-example.ts: sha256:40ae5ebe497fdf310200e43fe986552546d0a22837c0d39e855db1cfd33eb88e
@@ -90,49 +59,86 @@ dependencies:
     .claude/skills/systematic-debugging/test-pressure-1.md: sha256:0b6a915db0054577819834c79be9eb614e97bddba10d73768e1fbe91cfed048a
     .claude/skills/systematic-debugging/test-pressure-2.md: sha256:b2030aeffba07050e8ad573ddf87486457c4a016a786bb326235bebd856f2016
     .claude/skills/systematic-debugging/test-pressure-3.md: sha256:96b50a52e2c7989c9cf20fb752c47c1e9a3a70dc362f8f7989f8f5b64dac7708
+  content_hash: sha256:1858a982fd8037b11e297b74f28375301304e79c7cc2cafe1c54e594fef849d7
+- repo_url: obra/superpowers
+  name: test-driven-development
+  host: github.com
+  resolved_commit: d884ae04edebef577e82ff7c4e143debd0bbec99
+  resolved_ref: v6.1.1
+  version: unknown
+  virtual_path: skills/test-driven-development
+  is_virtual: true
+  package_type: claude_skill
+  deployed_files:
+  - .agents/skills/test-driven-development
+  - .agents/skills/test-driven-development/SKILL.md
+  - .agents/skills/test-driven-development/testing-anti-patterns.md
+  - .claude/skills/test-driven-development
+  - .claude/skills/test-driven-development/SKILL.md
+  - .claude/skills/test-driven-development/testing-anti-patterns.md
+  deployed_file_hashes:
+    .agents/skills/test-driven-development/SKILL.md: sha256:b5b4717b8b761cce15a6cfe9022e33fd959e0894c0c39d72c9cb49c23486c10e
+    .agents/skills/test-driven-development/testing-anti-patterns.md: sha256:bde453bc258f06543987477c837939afaa774ea2acbd9f308d702fc452bc4283
     .claude/skills/test-driven-development/SKILL.md: sha256:b5b4717b8b761cce15a6cfe9022e33fd959e0894c0c39d72c9cb49c23486c10e
     .claude/skills/test-driven-development/testing-anti-patterns.md: sha256:bde453bc258f06543987477c837939afaa774ea2acbd9f308d702fc452bc4283
+  content_hash: sha256:eee144aea35d783296d178017e9fe843c6d16cc8b240e106f5e50910f6caf329
+- repo_url: obra/superpowers
+  name: using-superpowers
+  host: github.com
+  resolved_commit: d884ae04edebef577e82ff7c4e143debd0bbec99
+  resolved_ref: v6.1.1
+  version: unknown
+  virtual_path: skills/using-superpowers
+  is_virtual: true
+  package_type: claude_skill
+  deployed_files:
+  - .agents/skills/using-superpowers
+  - .agents/skills/using-superpowers/SKILL.md
+  - .agents/skills/using-superpowers/references/antigravity-tools.md
+  - .agents/skills/using-superpowers/references/codex-tools.md
+  - .agents/skills/using-superpowers/references/pi-tools.md
+  - .claude/skills/using-superpowers
+  - .claude/skills/using-superpowers/SKILL.md
+  - .claude/skills/using-superpowers/references/antigravity-tools.md
+  - .claude/skills/using-superpowers/references/codex-tools.md
+  - .claude/skills/using-superpowers/references/pi-tools.md
+  deployed_file_hashes:
+    .agents/skills/using-superpowers/SKILL.md: sha256:55379fe7c1c473a02c61961c822996bff30e1320d6921d9062509bc508482c05
+    .agents/skills/using-superpowers/references/antigravity-tools.md: sha256:d0bcfa94dd0fa399fb9606a0f7c9562b43040cad02be167a2b999c3913a1d5e9
+    .agents/skills/using-superpowers/references/codex-tools.md: sha256:9310bb2315eed2c1cebea02cd1c9e8fe121cb788fc6b41e8b8f8b5ff46f85f37
+    .agents/skills/using-superpowers/references/pi-tools.md: sha256:703dbc83d23ecab9c6f388460c38abc482e9dee2fe6772a8c7a255152ad3a4d5
     .claude/skills/using-superpowers/SKILL.md: sha256:55379fe7c1c473a02c61961c822996bff30e1320d6921d9062509bc508482c05
     .claude/skills/using-superpowers/references/antigravity-tools.md: sha256:d0bcfa94dd0fa399fb9606a0f7c9562b43040cad02be167a2b999c3913a1d5e9
     .claude/skills/using-superpowers/references/codex-tools.md: sha256:9310bb2315eed2c1cebea02cd1c9e8fe121cb788fc6b41e8b8f8b5ff46f85f37
     .claude/skills/using-superpowers/references/pi-tools.md: sha256:703dbc83d23ecab9c6f388460c38abc482e9dee2fe6772a8c7a255152ad3a4d5
+  content_hash: sha256:436454e9dc370401074b1df5c0d2a47b86d8a6350af405b63697a528a6167596
+- repo_url: obra/superpowers
+  name: verification-before-completion
+  host: github.com
+  resolved_commit: d884ae04edebef577e82ff7c4e143debd0bbec99
+  resolved_ref: v6.1.1
+  version: unknown
+  virtual_path: skills/verification-before-completion
+  is_virtual: true
+  package_type: claude_skill
+  deployed_files:
+  - .agents/skills/verification-before-completion
+  - .agents/skills/verification-before-completion/SKILL.md
+  - .claude/skills/verification-before-completion
+  - .claude/skills/verification-before-completion/SKILL.md
+  deployed_file_hashes:
+    .agents/skills/verification-before-completion/SKILL.md: sha256:ea52d15aabaf72bc6b558efe2c126f161b53961090ddcd712000273bfe8c7b6c
     .claude/skills/verification-before-completion/SKILL.md: sha256:ea52d15aabaf72bc6b558efe2c126f161b53961090ddcd712000273bfe8c7b6c
-    .codex/hooks/superpowers/hooks/run-hook.cmd: sha256:d3d9c6199678dab2858e60509dde5e7414f13c2a2b5e48a38b1d368b6e1d6abb
-    .codex/hooks/superpowers/hooks/session-start: sha256:88a060272ca8047e0d1cd73a016e1cebba8396807a44be1e296d7c02dcbb9934
-  content_hash: sha256:38c4d7d8b39baaac5a5e83113c1a9d7562f9c67155c73ae6fa66abddedec2ba2
-  skill_subset:
-  - systematic-debugging
-  - test-driven-development
-  - using-superpowers
-  - verification-before-completion
-  declared_license: MIT
+  content_hash: sha256:9b446f0c7fe1cfb560b1d34439523b1a76d5f177290007b2c053a1c749a4a8ba
 deployments:
-- kind: project-relative
-  target: claude
-  value: .claude/hooks/superpowers/hooks/run-hook.cmd
-  runtime: null
-  scope: project
-  owners:
-  - obra/superpowers
-  active_owner: obra/superpowers
-  content_hash: sha256:d3d9c6199678dab2858e60509dde5e7414f13c2a2b5e48a38b1d368b6e1d6abb
-- kind: project-relative
-  target: claude
-  value: .claude/hooks/superpowers/hooks/session-start
-  runtime: null
-  scope: project
-  owners:
-  - obra/superpowers
-  active_owner: obra/superpowers
-  content_hash: sha256:88a060272ca8047e0d1cd73a016e1cebba8396807a44be1e296d7c02dcbb9934
 - kind: project-relative
   target: claude
   value: .claude/skills/systematic-debugging
   runtime: null
   scope: project
   owners:
-  - obra/superpowers
-  active_owner: obra/superpowers
+  - obra/superpowers/skills/systematic-debugging
+  active_owner: obra/superpowers/skills/systematic-debugging
   content_hash: null
 - kind: project-relative
   target: claude
@@ -140,8 +146,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - obra/superpowers
-  active_owner: obra/superpowers
+  - obra/superpowers/skills/systematic-debugging
+  active_owner: obra/superpowers/skills/systematic-debugging
   content_hash: sha256:c24733a5b1821bd6bed1fc950261f0b9f4e90097e0bbb96459d8179713730789
 - kind: project-relative
   target: claude
@@ -149,8 +155,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - obra/superpowers
-  active_owner: obra/superpowers
+  - obra/superpowers/skills/systematic-debugging
+  active_owner: obra/superpowers/skills/systematic-debugging
   content_hash: sha256:3b20719eca4f0461cb51a195221320d775dcf03b6859271066a03a5132a6ce7a
 - kind: project-relative
   target: claude
@@ -158,8 +164,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - obra/superpowers
-  active_owner: obra/superpowers
+  - obra/superpowers/skills/systematic-debugging
+  active_owner: obra/superpowers/skills/systematic-debugging
   content_hash: sha256:40ae5ebe497fdf310200e43fe986552546d0a22837c0d39e855db1cfd33eb88e
 - kind: project-relative
   target: claude
@@ -167,8 +173,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - obra/superpowers
-  active_owner: obra/superpowers
+  - obra/superpowers/skills/systematic-debugging
+  active_owner: obra/superpowers/skills/systematic-debugging
   content_hash: sha256:e89fec8400d6cd50f43407cec9fab50976ba4d55d0ec2eb51c0bd68036b54c26
 - kind: project-relative
   target: claude
@@ -176,8 +182,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - obra/superpowers
-  active_owner: obra/superpowers
+  - obra/superpowers/skills/systematic-debugging
+  active_owner: obra/superpowers/skills/systematic-debugging
   content_hash: sha256:1e175fb86fc357e58c6aebf5441e481e1b7868b4380c0456b63a17eefbd18ba7
 - kind: project-relative
   target: claude
@@ -185,8 +191,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - obra/superpowers
-  active_owner: obra/superpowers
+  - obra/superpowers/skills/systematic-debugging
+  active_owner: obra/superpowers/skills/systematic-debugging
   content_hash: sha256:6462747eae9b175ac145b78bcfaeab755654a75e32637f08eb633f065a9e1d7c
 - kind: project-relative
   target: claude
@@ -194,8 +200,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - obra/superpowers
-  active_owner: obra/superpowers
+  - obra/superpowers/skills/systematic-debugging
+  active_owner: obra/superpowers/skills/systematic-debugging
   content_hash: sha256:6b0622269e098ca1399e123e553fd385f0b6412d88ef0e9c4f5a8ea9cf1cec7b
 - kind: project-relative
   target: claude
@@ -203,8 +209,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - obra/superpowers
-  active_owner: obra/superpowers
+  - obra/superpowers/skills/systematic-debugging
+  active_owner: obra/superpowers/skills/systematic-debugging
   content_hash: sha256:fe2ba480d78ac0d686dc025f41c2a32a43d642bf533f91b0c6053a04d35d6486
 - kind: project-relative
   target: claude
@@ -212,8 +218,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - obra/superpowers
-  active_owner: obra/superpowers
+  - obra/superpowers/skills/systematic-debugging
+  active_owner: obra/superpowers/skills/systematic-debugging
   content_hash: sha256:0b6a915db0054577819834c79be9eb614e97bddba10d73768e1fbe91cfed048a
 - kind: project-relative
   target: claude
@@ -221,8 +227,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - obra/superpowers
-  active_owner: obra/superpowers
+  - obra/superpowers/skills/systematic-debugging
+  active_owner: obra/superpowers/skills/systematic-debugging
   content_hash: sha256:b2030aeffba07050e8ad573ddf87486457c4a016a786bb326235bebd856f2016
 - kind: project-relative
   target: claude
@@ -230,8 +236,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - obra/superpowers
-  active_owner: obra/superpowers
+  - obra/superpowers/skills/systematic-debugging
+  active_owner: obra/superpowers/skills/systematic-debugging
   content_hash: sha256:96b50a52e2c7989c9cf20fb752c47c1e9a3a70dc362f8f7989f8f5b64dac7708
 - kind: project-relative
   target: claude
@@ -239,8 +245,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - obra/superpowers
-  active_owner: obra/superpowers
+  - obra/superpowers/skills/test-driven-development
+  active_owner: obra/superpowers/skills/test-driven-development
   content_hash: null
 - kind: project-relative
   target: claude
@@ -248,8 +254,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - obra/superpowers
-  active_owner: obra/superpowers
+  - obra/superpowers/skills/test-driven-development
+  active_owner: obra/superpowers/skills/test-driven-development
   content_hash: sha256:b5b4717b8b761cce15a6cfe9022e33fd959e0894c0c39d72c9cb49c23486c10e
 - kind: project-relative
   target: claude
@@ -257,8 +263,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - obra/superpowers
-  active_owner: obra/superpowers
+  - obra/superpowers/skills/test-driven-development
+  active_owner: obra/superpowers/skills/test-driven-development
   content_hash: sha256:bde453bc258f06543987477c837939afaa774ea2acbd9f308d702fc452bc4283
 - kind: project-relative
   target: claude
@@ -266,8 +272,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - obra/superpowers
-  active_owner: obra/superpowers
+  - obra/superpowers/skills/using-superpowers
+  active_owner: obra/superpowers/skills/using-superpowers
   content_hash: null
 - kind: project-relative
   target: claude
@@ -275,8 +281,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - obra/superpowers
-  active_owner: obra/superpowers
+  - obra/superpowers/skills/using-superpowers
+  active_owner: obra/superpowers/skills/using-superpowers
   content_hash: sha256:55379fe7c1c473a02c61961c822996bff30e1320d6921d9062509bc508482c05
 - kind: project-relative
   target: claude
@@ -284,8 +290,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - obra/superpowers
-  active_owner: obra/superpowers
+  - obra/superpowers/skills/using-superpowers
+  active_owner: obra/superpowers/skills/using-superpowers
   content_hash: sha256:d0bcfa94dd0fa399fb9606a0f7c9562b43040cad02be167a2b999c3913a1d5e9
 - kind: project-relative
   target: claude
@@ -293,8 +299,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - obra/superpowers
-  active_owner: obra/superpowers
+  - obra/superpowers/skills/using-superpowers
+  active_owner: obra/superpowers/skills/using-superpowers
   content_hash: sha256:9310bb2315eed2c1cebea02cd1c9e8fe121cb788fc6b41e8b8f8b5ff46f85f37
 - kind: project-relative
   target: claude
@@ -302,8 +308,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - obra/superpowers
-  active_owner: obra/superpowers
+  - obra/superpowers/skills/using-superpowers
+  active_owner: obra/superpowers/skills/using-superpowers
   content_hash: sha256:703dbc83d23ecab9c6f388460c38abc482e9dee2fe6772a8c7a255152ad3a4d5
 - kind: project-relative
   target: claude
@@ -311,8 +317,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - obra/superpowers
-  active_owner: obra/superpowers
+  - obra/superpowers/skills/verification-before-completion
+  active_owner: obra/superpowers/skills/verification-before-completion
   content_hash: null
 - kind: project-relative
   target: claude
@@ -320,8 +326,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - obra/superpowers
-  active_owner: obra/superpowers
+  - obra/superpowers/skills/verification-before-completion
+  active_owner: obra/superpowers/skills/verification-before-completion
   content_hash: sha256:ea52d15aabaf72bc6b558efe2c126f161b53961090ddcd712000273bfe8c7b6c
 - kind: project-relative
   target: codex
@@ -329,8 +335,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - obra/superpowers
-  active_owner: obra/superpowers
+  - obra/superpowers/skills/systematic-debugging
+  active_owner: obra/superpowers/skills/systematic-debugging
   content_hash: null
 - kind: project-relative
   target: codex
@@ -338,8 +344,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - obra/superpowers
-  active_owner: obra/superpowers
+  - obra/superpowers/skills/systematic-debugging
+  active_owner: obra/superpowers/skills/systematic-debugging
   content_hash: sha256:c24733a5b1821bd6bed1fc950261f0b9f4e90097e0bbb96459d8179713730789
 - kind: project-relative
   target: codex
@@ -347,8 +353,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - obra/superpowers
-  active_owner: obra/superpowers
+  - obra/superpowers/skills/systematic-debugging
+  active_owner: obra/superpowers/skills/systematic-debugging
   content_hash: sha256:3b20719eca4f0461cb51a195221320d775dcf03b6859271066a03a5132a6ce7a
 - kind: project-relative
   target: codex
@@ -356,8 +362,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - obra/superpowers
-  active_owner: obra/superpowers
+  - obra/superpowers/skills/systematic-debugging
+  active_owner: obra/superpowers/skills/systematic-debugging
   content_hash: sha256:40ae5ebe497fdf310200e43fe986552546d0a22837c0d39e855db1cfd33eb88e
 - kind: project-relative
   target: codex
@@ -365,8 +371,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - obra/superpowers
-  active_owner: obra/superpowers
+  - obra/superpowers/skills/systematic-debugging
+  active_owner: obra/superpowers/skills/systematic-debugging
   content_hash: sha256:e89fec8400d6cd50f43407cec9fab50976ba4d55d0ec2eb51c0bd68036b54c26
 - kind: project-relative
   target: codex
@@ -374,8 +380,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - obra/superpowers
-  active_owner: obra/superpowers
+  - obra/superpowers/skills/systematic-debugging
+  active_owner: obra/superpowers/skills/systematic-debugging
   content_hash: sha256:1e175fb86fc357e58c6aebf5441e481e1b7868b4380c0456b63a17eefbd18ba7
 - kind: project-relative
   target: codex
@@ -383,8 +389,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - obra/superpowers
-  active_owner: obra/superpowers
+  - obra/superpowers/skills/systematic-debugging
+  active_owner: obra/superpowers/skills/systematic-debugging
   content_hash: sha256:6462747eae9b175ac145b78bcfaeab755654a75e32637f08eb633f065a9e1d7c
 - kind: project-relative
   target: codex
@@ -392,8 +398,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - obra/superpowers
-  active_owner: obra/superpowers
+  - obra/superpowers/skills/systematic-debugging
+  active_owner: obra/superpowers/skills/systematic-debugging
   content_hash: sha256:6b0622269e098ca1399e123e553fd385f0b6412d88ef0e9c4f5a8ea9cf1cec7b
 - kind: project-relative
   target: codex
@@ -401,8 +407,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - obra/superpowers
-  active_owner: obra/superpowers
+  - obra/superpowers/skills/systematic-debugging
+  active_owner: obra/superpowers/skills/systematic-debugging
   content_hash: sha256:fe2ba480d78ac0d686dc025f41c2a32a43d642bf533f91b0c6053a04d35d6486
 - kind: project-relative
   target: codex
@@ -410,8 +416,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - obra/superpowers
-  active_owner: obra/superpowers
+  - obra/superpowers/skills/systematic-debugging
+  active_owner: obra/superpowers/skills/systematic-debugging
   content_hash: sha256:0b6a915db0054577819834c79be9eb614e97bddba10d73768e1fbe91cfed048a
 - kind: project-relative
   target: codex
@@ -419,8 +425,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - obra/superpowers
-  active_owner: obra/superpowers
+  - obra/superpowers/skills/systematic-debugging
+  active_owner: obra/superpowers/skills/systematic-debugging
   content_hash: sha256:b2030aeffba07050e8ad573ddf87486457c4a016a786bb326235bebd856f2016
 - kind: project-relative
   target: codex
@@ -428,8 +434,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - obra/superpowers
-  active_owner: obra/superpowers
+  - obra/superpowers/skills/systematic-debugging
+  active_owner: obra/superpowers/skills/systematic-debugging
   content_hash: sha256:96b50a52e2c7989c9cf20fb752c47c1e9a3a70dc362f8f7989f8f5b64dac7708
 - kind: project-relative
   target: codex
@@ -437,8 +443,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - obra/superpowers
-  active_owner: obra/superpowers
+  - obra/superpowers/skills/test-driven-development
+  active_owner: obra/superpowers/skills/test-driven-development
   content_hash: null
 - kind: project-relative
   target: codex
@@ -446,8 +452,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - obra/superpowers
-  active_owner: obra/superpowers
+  - obra/superpowers/skills/test-driven-development
+  active_owner: obra/superpowers/skills/test-driven-development
   content_hash: sha256:b5b4717b8b761cce15a6cfe9022e33fd959e0894c0c39d72c9cb49c23486c10e
 - kind: project-relative
   target: codex
@@ -455,8 +461,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - obra/superpowers
-  active_owner: obra/superpowers
+  - obra/superpowers/skills/test-driven-development
+  active_owner: obra/superpowers/skills/test-driven-development
   content_hash: sha256:bde453bc258f06543987477c837939afaa774ea2acbd9f308d702fc452bc4283
 - kind: project-relative
   target: codex
@@ -464,8 +470,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - obra/superpowers
-  active_owner: obra/superpowers
+  - obra/superpowers/skills/using-superpowers
+  active_owner: obra/superpowers/skills/using-superpowers
   content_hash: null
 - kind: project-relative
   target: codex
@@ -473,8 +479,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - obra/superpowers
-  active_owner: obra/superpowers
+  - obra/superpowers/skills/using-superpowers
+  active_owner: obra/superpowers/skills/using-superpowers
   content_hash: sha256:55379fe7c1c473a02c61961c822996bff30e1320d6921d9062509bc508482c05
 - kind: project-relative
   target: codex
@@ -482,8 +488,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - obra/superpowers
-  active_owner: obra/superpowers
+  - obra/superpowers/skills/using-superpowers
+  active_owner: obra/superpowers/skills/using-superpowers
   content_hash: sha256:d0bcfa94dd0fa399fb9606a0f7c9562b43040cad02be167a2b999c3913a1d5e9
 - kind: project-relative
   target: codex
@@ -491,8 +497,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - obra/superpowers
-  active_owner: obra/superpowers
+  - obra/superpowers/skills/using-superpowers
+  active_owner: obra/superpowers/skills/using-superpowers
   content_hash: sha256:9310bb2315eed2c1cebea02cd1c9e8fe121cb788fc6b41e8b8f8b5ff46f85f37
 - kind: project-relative
   target: codex
@@ -500,8 +506,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - obra/superpowers
-  active_owner: obra/superpowers
+  - obra/superpowers/skills/using-superpowers
+  active_owner: obra/superpowers/skills/using-superpowers
   content_hash: sha256:703dbc83d23ecab9c6f388460c38abc482e9dee2fe6772a8c7a255152ad3a4d5
 - kind: project-relative
   target: codex
@@ -509,8 +515,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - obra/superpowers
-  active_owner: obra/superpowers
+  - obra/superpowers/skills/verification-before-completion
+  active_owner: obra/superpowers/skills/verification-before-completion
   content_hash: null
 - kind: project-relative
   target: codex
@@ -518,24 +524,6 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - obra/superpowers
-  active_owner: obra/superpowers
+  - obra/superpowers/skills/verification-before-completion
+  active_owner: obra/superpowers/skills/verification-before-completion
   content_hash: sha256:ea52d15aabaf72bc6b558efe2c126f161b53961090ddcd712000273bfe8c7b6c
-- kind: project-relative
-  target: codex
-  value: .codex/hooks/superpowers/hooks/run-hook.cmd
-  runtime: null
-  scope: project
-  owners:
-  - obra/superpowers
-  active_owner: obra/superpowers
-  content_hash: sha256:d3d9c6199678dab2858e60509dde5e7414f13c2a2b5e48a38b1d368b6e1d6abb
-- kind: project-relative
-  target: codex
-  value: .codex/hooks/superpowers/hooks/session-start
-  runtime: null
-  scope: project
-  owners:
-  - obra/superpowers
-  active_owner: obra/superpowers
-  content_hash: sha256:88a060272ca8047e0d1cd73a016e1cebba8396807a44be1e296d7c02dcbb9934

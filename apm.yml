@@ -6,9 +6,7 @@ targets:
   - claude
 dependencies:
   apm:
-    - git: obra/superpowers#v6.1.1
-      skills:
-        - test-driven-development
-        - systematic-debugging
-        - verification-before-completion
-        - using-superpowers
+    - obra/superpowers/skills/using-superpowers#v6.1.1
+    - obra/superpowers/skills/test-driven-development#v6.1.1
+    - obra/superpowers/skills/systematic-debugging#v6.1.1
+    - obra/superpowers/skills/verification-before-completion#v6.1.1

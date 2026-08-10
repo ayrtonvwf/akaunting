@@ -81,16 +81,6 @@ fabric.properties
 /.history
 /.vscode
 /.claude/*
-!/.claude/apm-hooks.json
-!/.claude/settings.json
-!/.claude/hooks/
-/.claude/hooks/*
-!/.claude/hooks/superpowers/
-/.claude/hooks/superpowers/*
-!/.claude/hooks/superpowers/hooks/
-/.claude/hooks/superpowers/hooks/*
-!/.claude/hooks/superpowers/hooks/run-hook.cmd
-!/.claude/hooks/superpowers/hooks/session-start
 !/.claude/skills/
 /.claude/skills/*
 !/.claude/skills/test-driven-development/
