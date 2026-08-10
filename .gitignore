@@ -98,3 +98,4 @@ modules/*
 .DS_Store
 /graphify-out/cache/
 /graphify-out/cost.json
+/.worktrees/
