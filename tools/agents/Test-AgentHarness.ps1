@@ -30,7 +30,7 @@ foreach ($skill in $externalSkills) {
     }
 }
 
-$projectSkills = @('akaunting-codebase-navigation', 'akaunting-test-coverage')
+$projectSkills = @('akaunting-codebase-navigation', 'akaunting-test-coverage', 'akaunting-dependency-upgrade')
 foreach ($skill in $projectSkills) {
     $canonical = Join-Path $repoRoot ".agents\skills\$skill\SKILL.md"
     $claudeMirror = Join-Path $repoRoot ".claude\skills\$skill\SKILL.md"
@@ -44,6 +44,11 @@ foreach ($skill in $projectSkills) {
 $coveragePath = Join-Path $repoRoot '.agents\skills\akaunting-test-coverage\SKILL.md'
 foreach ($text in @('openwiki/testing.md', 'phpunit.xml', 'SQLite', 'tests/Feature', 'tests/Unit', 'modules/*/Tests', 'Do not edit OpenWiki')) {
     if (-not (Get-Content -LiteralPath $coveragePath -Raw).Contains($text)) { throw "Test-coverage skill is missing: $text" }
+}
+
+$upgradePath = Join-Path $repoRoot '.agents\skills\akaunting-dependency-upgrade\SKILL.md'
+foreach ($text in @('openwiki/configuration.md', 'composer.json', 'package.json', 'overrides/', 'composer.lock', 'package-lock.json', 'composer update <package>', 'Do not edit OpenWiki')) {
+    if (-not (Get-Content -LiteralPath $upgradePath -Raw).Contains($text)) { throw "Dependency-upgrade skill is missing: $text" }
 }
 
 Write-Host 'Root agent guidance is valid.'
