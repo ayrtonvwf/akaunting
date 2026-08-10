@@ -1,5 +1,31 @@
 # AGENTS
 
+## Evidence order
+
+1. Read `openwiki/index.md`, `openwiki/quickstart.md`, and the relevant system or workflow page for orientation.
+2. Use the locked Graphify query for source relationships.
+3. Verify behavior in current source, configuration, manifests/lockfiles, and focused tests.
+4. Consult external documentation only when local evidence cannot establish the fact.
+
+OpenWiki is a navigation map, not an override of implementation evidence. When it is stale or incomplete, report the page, source location, and discrepancy. Do not edit the OpenWiki bundle.
+
+## Maintenance workflows
+
+- For unfamiliar paths, use `akaunting-codebase-navigation`.
+- For test additions, use `akaunting-test-coverage`; read `openwiki/testing.md`, and use the in-memory SQLite PHPUnit configuration in `phpunit.xml`.
+- For Composer, NPM, or lockfile changes, use `akaunting-dependency-upgrade`; check root and module manifests plus `overrides/` before changing a constraint.
+
+### Project map
+
+- `app/` contains the application’s Laravel domain, HTTP, jobs, models, and supporting code.
+- `modules/` contains bundled extension modules, including OfflinePayments and PaypalStandard.
+- `config/` contains application configuration.
+- `routes/` defines web, API, portal, and other HTTP entry points.
+- `database/` contains factories, migrations, and seed data.
+- `tests/` contains the core PHPUnit feature and unit tests.
+- `overrides/` holds repository-maintained dependency overrides.
+- `openwiki/` is the generated evidence-navigation index.
+
 ## Graphify
 
 For codebase architecture and relationship questions, use the project-scoped Graphify skill instead of reproducing its workflow here:
@@ -17,16 +43,3 @@ Repository-specific constraints:
 - The graph scope is `app/`, `modules/`, `config/`, `routes/`, and `tests/`; exclude vendor, frontend, documentation, and generated assets.
 - Treat Graphify as structural evidence: `EXTRACTED` is source-derived; `INFERRED` and `AMBIGUOUS` require source inspection.
 - Graphify requires no API key, and this repository does not install its hooks or MCP integration.
-
-<!-- OPENWIKI:START -->
-
-## OpenWiki
-
-This repository has a generated `openwiki/` evidence index. It is optional just-in-time context, not required startup reading.
-
-- Treat source code and tests as authoritative. A brief's unknowns and review items are verification gaps, not automatic requirements.
-- Prefer the narrowest quiet validation that proves the changed behavior. Preserve complete failure output.
-
-The scheduled OpenWiki GitHub Actions workflow refreshes the repository wiki. Do not hand-edit generated OpenWiki pages unless explicitly asked; prefer updating source code/docs and letting OpenWiki regenerate.
-
-<!-- OPENWIKI:END -->
