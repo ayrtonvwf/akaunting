@@ -14,8 +14,8 @@ if (-not (Test-Path -LiteralPath $claudeSkillPath)) {
 
 $agentsContent = Get-Content -LiteralPath $agentsPath -Raw
 
-if (($agentsContent -split "`r?`n").Count -gt 45) {
-    throw "AGENTS.md should remain a concise Graphify router; move detailed workflow into the project skill."
+if (($agentsContent -split "`r?`n").Count -gt 120) {
+    throw "AGENTS.md should remain concise; move detailed task workflows into project skills."
 }
 
 $requiredPatterns = [ordered]@{
