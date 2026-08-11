@@ -1,0 +1,12 @@
+name: akaunting-agent-harness
+version: 0.1.0
+description: Shared maintenance skills for Akaunting agents
+targets:
+  - codex
+  - claude
+dependencies:
+  apm:
+    - obra/superpowers/skills/using-superpowers#v6.1.1
+    - obra/superpowers/skills/test-driven-development#v6.1.1
+    - obra/superpowers/skills/systematic-debugging#v6.1.1
+    - obra/superpowers/skills/verification-before-completion#v6.1.1

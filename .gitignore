@@ -80,7 +80,17 @@ fabric.properties
 /.idea
 /.history
 /.vscode
-/.claude
+/.claude/*
+!/.claude/skills/
+/.claude/skills/*
+!/.claude/skills/test-driven-development/
+!/.claude/skills/test-driven-development/**
+!/.claude/skills/systematic-debugging/
+!/.claude/skills/systematic-debugging/**
+!/.claude/skills/verification-before-completion/
+!/.claude/skills/verification-before-completion/**
+!/.claude/skills/using-superpowers/
+!/.claude/skills/using-superpowers/**
 /.vagrant
 Homestead.json
 Homestead.yaml
@@ -98,3 +108,5 @@ modules/*
 .DS_Store
 /graphify-out/cache/
 /graphify-out/cost.json
+/.worktrees/
+apm_modules/
