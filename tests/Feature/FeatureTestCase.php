@@ -25,7 +25,7 @@ abstract class FeatureTestCase extends TestCase
         $this->company = $this->user->companies()->first();
 
         // Disable debugbar
-        config(['debugbar.enabled', false]);
+        config(['debugbar.enabled' => false]);
     }
 
     /**
