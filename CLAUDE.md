@@ -28,6 +28,10 @@ OpenWiki is a navigation map, not an override of implementation evidence. When i
 - For test additions, use `akaunting-test-coverage`; read `openwiki/testing.md`, and use the in-memory SQLite PHPUnit configuration in `phpunit.xml`.
 - For Composer, NPM, or lockfile changes, use `akaunting-dependency-upgrade`; check root and module manifests plus `overrides/` before changing a constraint.
 
+### Parallel test isolation
+
+`php artisan test --parallel` runs multiple worker processes against this repo. Any new file-backed driver, temp path, or on-disk cache touched by tests must be scoped per worker via `Tests\Concerns\IsolatesParallelTestState::testToken()` (see `tests/CreatesApplication.php`), or it will race across workers the same way the shared Blade compiled-view directory once did (issue #5). `tests/Unit/ParallelIsolationTest.php` guards the known isolation points — extend it when adding a new shared-writable path.
+
 ### Project map
 
 - `app/` contains the application’s Laravel domain, HTTP, jobs, models, and supporting code.
