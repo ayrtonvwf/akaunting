@@ -177,20 +177,47 @@ module.exports = {
 
 ```javascript
 const mix = require('laravel-mix');
+require('laravel-mix-tailwind');
 
 mix
-  .vue({ version: 2 })
-  .postCss('resources/assets/sass/app.css', 'public/css', [
-    require('tailwindcss'),
-    require('autoprefixer'),
-  ])
-  .version()
-  .sourceMaps();
+    .setPublicPath('public/')
+    .webpackConfig({
+        output: {
+            publicPath: 'public/js/',
+            filename: '[name].js',
+            chunkFilename: '[name].js',
+        },
+        stats: {
+            children: true
+        },
+    })
+    .options({
+        terser: {
+            extractComments: false,
+        }
+    })
 
-if (!mix.inProduction()) {
-  mix.webpackConfig({ devtool: 'source-map' });
-}
+    // ~22 .js() entries, one per feature area, each compiled to its own
+    // public/js/<area>/<name>.min.js bundle — grouped as Auth, Banking,
+    // Common, Install, Wizard, Modules, Portal, and Settings. For example:
+    .js('resources/assets/js/views/auth/common.js', 'public/js/auth/common.min.js')
+    .js('resources/assets/js/views/banking/accounts.js', 'public/js/banking/accounts.min.js')
+    .js('resources/assets/js/views/common/documents.js', 'public/js/common/documents.min.js')
+    // ...(see webpack.mix.js for the full, current list)
+
+    .vue()
+
+    .postCss('resources/assets/sass/app.css', 'public/css', [
+        require('tailwindcss')
+    ])
+    .tailwind('./tailwind.config.js')
+
+    if (mix.inProduction()) {
+        mix.version()
+    }
 ```
+
+This is a condensed, verified reproduction of the real `webpack.mix.js` at the repository root — read that file directly for the complete, current entry list rather than treating this as exhaustive.
 
 ### Build Commands
 

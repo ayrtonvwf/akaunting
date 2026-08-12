@@ -26,7 +26,7 @@ Module registration is not implemented in this application's own code — it run
 
 **2. `config/module.php`** configures the vendor package: the `Modules` namespace, the `modules/` and public asset paths, and the stub files used when scaffolding a new module.
 
-**3. Command overrides in `overrides/akaunting/laravel-module/Commands/`** replace the vendor package's install/enable/disable/delete command implementations. `composer.json` autoloads them under the `Akaunting\Module\Commands\` namespace (in place of `vendor/akaunting/laravel-module/src/Commands/`, which is explicitly excluded from the classmap) so the repository's versions run instead. Their verified signatures:
+**3. Command overrides in `overrides/akaunting/laravel-module/Commands/`** replace the vendor package's install/enable/disable/delete command implementations. `composer.json` autoloads them under the `Akaunting\Module\Commands\` namespace, and its `exclude-from-classmap` list explicitly excludes the four corresponding vendor files (`vendor/akaunting/laravel-module/src/Commands/DeleteCommand.php`, `DisableCommand.php`, `EnableCommand.php`, `InstallCommand.php`) so the repository's versions run instead. Their verified signatures:
 
 | Command | Signature |
 |---------|-----------|
@@ -387,6 +387,8 @@ Modules define their own permissions:
 ```
 
 ## Creating Custom Module
+
+The steps below illustrate building a new, from-scratch module (not one of the two shipped with this repository), following the `akaunting/laravel-module` package's documented conventions. Unlike the verified `module:install` / `module:enable` / `module:disable` / `module:delete` signatures above, `make:module` itself is **unverified in this repo** — there is no local `vendor/` install to confirm it against (the same reason `make:module MyModule` was dropped from the "Module Commands" list above). Treat this whole section as an illustrative walkthrough, not a confirmed command reference.
 
 ### 1. Generate Module Scaffolding
 

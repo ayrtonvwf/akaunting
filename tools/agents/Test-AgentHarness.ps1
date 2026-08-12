@@ -30,7 +30,7 @@ foreach ($skill in $externalSkills) {
     }
 }
 
-$projectSkills = @('akaunting-codebase-navigation', 'akaunting-test-coverage', 'akaunting-dependency-upgrade')
+$projectSkills = @('akaunting-codebase-navigation', 'akaunting-test-coverage', 'akaunting-dependency-upgrade', 'graphify')
 foreach ($skill in $projectSkills) {
     $canonical = Join-Path $repoRoot ".agents\skills\$skill\SKILL.md"
     $claudeMirror = Join-Path $repoRoot ".claude\skills\$skill\SKILL.md"

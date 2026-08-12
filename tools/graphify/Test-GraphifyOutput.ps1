@@ -162,6 +162,8 @@ if ($sourcePaths.Count -eq 0) {
     throw 'Graphify graph.json did not expose any source_file values to verify.'
 }
 
+$hasModulesSourcePath = $false
+
 foreach ($sourcePath in $sourcePaths) {
     $normalizedSourcePath = $sourcePath.Replace('\', '/')
 
@@ -172,6 +174,17 @@ foreach ($sourcePath in $sourcePaths) {
     if (-not (Test-IsAllowedGraphifySourcePath -SourcePath $sourcePath -AllowedRoots $allowedRoots)) {
         throw "Graphify graph.json includes out-of-scope source path: $sourcePath"
     }
+
+    if ($normalizedSourcePath.StartsWith('modules/', [System.StringComparison]::Ordinal)) {
+        $hasModulesSourcePath = $true
+    }
+}
+
+# Defense in depth: Invoke-Graphify.ps1 already refuses to rebuild without modules/ present,
+# but a non-trivially sized graph missing every modules/ node would mean that guard was
+# bypassed or the graph was built against an incomplete checkout.
+if ($sourcePaths.Count -ge 100 -and -not $hasModulesSourcePath) {
+    throw 'Graphify graph.json has no modules/ source paths despite a non-trivial node count.'
 }
 
 Write-Host 'Graphify output is valid.'
