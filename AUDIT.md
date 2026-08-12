@@ -308,13 +308,18 @@ consequence of the counting rule as much as of new tests.
 
 *Provenance: judgment, over the evidence in sections 3 and 4.*
 
-**Verdict:** feasible, with named costs — and the destination should be Laravel 13, not 12.
+**Verdict:** feasible, with named costs. Separately, and as a recommendation the plan's author has to
+ratify rather than a call this audit can make on its own: the destination should be Laravel 13 rather
+than 12.
 
-Two separate claims, because they rest on different evidence.
+Two separate claims, because they rest on different evidence and carry different authority.
 
 **On feasibility.** The two resolver probes fail, but they do not fail for the reason the failure
 looks like. Both were run as a single-package update naming only `laravel/framework`, so every other
-package stays pinned at its locked version by construction. Read the eight `Problem` blocks in
+package stays pinned at its locked version by construction. `-W` would not have changed this and its
+absence is not the gap it looks like: `-W` widens an update to the named package's *dependencies*, and
+the seven packages below are its *dependents*. Nothing short of naming them, or updating everything,
+moves them. Read the eight `Problem` blocks in
 `audit-out/probe-l11.txt` against section 3's ceiling column and the picture inverts: four of the
 seven named packages — `akaunting/laravel-language`, `akaunting/laravel-setting`,
 `akaunting/laravel-version`, `akaunting/laravel-firewall` — declare constraints at their *locked*
@@ -327,27 +332,42 @@ are not evidence that it cannot be moved there.
 
 The ceilings that are real come from the table instead, and there are four of them: two
 `ceiling-below` rows and two `abandoned` rows. Each is a small-to-medium single-purpose package, each
-is MIT, and each has a fork-or-replace path that is bounded and describable. That is the whole of the
-hard blocker set. Nothing in section 3 says the framework itself, or any package carrying an
-architectural commitment, cannot move.
+is MIT, and each has a bounded, describable path out — upgrade in place, fork, or replace, and step 4
+below is the one where "upgrade in place" turns out to be available despite the `abandoned` marker.
+Nothing in section 3 says
+the framework itself, or any package carrying an architectural commitment, cannot move. That is the
+hard blocker set **as far as this audit can see it**, which is not the same as all of it — section 6
+says why a failed probe cannot enumerate blockers, only name one frontier of them.
 
 **On the risk, which is where the real cost sits.** Section 4 is the reason this is "with named
 costs" rather than a clean yes. 44.81% over `app/` is not itself disqualifying; the distribution is
 the problem. Coverage is thinnest exactly on the surfaces a major upgrade disturbs: `Imports` 0.42%
 with 39 of 40 files untested, `BulkActions` 3.91%, `Exceptions` 5.71%, `Classifiers` 0.00%,
 `Http/Livewire` 18.53%, `Http/Controllers` 27.38% with 58 of 88 files untested, `Listeners` 28.57%,
-`Console` 33.77%. `Http/Middleware` sits at 46.53%, and middleware is the single most upgrade-sensitive
-directory in the tree under the Laravel 11 skeleton change. The one comfortable reading on the
-framework axis is `Providers` at 72.24%, which is the other half of that same change. On the domain
-axis, `Purchases` 25.06% and `Sales` 27.35% are the two lowest — the product's transactional core.
+`Console` 33.77%. On the domain axis, `Purchases` 25.06% and `Sales` 27.35% are the two lowest — the
+product's transactional core.
+
+`Http/Middleware` at 46.53% deserves a note, because the obvious reason to care about it is wrong.
+Laravel 11's slim skeleton is for *new* applications; the 11 upgrade guide states under Application
+Structure that it does **not recommend** migrating a Laravel 10 application's structure, because 11
+supports the 10 structure as-is. So the 28 middleware files are not forced through a re-registration.
+They matter for the ordinary reason instead — Sanctum 4 retargets middleware this application has
+overridden, and step 7 below covers it.
 
 So the net will not catch a framework regression where a framework regression is most likely. That is
 a Ch2 precondition, not a Ch3 blocker, and it is why the ordering below puts test coverage before the
 `10 → 11` step rather than after it.
 
-**On the target.** Ch3 names 12, and 12 is a bad place to stop. Section 1 has the dates: 12's bug-fix
-window closes 13 August 2026 — that is now, not a future date to plan around — and security support
-ends 24 February 2027. Landing there would put this fork on an unsupported framework roughly six months
+**On the target — a recommendation, not a decision taken.** `specs/northstar/PLAN.md` does not merely
+name 12 as the target; it lists **"Target is Laravel 12, not 13. One horizon at a time."** under
+**Non-goals**. What follows therefore argues against a standing non-goal, and this audit does not have
+the standing to overturn one. Read it as a recommendation pending ratification: until the plan's
+non-goal is changed by the person who wrote it, 12 remains the committed target and this section is
+the case for revisiting that. The blocker ordering below is written so it holds either way — steps 1
+to 9 are identical for both destinations, and only step 10 differs.
+
+The case: 12 is a bad place to stop. Section 1 has the dates: 12's bug-fix window closes 13 August
+2026 — that is now, not a future date to plan around — and security support ends 24 February 2027. Landing there would put this fork on an unsupported framework roughly six months
 after arriving, which is a smaller version of the position section 1 documents it already being in.
 There is no argument for stopping at 12 that survives its own dates.
 
@@ -408,15 +428,19 @@ the highest of the four, and the one to start on earliest, because the fork opti
 maintenance owner decided before it is used. Bounded — it is a menu builder, not an architectural
 dependency — but not small.
 
-**4. `genealabs/laravel-model-caching` — the widest blast radius.** Marked `abandoned` with a named
-replacement, `mike-bronner/laravel-model-caching`. Locked at 0.13.9; the successor's latest is 13.1.7,
-declaring `illuminate/* ^11.0|^12.0|^13.0`. A `0.13 → 13.1` jump is a rewritten API, not a bump. It is
-also held down independently by `genealabs/laravel-pivot-events` 10.0.1, which section 3 records as a
-separate cap invisible to the ceilings table. This package wraps Eloquent query caching, so it sits
-under every cached model read, and `Models` is 57.23% covered — the highest-consequence, least-guarded
-combination in the set. Cost: medium-to-high, mostly in verification rather than in the swap.
-Consider whether the caching layer is still wanted at all; removing it is a legitimate and possibly
-cheaper answer than porting it.
+**4. `genealabs/laravel-model-caching` — the widest blast radius, but probably not a package swap.**
+Marked `abandoned` with `mike-bronner/laravel-model-caching` named as the replacement, and it is easy
+to read that as "this package is over". It is not. Packagist still publishes 11.0.1, 12.0.4 and 13.1.7
+**under the `genealabs/laravel-model-caching` name itself** — the abandoned marker travels along with
+those releases — and 13.1.7 declares `illuminate/* ^11.0|^12.0|^13.0`, so it covers both the 12 hop
+and 13. `composer require genealabs/laravel-model-caching:^13.0` is on the table and is very likely
+the whole of the resolver fix. The `genealabs/laravel-pivot-events` 10.0.1 cap that section 3 records
+is not an independent constraint either: 13.1.7 depends on `mikebronner/laravel-pivot-events` instead,
+so that cap disappears when the package moves rather than needing separate work. Cost: **low in
+dependency terms, medium in verification** — `0.13.9 → 13.x` is a decade of API change on a layer that
+wraps Eloquent query caching, so it sits under every cached model read while `Models` is 57.23%
+covered. The risk is behavioural, not resolvable. Consider whether the caching layer is still wanted
+at all; removing it is a legitimate and possibly cheaper answer than porting it.
 
 **5. `intervention/imagecache`.** Abandoned, locked and latest both 2.6.0 (2023-02-25), ceiling 10, no
 replacement named by the package. It pins `intervention/image` to the 2.x line, and `intervention/image`
@@ -438,11 +462,14 @@ cross-check adds. Each already has a published release declaring 12 or 13, so ea
 once steps 2 to 6 have unpinned the resolver: `akaunting/laravel-firewall` → 3.0.0,
 `akaunting/laravel-language` → 2.0.0, `akaunting/laravel-mutable-observer` → 3.0.0,
 `akaunting/laravel-sortable` → 3.0.0, `santigarcor/laratrust` 7.2.1 → 8.5.5, plus
-`akaunting/laravel-money`, `barryvdh/*`, `laravel/sanctum`, `laravel/slack-notification-channel`,
+`akaunting/laravel-money`, `barryvdh/*`, `laravel/slack-notification-channel`,
 `graham-campbell/markdown`, `plank/laravel-mediable` and `wnx/laravel-stats`. Cost: low per package,
 with two that are not free. `laratrust` 7 → 8 is a major on the authorisation layer and carries a
 published migration; `Auth` is 45.49% covered with 27 of 55 files untested, so this is the bump most
-likely to break something quietly. `akaunting/laravel-setting` (v1.2.9, `>=5.3`) and
+likely to break something quietly. `laravel/sanctum` 3 → 4 is not a bump at all and is handled in
+step 9 instead — upstream marks it High Impact, it requires publishing migrations and rewriting the
+middleware keys in `config/sanctum.php`, and it has to land with the framework rather than ahead
+of it. `akaunting/laravel-setting` (v1.2.9, `>=5.3`) and
 `akaunting/laravel-version` (v1.0.4, last released 2021-03-05, `>=5.2.0`) will resolve on 12 and 13
 without moving at all, purely because their constraints are open-ended — that is declaration, not
 evidence, and a package untouched since 2021 resolving cleanly against a 2026 framework should be
@@ -454,19 +481,70 @@ two. `staudenmeir/eloquent-has-many-deep-contracts` v1.1 caps the second one ind
 but it needs the version window read deliberately — an intermediate release has to be picked for the
 12 hop and then moved again for 13, and `composer require` without a pin will pick wrong.
 
-**9. `laravel/framework` 10 → 11.** The largest code cost in the list, and it becomes possible only
-after 2 to 8. The 11 skeleton removes `app/Http/Kernel.php` and `app/Console/Kernel.php` and moves
-their contents into `bootstrap/app.php`: the 28 files in `app/Http/Middleware` and the 12 in
-`app/Providers` all have to be re-registered through the new entry point, and section 4 puts those
-two directories at 46.53% and 72.24%. The framework's own transitive requirements —
-`laravel/prompts` ^0.3, `nesbot/carbon`, `nunomaduro/termwind` and ten `symfony/*` sub-packages, all
-named in the probes — resolve on their own once the direct pins are relaxed and need no separate
-action. Cost: high, and it is genuine migration work rather than
-dependency work. This is the step to land alone, on its own branch, with the suite from step 1 behind
-it.
+**9. `laravel/framework` 10 → 11.** Possible only after 2 to 8, and the step where the cost is most
+often misestimated — including by this project.
 
-**10. `11 → 12`, then `12 → 13`.** `11 → 12` is small; upstream's own guide describes it as a minor
-effort, and section 3's ceiling column says the dependency set is mostly already there. `12 → 13` is
+*Correcting an inherited error first.* `specs/northstar/PLAN.md` says Ch3 "collapses
+`app/Console/Kernel.php` and `app/Http/Kernel.php` into `bootstrap/app.php`" and treats the extension
+surface as moving because of it. Upstream says otherwise. The Laravel 11 upgrade guide, under
+Application Structure, states that the slim skeleton is what *new* applications get and that it does
+**not recommend** a Laravel 10 application migrate its structure, because 11 was tuned to support the
+10 structure as-is. The whole 10 → 11 guide is headed *Estimated Upgrade Time: 15 Minutes*. So the
+skeleton migration is **optional work, not required work**, the 28 middleware files and 12 providers
+stay where they are, and any Ch3 schedule built on the collapse being mandatory is budgeting for
+something upstream advises against doing. The coverage numbers do not change; what changes is that
+they are not the reason this step is expensive.
+
+*What actually applies here.* The guide's High Impact list, filtered to this codebase:
+
+- **PHP 8.2 required.** `composer.json` declares `php: ^8.1` and section 2 records an 8.1 lane in the
+  CI matrix. Both have to move. Section 1 already calls 8.1 end-of-life, so this forces a change that
+  is overdue on its own merits.
+- **Modifying Columns.** Every `->change()` must now restate *all* modifiers it wants to keep;
+  anything omitted is dropped. There are 6 `->change()` calls across 3 migration files
+  (`2019_11_16_000000_core_v2.php`, `2022_05_10_000000_core_v300.php`,
+  `2022_08_29_000000_core_v307.php`). Small, but silent and data-destructive if missed. Squashing via
+  `schema:dump` is upstream's escape hatch.
+- **Floating-point types.** `double` and `float` were rewritten: `double` no longer takes
+  `$total`/`$places`, `float` takes an optional `$precision`, and `unsignedDecimal`, `unsignedDouble`
+  and `unsignedFloat` are gone. This codebase has 38 such calls — 36 `->double(`, 2 `->float(` —
+  across 6 migration files, all using the `(total, places)` argument form
+  (`$table->double('amount', 15, 4)`). On a double-entry accounting application these are the money
+  columns, so this is the highest-consequence item in the list.
+- **SQLite 3.26+.** `phpunit.xml` runs the suite on `sqlite` `:memory:`, so this lands on the test
+  environment and CI rather than on production.
+- **Sanctum 3 → 4.** Migrations are no longer auto-loaded and must be published
+  (`vendor:publish --tag=sanctum-migrations`), and `config/sanctum.php` needs its middleware keys
+  rewritten. This application's file currently declares `verify_csrf_token` and `encrypt_cookies`
+  pointing at its own `App\Http\Middleware` classes; Sanctum 4 expects `authenticate_session`,
+  `encrypt_cookies` and `validate_csrf_token` pointing at the Sanctum and framework classes. That is a
+  rename *and* a retarget of overridden middleware, which is why upstream marks it High Impact and why
+  it does not belong in step 7's routine-bump bucket.
+- Medium impact, worth budgeting: **Carbon 3** — `diffIn*` now returns floating-point values and can
+  return negatives to indicate direction, a real hazard in a codebase with recurring transactions and
+  date arithmetic; **per-second rate limiting** — `decayMinutes` → `decaySeconds`, and the `Limit` and
+  `ThrottlesExceptions` constructors now take seconds; and password rehashing on login.
+- `doctrine/dbal` can be dropped afterwards; the framework no longer depends on it.
+
+The framework's own transitive requirements — `laravel/prompts` ^0.3, `nesbot/carbon`,
+`nunomaduro/termwind` and ten `symfony/*` sub-packages, all named in the probes — resolve on their own
+once the direct pins are relaxed and need no separate action.
+
+Cost: **moderate, and concentrated in migrations rather than in application structure.** Upstream's 15
+minutes is for a clean application; the 38 floating-point columns, the 6 `->change()` calls and the
+Sanctum middleware retarget are what this fork adds to it. Still the step to land alone, on its own
+branch, with the suite from step 1 behind it — the failure modes here are silent schema changes, which
+is what a test suite catches and a code review does not.
+
+**10. `11 → 12`, then `12 → 13`.** `11 → 12` really is small: upstream heads that guide *Estimated
+Upgrade Time: 5 Minutes*, its only High Impact item is updating dependencies, and section 3's ceiling
+column says the dependency set is mostly already there. Three things to check rather than assume.
+**Carbon 3 stops being optional** — 12 removes Carbon 2 support entirely, so the `diffIn*`
+float-and-negative change deferred at step 9 has to be absorbed here at the latest. The `HasUuids`
+trait switches to UUIDv7; this application uses it nowhere, so it does not apply. The `local`
+filesystem disk's default root moves to `storage/app/private`, but `config/filesystems.php` defines
+`local` explicitly, so that does not apply either. Also worth a grep before landing: the `image`
+validation rule no longer accepts SVGs by default. `12 → 13` is
 the step that makes the whole exercise worth doing, and it reopens exactly two runtime packages:
 `akaunting/laravel-language` and `akaunting/laravel-mutable-observer`, both capped at 12, both
 first-party, both last released before 13 existed (`beyondcode/laravel-dump-server` also caps at 12
@@ -505,9 +583,22 @@ finds this ordering wrong at some step, the finding to record is which step and 
   future package that blocks by declaring a `conflict` rather than a narrow `require` would be
   invisible to the table in the same way. The resolver probes are what catch this class, which is a
   reason to keep running both and not just the cheaper one.
-- **Declared support is not proven support.** A ceiling of 12 means the package says so, not that it
-  works. The resolver probes narrow this gap; they do not close it. Section 5's step 7 names the two
-  packages where the gap is widest.
+- **Declared support is not proven support, and nothing here narrows that.** A ceiling of 12 means the
+  package says so, not that it works. It would be convenient to credit the resolver probes with
+  closing some of the gap, and they close none of it: neither probe resolved, so no install was
+  produced and no line of this application's code has run on 11 or 12. What the probes establish is a
+  fact about lock state, which is what section 5 uses them for and the only thing they can support.
+  Proven support starts when something installs and the suite runs against it, and that has not
+  happened yet. Section 5's step 7 names the two packages where the gap is widest.
+- **The blocker set may be incomplete, and a failed probe cannot tell you otherwise.** This is the
+  symmetric caveat to section 5's central argument. The ceilings table covers the 57 direct
+  dependencies; `composer.lock` holds 223 packages, and transitive ones enter the picture only where a
+  probe happens to name them. Because neither probe resolved, Composer stopped at the first
+  unsatisfiable set and never explored past it — so the `why-not` output is **one failure frontier,
+  not an enumeration of blockers**. Clearing the packages section 5 names is very likely to reveal
+  further ones behind them. That does not weaken the verdict, which rests on no blocker being
+  unclearable rather than on the list being exhaustive, but it does mean the step list is a starting
+  order rather than a complete inventory, and Ch3 should expect to extend it.
 - **This is a snapshot.** Every generated figure carries its `generated_at` timestamp. Ch3 reruns the
   scripts, and the diff is the news.
 - **The documentation half is elsewhere.**
