@@ -1,5 +1,5 @@
 $repoRoot = Resolve-Path (Join-Path $PSScriptRoot '..\..')
-$projectSkills = @('akaunting-codebase-navigation', 'akaunting-test-coverage', 'akaunting-dependency-upgrade')
+$projectSkills = @('akaunting-codebase-navigation', 'akaunting-test-coverage', 'akaunting-dependency-upgrade', 'graphify')
 
 foreach ($skill in $projectSkills) {
     $canonicalDirectory = Join-Path $repoRoot ".agents\skills\$skill"
