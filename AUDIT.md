@@ -308,11 +308,8 @@ consequence of the counting rule as much as of new tests.
 
 *Provenance: judgment, over the evidence in sections 3 and 4.*
 
-**Verdict:** feasible, with named costs. Separately, and as a recommendation the plan's author has to
-ratify rather than a call this audit can make on its own: the destination should be Laravel 13 rather
-than 12.
-
-Two separate claims, because they rest on different evidence and carry different authority.
+**Verdict:** feasible, with named costs. The destination is Laravel 12, as the plan says, and the cost
+of stopping there is set out below rather than argued away.
 
 **On feasibility.** The two resolver probes fail, but they do not fail for the reason the failure
 looks like. Both were run as a single-package update naming only `laravel/framework`, so every other
@@ -358,30 +355,44 @@ So the net will not catch a framework regression where a framework regression is
 a Ch2 precondition, not a Ch3 blocker, and it is why the ordering below puts test coverage before the
 `10 → 11` step rather than after it.
 
-**On the target — a recommendation, not a decision taken.** `specs/northstar/PLAN.md` does not merely
-name 12 as the target; it lists **"Target is Laravel 12, not 13. One horizon at a time."** under
-**Non-goals**. What follows therefore argues against a standing non-goal, and this audit does not have
-the standing to overturn one. Read it as a recommendation pending ratification: until the plan's
-non-goal is changed by the person who wrote it, 12 remains the committed target and this section is
-the case for revisiting that. The blocker ordering below is written so it holds either way — steps 1
-to 9 are identical for both destinations, and only step 10 differs.
+**On the target — Laravel 12, decided.** `specs/northstar/PLAN.md` does not merely name 12; it lists
+**"Target is Laravel 12, not 13. One horizon at a time."** under **Non-goals**. This audit put the
+case for going one major further, and the call has been taken: the target holds at 12. The reasoning
+is a scope judgment rather than a technical one. A two-major upgrade — 10 to 11 to 12 — is the
+exercise this project set out to do. A third major is a third upgrade, and adding it mid-flight turns
+a finishable piece of work into a longer one. One horizon at a time.
 
-The case: 12 is a bad place to stop. Section 1 has the dates: 12's bug-fix window closes 13 August
-2026 — that is now, not a future date to plan around — and security support ends 24 February 2027. Landing there would put this fork on an unsupported framework roughly six months
-after arriving, which is a smaller version of the position section 1 documents it already being in.
-There is no argument for stopping at 12 that survives its own dates.
+That is a deliberate choice, and the rest of this subsection is what it costs, stated plainly so that
+nobody arriving later mistakes the stop at 12 for an oversight.
 
-12 does have to be passed through: Laravel upgrade guides are written per major, and `10 → 13` in one
-step is not a supported path. Keep 12 as a transit point, move the destination to 13. Section 3
-supports this: 30 of the 57 direct packages classify `supports-12`, and 27 of those 30 carry a ceiling
-of 13 rather than 12. Going one major further is mostly free at the dependency layer.
+**The cost.** Laravel 12's bug-fix window closed on 13 August 2026. It is security-only until
+24 February 2027, and upstream is already shipping 13.25.0. So Ch3 will land this fork on a release
+that is *already leaving active support*, and it will arrive with most of the support clock spent —
+whatever remains of a window that closes in February 2027, minus however long Ch3 takes. The honest
+description is that Half B moves the fork from 18 months past end-of-life to a few months short of it.
+That is a large improvement and it is not a durable position. It buys a supported-enough platform to
+do the PHP and code work on, not a place to stay.
 
-It is not entirely free, and the exception matters. The three `supports-12` rows that stop at 12 are
+Two consequences worth writing down now rather than rediscovering. Ch3 finishing does not close the
+framework question — a `12 → 13` chapter follows it, and the sooner it is scheduled the less this
+costs. And a security-only release means security fixes still arrive; it is not unsupported. The
+window is narrow, not absent.
+
+**What a later `12 → 13` would face, since this audit already has the answer.** Recorded here as
+intelligence for whoever picks that up, not as an argument for doing it now.
+
+At the dependency layer 13 is mostly already paid for: of the 30 direct packages that classify
+`supports-12`, **27 carry a ceiling of 13 rather than 12**. Three stop at 12 —
 `akaunting/laravel-language` (latest 2.0.0), `akaunting/laravel-mutable-observer` (latest 3.0.0) and
-`beyondcode/laravel-dump-server` (latest 2.1.0). The first two were both released 2025-12-16, before
-Laravel 13 shipped on 17 March 2026; they are clear at 12 and become the new blockers at 13, and both
-are first-party, which is the same question one major later. The third is `require-dev` and can be
-dropped rather than solved if it comes to that.
+`beyondcode/laravel-dump-server` (latest 2.1.0). The last is `require-dev` and can be dropped rather
+than solved. The first two are the real finding: both are **first-party**, and both were last released
+**2025-12-16**, which is before Laravel 13 shipped on 17 March 2026. They are clear at 12 and become
+the blockers at 13 — the same fork-or-wait question as step 3 below, one major later, against the same
+vendor. The "On waiting" paragraph immediately below applies to them unchanged.
+
+So the `12 → 13` move is small at the dependency layer and turns on two first-party packages. Whoever
+schedules it should start by checking whether the vendor has released for 13 in the meantime; if it
+has, that chapter is mostly a version bump.
 
 **On waiting.** Waiting for upstream is not a strategy here, and `latest_released_at` in
 `audit-out/ceilings.json` is why. The vendor is releasing actively for the packages it still
@@ -432,9 +443,9 @@ dependency — but not small.
 Marked `abandoned` with `mike-bronner/laravel-model-caching` named as the replacement, and it is easy
 to read that as "this package is over". It is not. Packagist still publishes 11.0.1, 12.0.4 and 13.1.7
 **under the `genealabs/laravel-model-caching` name itself** — the abandoned marker travels along with
-those releases — and 13.1.7 declares `illuminate/* ^11.0|^12.0|^13.0`, so it covers both the 12 hop
-and 13. `composer require genealabs/laravel-model-caching:^13.0` is on the table and is very likely
-the whole of the resolver fix. The `genealabs/laravel-pivot-events` 10.0.1 cap that section 3 records
+those releases — and 13.1.7 declares `illuminate/* ^11.0|^12.0|^13.0`, so it covers 12, and 13 too
+should that ever follow. `composer require genealabs/laravel-model-caching:^13.0` is on the table and
+is very likely the whole of the resolver fix. The `genealabs/laravel-pivot-events` 10.0.1 cap that section 3 records
 is not an independent constraint either: 13.1.7 depends on `mikebronner/laravel-pivot-events` instead,
 so that cap disappears when the package moves rather than needing separate work. Cost: **low in
 dependency terms, medium in verification** — `0.13.9 → 13.x` is a decade of API change on a layer that
@@ -470,7 +481,7 @@ likely to break something quietly. `laravel/sanctum` 3 → 4 is not a bump at al
 step 9 instead — upstream marks it High Impact, it requires publishing migrations and rewriting the
 middleware keys in `config/sanctum.php`, and it has to land with the framework rather than ahead
 of it. `akaunting/laravel-setting` (v1.2.9, `>=5.3`) and
-`akaunting/laravel-version` (v1.0.4, last released 2021-03-05, `>=5.2.0`) will resolve on 12 and 13
+`akaunting/laravel-version` (v1.0.4, last released 2021-03-05, `>=5.2.0`) will resolve on 12
 without moving at all, purely because their constraints are open-ended — that is declaration, not
 evidence, and a package untouched since 2021 resolving cleanly against a 2026 framework should be
 treated as unverified rather than as clear.
@@ -478,8 +489,9 @@ treated as unverified rather than as clear.
 **8. `staudenmeir/belongs-to-through` and `staudenmeir/eloquent-has-many-deep`.** Section 3 names the
 trap: locked at `illuminate/database ^10.0`, latest declaring `^13.0`, with 12 sitting between the
 two. `staudenmeir/eloquent-has-many-deep-contracts` v1.1 caps the second one independently. Cost: low,
-but it needs the version window read deliberately — an intermediate release has to be picked for the
-12 hop and then moved again for 13, and `composer require` without a pin will pick wrong.
+but it needs the version window read deliberately — the release that supports 12 is neither the locked
+one nor the latest one, so both have to be pinned explicitly. `composer require` without a pin will
+take the latest and land on `^13.0`, which does not install here.
 
 **9. `laravel/framework` 10 → 11.** Possible only after 2 to 8, and the step where the cost is most
 often misestimated — including by this project.
@@ -536,22 +548,22 @@ Sanctum middleware retarget are what this fork adds to it. Still the step to lan
 branch, with the suite from step 1 behind it — the failure modes here are silent schema changes, which
 is what a test suite catches and a code review does not.
 
-**10. `11 → 12`, then `12 → 13`.** `11 → 12` really is small: upstream heads that guide *Estimated
-Upgrade Time: 5 Minutes*, its only High Impact item is updating dependencies, and section 3's ceiling
-column says the dependency set is mostly already there. Three things to check rather than assume.
-**Carbon 3 stops being optional** — 12 removes Carbon 2 support entirely, so the `diffIn*`
-float-and-negative change deferred at step 9 has to be absorbed here at the latest. The `HasUuids`
-trait switches to UUIDv7; this application uses it nowhere, so it does not apply. The `local`
-filesystem disk's default root moves to `storage/app/private`, but `config/filesystems.php` defines
-`local` explicitly, so that does not apply either. Also worth a grep before landing: the `image`
-validation rule no longer accepts SVGs by default. `12 → 13` is
-the step that makes the whole exercise worth doing, and it reopens exactly two runtime packages:
-`akaunting/laravel-language` and `akaunting/laravel-mutable-observer`, both capped at 12, both
-first-party, both last released before 13 existed (`beyondcode/laravel-dump-server` also caps at 12
-but is `require-dev` and can be dropped). Cost: low for the framework, unknown for those two until the
-vendor either releases or does not. They are the same fork-or-wait decision as step 3, one major
-later, and the honest thing to do is take the decision once — when step 3 is decided — rather than
-twice.
+**10. `laravel/framework` 11 → 12 — the last step, and the destination.** Genuinely small: upstream
+heads that guide *Estimated Upgrade Time: 5 Minutes*, its only High Impact item is updating
+dependencies, and section 3's ceiling column says the dependency set is mostly already there. Four
+things to check rather than assume:
+
+- **Carbon 3 stops being optional.** Laravel 12 removes Carbon 2 support entirely, so the `diffIn*`
+  change flagged at step 9 — floating-point returns, negatives to indicate direction — has to be
+  absorbed here at the latest. In a codebase with recurring transactions and date arithmetic this is
+  the item on the `11 → 12` list most likely to bite.
+- The `HasUuids` trait switches to UUIDv7. This application uses it nowhere, so it does not apply.
+- The `local` filesystem disk's default root moves to `storage/app/private`, but
+  `config/filesystems.php` defines `local` explicitly, so that does not apply either.
+- The `image` validation rule no longer accepts SVGs by default. Worth a grep before landing.
+
+Cost: low. This is where Half B stops, and the subsection above says what stopping here costs and what
+a subsequent `12 → 13` chapter would face.
 
 Steps 2 through 8 are dependency work and can be interleaved. Step 1 gates the verification of
 everything after it. Steps 9 and 10 are strictly sequential and strictly last. If a future chapter
