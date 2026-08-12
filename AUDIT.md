@@ -303,3 +303,213 @@ Counting rules, since different rules give different numbers: a test file is any
 `tests/`; a test method is a `function testX` declaration or a `#[Test]`/`@test` marker; an assertion
 call is any `->assertSomething(`. The assertion figure moved furthest of the three, which is a
 consequence of the counting rule as much as of new tests.
+
+## 5. The Ch3 Half B call
+
+*Provenance: judgment, over the evidence in sections 3 and 4.*
+
+**Verdict:** feasible, with named costs — and the destination should be Laravel 13, not 12.
+
+Two separate claims, because they rest on different evidence.
+
+**On feasibility.** The two resolver probes fail, but they do not fail for the reason the failure
+looks like. Both were run as a single-package update naming only `laravel/framework`, so every other
+package stays pinned at its locked version by construction. Read the eight `Problem` blocks in
+`audit-out/probe-l11.txt` against section 3's ceiling column and the picture inverts: four of the
+seven named packages — `akaunting/laravel-language`, `akaunting/laravel-setting`,
+`akaunting/laravel-version`, `akaunting/laravel-firewall` — declare constraints at their *locked*
+version that already admit 11 and 12, and are held out only by "an update of this package was not
+requested". The other three — `akaunting/laravel-mutable-observer`, `akaunting/laravel-sortable`,
+`santigarcor/laratrust` — genuinely conflict at their locked version, and all three have a published
+later release that does not. Not one of the eight blocks is a package with no release that supports
+the target. The probes measure lock state. They are evidence that this fork cannot drift onto 12; they
+are not evidence that it cannot be moved there.
+
+The ceilings that are real come from the table instead, and there are four of them: two
+`ceiling-below` rows and two `abandoned` rows. Each is a small-to-medium single-purpose package, each
+is MIT, and each has a fork-or-replace path that is bounded and describable. That is the whole of the
+hard blocker set. Nothing in section 3 says the framework itself, or any package carrying an
+architectural commitment, cannot move.
+
+**On the risk, which is where the real cost sits.** Section 4 is the reason this is "with named
+costs" rather than a clean yes. 44.81% over `app/` is not itself disqualifying; the distribution is
+the problem. Coverage is thinnest exactly on the surfaces a major upgrade disturbs: `Imports` 0.42%
+with 39 of 40 files untested, `BulkActions` 3.91%, `Exceptions` 5.71%, `Classifiers` 0.00%,
+`Http/Livewire` 18.53%, `Http/Controllers` 27.38% with 58 of 88 files untested, `Listeners` 28.57%,
+`Console` 33.77%. `Http/Middleware` sits at 46.53%, and middleware is the single most upgrade-sensitive
+directory in the tree under the Laravel 11 skeleton change. The one comfortable reading on the
+framework axis is `Providers` at 72.24%, which is the other half of that same change. On the domain
+axis, `Purchases` 25.06% and `Sales` 27.35% are the two lowest — the product's transactional core.
+
+So the net will not catch a framework regression where a framework regression is most likely. That is
+a Ch2 precondition, not a Ch3 blocker, and it is why the ordering below puts test coverage before the
+`10 → 11` step rather than after it.
+
+**On the target.** Ch3 names 12, and 12 is a bad place to stop. Section 1 has the dates: 12's bug-fix
+window closes 13 August 2026 — that is now, not a future date to plan around — and security support
+ends 24 February 2027. Landing there would put this fork on an unsupported framework roughly six months
+after arriving, which is a smaller version of the position section 1 documents it already being in.
+There is no argument for stopping at 12 that survives its own dates.
+
+12 does have to be passed through: Laravel upgrade guides are written per major, and `10 → 13` in one
+step is not a supported path. Keep 12 as a transit point, move the destination to 13. Section 3
+supports this: 30 of the 57 direct packages classify `supports-12`, and 27 of those 30 carry a ceiling
+of 13 rather than 12. Going one major further is mostly free at the dependency layer.
+
+It is not entirely free, and the exception matters. The three `supports-12` rows that stop at 12 are
+`akaunting/laravel-language` (latest 2.0.0), `akaunting/laravel-mutable-observer` (latest 3.0.0) and
+`beyondcode/laravel-dump-server` (latest 2.1.0). The first two were both released 2025-12-16, before
+Laravel 13 shipped on 17 March 2026; they are clear at 12 and become the new blockers at 13, and both
+are first-party, which is the same question one major later. The third is `require-dev` and can be
+dropped rather than solved if it comes to that.
+
+**On waiting.** Waiting for upstream is not a strategy here, and `latest_released_at` in
+`audit-out/ceilings.json` is why. The vendor is releasing actively for the packages it still
+maintains: `laravel-firewall` 3.0.0 and `laravel-sortable` 3.0.0 in May 2026, `laravel-apexcharts`
+4.0.0 in May 2026, `laravel-money` 6.0.3 in March 2026, all declaring 13. It is not releasing for the
+one first-party package that actually blocks: `akaunting/laravel-menu` has had nothing since
+2023-10-25. The packages that would be cleared by waiting are already clear. The package that would
+need to be cleared shows no sign of movement. Waiting buys the first-party lock-state bumps that are
+free anyway and does not touch the hard set.
+
+### Blockers, and what clearing each would cost
+
+In the order they have to be cleared. Costs are magnitude judgments read off declared constraints,
+package size and release history — no upgrade was attempted in this chapter, and section 6 says what
+that means.
+
+**1. Test coverage on the upgrade-sensitive surfaces.** Not a resolver blocker; a prerequisite, and
+first because it gates whether any of the rest can be verified. The surfaces named above — `Imports`,
+`BulkActions`, `Http/Controllers`, `Http/Livewire`, `Http/Middleware`, `Exceptions`, `Console` — plus
+the `Purchases` and `Sales` domains, need enough coverage that a `10 → 11` behavioural regression
+fails a test rather than reaching a user. Cost: this is Ch2's entire deliverable, and section 4's
+untested-file column is the worklist. Doing Half B without it is possible; doing it without it and
+knowing whether it worked is not.
+
+**2. The dev-tooling floor.** `nunomaduro/collision` v7.12.0 declares `conflict: laravel/framework
+>=11.0.0` — a hard resolver stop that section 3 records is invisible to the ceilings table, since the
+classifier reads `require` only. It moves to v8, which drags `phpunit/phpunit` 10 → 11 or later, and
+with it `brianium/paratest`, `mockery/mockery`, `spatie/laravel-ignition` and
+`beyondcode/laravel-dump-server`. Cost: low. `tests/` declares no doc-comment test metadata —
+no `@test`, `@dataProvider`, `@depends` or `@group` anywhere — so the PHPUnit major move is a
+configuration-schema and API-deprecation pass rather than a rewrite of the suite. Must be first among
+the package work: without it the suite cannot run on the new framework, and every later step is
+unverifiable.
+
+**3. `akaunting/laravel-menu` — the hardest blocker.** First-party, locked and latest both v3.1.2,
+last released 2023-10-25, ceiling 10 (`illuminate/config|support|view ^9.0|^10.0`). It is compounded
+rather than contradicted by its transitive dependency `laravelcollective/html` v6.4.1, which caps at
+`^10.0` and is itself marked abandoned in `composer.lock` with `spatie/laravel-html` named as the
+replacement. So clearing this means clearing two dead things at once.
+Options, in increasing cost: the vendor releases a 4.x — outside this fork's control, and the release
+history says do not plan on it; fork it into the repository and widen both constraints, which also
+requires replacing or vendoring `laravelcollective/html`; or replace the menu layer outright. Cost:
+the highest of the four, and the one to start on earliest, because the fork option needs a home and a
+maintenance owner decided before it is used. Bounded — it is a menu builder, not an architectural
+dependency — but not small.
+
+**4. `genealabs/laravel-model-caching` — the widest blast radius.** Marked `abandoned` with a named
+replacement, `mike-bronner/laravel-model-caching`. Locked at 0.13.9; the successor's latest is 13.1.7,
+declaring `illuminate/* ^11.0|^12.0|^13.0`. A `0.13 → 13.1` jump is a rewritten API, not a bump. It is
+also held down independently by `genealabs/laravel-pivot-events` 10.0.1, which section 3 records as a
+separate cap invisible to the ceilings table. This package wraps Eloquent query caching, so it sits
+under every cached model read, and `Models` is 57.23% covered — the highest-consequence, least-guarded
+combination in the set. Cost: medium-to-high, mostly in verification rather than in the swap.
+Consider whether the caching layer is still wanted at all; removing it is a legitimate and possibly
+cheaper answer than porting it.
+
+**5. `intervention/imagecache`.** Abandoned, locked and latest both 2.6.0 (2023-02-25), ceiling 10, no
+replacement named by the package. It pins `intervention/image` to the 2.x line, and `intervention/image`
+is at 4.2.1 with a fully rewritten API — so this one blocker holds two packages back, and clearing it
+means taking the `image` 2 → 3/4 migration at the same time. Cost: medium, concentrated in whatever
+touches attachment and logo rendering. `intervention/image` is `framework-agnostic` in section 3's
+table and so never appears as a Laravel blocker; the coupling is the reason to name it here anyway.
+Cheapest path is likely to drop `imagecache` and cache rendered images through Laravel's own cache and
+filesystem, which is a smaller surface than either forking or porting.
+
+**6. `lorisleiva/laravel-search-string`.** Locked and latest both v1.3.0 (2023-03-11), ceiling 10
+(`illuminate/support ^9.0|^10.0`). Third-party and dormant rather than formally abandoned. It parses
+the search syntax behind the index pages, so it is single-purpose and self-contained. Cost: low.
+A fork with a widened constraint is plausibly a one-line change plus a test pass; the package's own
+test suite is the thing to run first to find out.
+
+**7. The lock-state bumps.** The seven packages the probes name, plus the nine the `why-not`
+cross-check adds. Each already has a published release declaring 12 or 13, so each is a version bump
+once steps 2 to 6 have unpinned the resolver: `akaunting/laravel-firewall` → 3.0.0,
+`akaunting/laravel-language` → 2.0.0, `akaunting/laravel-mutable-observer` → 3.0.0,
+`akaunting/laravel-sortable` → 3.0.0, `santigarcor/laratrust` 7.2.1 → 8.5.5, plus
+`akaunting/laravel-money`, `barryvdh/*`, `laravel/sanctum`, `laravel/slack-notification-channel`,
+`graham-campbell/markdown`, `plank/laravel-mediable` and `wnx/laravel-stats`. Cost: low per package,
+with two that are not free. `laratrust` 7 → 8 is a major on the authorisation layer and carries a
+published migration; `Auth` is 45.49% covered with 27 of 55 files untested, so this is the bump most
+likely to break something quietly. `akaunting/laravel-setting` (v1.2.9, `>=5.3`) and
+`akaunting/laravel-version` (v1.0.4, last released 2021-03-05, `>=5.2.0`) will resolve on 12 and 13
+without moving at all, purely because their constraints are open-ended — that is declaration, not
+evidence, and a package untouched since 2021 resolving cleanly against a 2026 framework should be
+treated as unverified rather than as clear.
+
+**8. `staudenmeir/belongs-to-through` and `staudenmeir/eloquent-has-many-deep`.** Section 3 names the
+trap: locked at `illuminate/database ^10.0`, latest declaring `^13.0`, with 12 sitting between the
+two. `staudenmeir/eloquent-has-many-deep-contracts` v1.1 caps the second one independently. Cost: low,
+but it needs the version window read deliberately — an intermediate release has to be picked for the
+12 hop and then moved again for 13, and `composer require` without a pin will pick wrong.
+
+**9. `laravel/framework` 10 → 11.** The largest code cost in the list, and it becomes possible only
+after 2 to 8. The 11 skeleton removes `app/Http/Kernel.php` and `app/Console/Kernel.php` and moves
+their contents into `bootstrap/app.php`: the 28 files in `app/Http/Middleware` and the 12 in
+`app/Providers` all have to be re-registered through the new entry point, and section 4 puts those
+two directories at 46.53% and 72.24%. The framework's own transitive requirements —
+`laravel/prompts` ^0.3, `nesbot/carbon`, `nunomaduro/termwind` and ten `symfony/*` sub-packages, all
+named in the probes — resolve on their own once the direct pins are relaxed and need no separate
+action. Cost: high, and it is genuine migration work rather than
+dependency work. This is the step to land alone, on its own branch, with the suite from step 1 behind
+it.
+
+**10. `11 → 12`, then `12 → 13`.** `11 → 12` is small; upstream's own guide describes it as a minor
+effort, and section 3's ceiling column says the dependency set is mostly already there. `12 → 13` is
+the step that makes the whole exercise worth doing, and it reopens exactly two runtime packages:
+`akaunting/laravel-language` and `akaunting/laravel-mutable-observer`, both capped at 12, both
+first-party, both last released before 13 existed (`beyondcode/laravel-dump-server` also caps at 12
+but is `require-dev` and can be dropped). Cost: low for the framework, unknown for those two until the
+vendor either releases or does not. They are the same fork-or-wait decision as step 3, one major
+later, and the honest thing to do is take the decision once — when step 3 is decided — rather than
+twice.
+
+Steps 2 through 8 are dependency work and can be interleaved. Step 1 gates the verification of
+everything after it. Steps 9 and 10 are strictly sequential and strictly last. If a future chapter
+finds this ordering wrong at some step, the finding to record is which step and why, not the verdict.
+
+## 6. What this audit does not cover
+
+*Provenance: hand-written.*
+
+- **`modules/` is unmeasured.** `phpunit.xml` scopes `<source>` to `./app`, so the two bundled
+  modules are executed by the suite but contribute no coverage data at all. `modules/` is a
+  post-install path that is not tracked in git, which is why it is out of scope rather than merely
+  unmeasured. The map is therefore silent about the extension surface, which is precisely the surface
+  Ch3 has to keep working: section 3 classifies both bundled modules `framework-agnostic`, and that
+  says nothing about the Laravel service providers they register. Treat the coverage figures in
+  section 4 as covering `app/` and nothing else.
+- **The coverage figure was cross-checked only against its own source.** The plan called for a second,
+  independently instrumented run. What was done instead was a check that `audit-out/coverage.json`
+  agrees with the `audit-out/clover.xml` it was derived from. That verifies the JSON derivation and
+  nothing more. A stale or mis-scoped `clover.xml`, or a PCOV misconfiguration in the original run,
+  would pass that check unnoticed. 44.81% is one measurement, reconciled with itself.
+- **The suite's assertion count is not deterministic.** Four runs of the same 242 tests reported 673,
+  674, 675 and 676 assertions, all green — four runs, four different numbers. It was not root-caused. It does not touch the coverage data,
+  which comes from Clover rather than from the runner's own tally, and it is a different measure from
+  the static 494 in section 4's suite-size table. It is recorded because anyone treating assertion
+  count as a metric — a Ch2 temptation — should know it moves on its own first.
+- **The ceiling classifier reads `require`, not `conflict`.** `nunomaduro/collision` is the one direct
+  package this misses today; section 3's declared-versus-actual list is where it is recorded. Any
+  future package that blocks by declaring a `conflict` rather than a narrow `require` would be
+  invisible to the table in the same way. The resolver probes are what catch this class, which is a
+  reason to keep running both and not just the cheaper one.
+- **Declared support is not proven support.** A ceiling of 12 means the package says so, not that it
+  works. The resolver probes narrow this gap; they do not close it. Section 5's step 7 names the two
+  packages where the gap is widest.
+- **This is a snapshot.** Every generated figure carries its `generated_at` timestamp. Ch3 reruns the
+  scripts, and the diff is the news.
+- **The documentation half is elsewhere.**
+  [`specs/northstar/DOCS-DRIFT-AUDIT.md`](specs/northstar/DOCS-DRIFT-AUDIT.md) covers the abandoned
+  developer manual and is not repeated here.
