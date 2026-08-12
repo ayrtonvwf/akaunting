@@ -1,15 +1,15 @@
-# Graph Report - .  (2026-08-06)
+# Graph Report - .  (2026-08-12)
 
 ## Corpus Check
 - cluster-only mode — file stats not available
 
 ## Summary
-- 7034 nodes · 15360 edges · 586 communities (237 shown, 349 thin omitted)
-- Extraction: 87% EXTRACTED · 13% INFERRED · 0% AMBIGUOUS · INFERRED: 2019 edges (avg confidence: 0.74)
+- 6747 nodes · 13952 edges · 556 communities (220 shown, 336 thin omitted)
+- Extraction: 88% EXTRACTED · 12% INFERRED · 0% AMBIGUOUS · INFERRED: 1649 edges (avg confidence: 0.8)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `4fc6d566`
+- Built from commit: `003695b0`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -360,6 +360,7 @@
 - Community 343
 - Community 344
 - Community 345
+- Community 346
 - Community 347
 - Community 348
 - Community 349
@@ -446,6 +447,15 @@
 - Community 430
 - Community 431
 - Community 432
+- Community 433
+- Community 434
+- Community 435
+- Community 436
+- Community 437
+- Community 438
+- Community 439
+- Community 440
+- Community 441
 - Community 442
 - Community 443
 - Community 444
@@ -494,38 +504,9 @@
 - Community 487
 - Community 488
 - Community 489
-- Community 490
-- Community 491
-- Community 492
-- Community 493
-- Community 494
-- Community 495
-- Community 496
-- Community 497
-- Community 498
-- Community 499
-- Community 500
-- Community 501
-- Community 502
-- Community 503
-- Community 504
-- Community 505
-- Community 506
-- Community 507
-- Community 508
-- Community 509
-- Community 510
-- Community 511
-- Community 512
-- Community 513
-- Community 514
-- Community 515
-- Community 516
-- Community 517
-- Community 518
 
 ## God Nodes (most connected - your core abstractions)
-1. `Route` - 385 edges
+1. `Route` - 386 edges
 2. `Event` - 330 edges
 3. `Job` - 198 edges
 4. `Document` - 185 edges
@@ -545,673 +526,649 @@
   modules/OfflinePayments/Http/Requests/SettingDelete.php → app/Abstracts/Http/FormRequest.php
 - `SettingGet` --inherits--> `FormRequest`  [EXTRACTED]
   modules/OfflinePayments/Http/Requests/SettingGet.php → app/Abstracts/Http/FormRequest.php
-- `Show` --inherits--> `FormRequest`  [EXTRACTED]
-  modules/OfflinePayments/Http/Requests/Show.php → app/Abstracts/Http/FormRequest.php
+- `CreatePaymentMethod` --inherits--> `Job`  [EXTRACTED]
+  modules/OfflinePayments/Jobs/CreatePaymentMethod.php → app/Abstracts/Job.php
 
 ## Import Cycles
 - None detected.
 
-## Communities (586 total, 349 thin omitted)
+## Communities (556 total, 336 thin omitted)
 
 ### Community 0 - "Community 0"
 Cohesion: 0.02
-Nodes (21): ContactCreated, ContactUpdated, ContactUpdating, Contacts, Contact, Contacts, Customers, Vendors (+13 more)
+Nodes (42): Event, Authenticated, Failed, RoleCreated, UserDeleted, UserUpdated, UserUpdating, AccountDeleted (+34 more)
 
 ### Community 1 - "Community 1"
-Cohesion: 0.04
-Nodes (77): al(), An(), ao(), _arrayLikeToArray(), _arrayWithHoles(), Bn(), bo(), cn() (+69 more)
+Cohesion: 0.03
+Nodes (14): DocumentTransactionCreated, DocumentTransactionCreating, DocumentTransactionUpdated, DocumentTransactionUpdating, DocumentReminded, Bills, Document, Invoices (+6 more)
 
 ### Community 2 - "Community 2"
 Cohesion: 0.03
-Nodes (24): Component, Hover, Button, Dropdown, Section, Country, Currency, Ddefault (+16 more)
+Nodes (6): DuplicateTransaction, Transaction, TransactionTax, ContactPerson, DocumentTotal, Illuminate\Database\Eloquent\Builder
 
 ### Community 3 - "Community 3"
-Cohesion: 0.05
-Nodes (47): My, getPaymentMethod(), checkToken(), getBannersOfModules(), getCategoriesOfModules(), getCoreVersion(), getDataKeyOfModules(), getFeaturedModules() (+39 more)
+Cohesion: 0.03
+Nodes (27): Component, Hover, ItemColumns, Message, Button, Dropdown, Link, Country (+19 more)
 
 ### Community 4 - "Community 4"
-Cohesion: 0.08
-Nodes (25): Job, CreatePermission, CreateRole, CreateAccount, CreateReconciliation, CreateTransaction, CreateTransactionTaxes, CreateContact (+17 more)
+Cohesion: 0.05
+Nodes (19): Update, UpdateFinished, Version3013, Version3014, Version3015, Version3016, Version3017, Version303 (+11 more)
 
 ### Community 5 - "Community 5"
-Cohesion: 0.04
-Nodes (24): Controller, Import, Plans, Accounts, Taxes, ApiKey, Home, Profile (+16 more)
+Cohesion: 0.06
+Nodes (27): Money, Owner, Role, User, Account, Reconciliation, Transaction, TransactionTax (+19 more)
 
 ### Community 6 - "Community 6"
-Cohesion: 0.04
-Nodes (45): Transaction, databaseDriverIs(), getCompanyDateFormat(), isLocalStorage(), getAlias(), getBulkActionClass(), getBulkActionRouteParameters(), getCancelRoute() (+37 more)
+Cohesion: 0.05
+Nodes (44): Transaction, databaseDriverIs(), getCompanyDateFormat(), getAlias(), getBulkActionClass(), getBulkActionRouteParameters(), getCancelRoute(), getCategoryFromConfig() (+36 more)
 
 ### Community 7 - "Community 7"
-Cohesion: 0.06
-Nodes (6): Import, Route, Illuminate\Foundation\Support\Providers\RouteServiceProvider, UsersTest, AccountsTest, InvoicesTest
+Cohesion: 0.05
+Nodes (19): FilterApplying, FilterShowing, GroupApplying, GroupShowing, RowsShowing, AddAccounts, AddBasis, AddContacts (+11 more)
 
 ### Community 8 - "Community 8"
-Cohesion: 0.04
-Nodes (6): TransactionUpdated, TransactionUpdating, Transactions, TransactionShare, DuplicateTransaction, Transaction
-
-### Community 9 - "Community 9"
-Cohesion: 0.04
-Nodes (14): ItemTaxes, BillHistories, BillItemTaxes, BillTotals, RecurringBillHistories, RecurringBillItemTaxes, RecurringBillTotals, InvoiceHistories (+6 more)
+Cohesion: 0.05
+Nodes (8): Show, Attachment, Buttons, Content, GetPaid, MakePayment, MoreButtons, Template
 
 ### Community 10 - "Community 10"
-Cohesion: 0.05
-Nodes (18): Akaunting\MutableObserver\Traits\Mutable, Observer, Bills, DocumentCancelled, DocumentReceived, DocumentRestored, DeleteTransaction, CreateDocumentCreatedHistory (+10 more)
+Cohesion: 0.06
+Nodes (17): Job, CreatePermission, DeleteInvitation, DeletePermission, DeleteRole, DeleteReconciliation, DeleteTransaction, DeleteTransfer (+9 more)
 
 ### Community 11 - "Community 11"
-Cohesion: 0.04
-Nodes (11): BulkAction, Reconciliations, Transactions, Transfers, Dashboards, Items, Vendors, Customers (+3 more)
+Cohesion: 0.05
+Nodes (10): Currencies, Currency, Currencies, Currency, Currencies, Currency, Currency, Currency (+2 more)
 
 ### Community 12 - "Community 12"
-Cohesion: 0.06
-Nodes (17): Response, InvalidEmailDetected, TooManyEmailsSent, Handler, Bugsnag, Items, DisablePersonDueToInvalidEmail, ReportTooManyEmailsSent (+9 more)
+Cohesion: 0.05
+Nodes (15): getPaymentMethod(), checkToken(), getCoreVersion(), getModuleIsubscribe(), getMyModules(), getSearchModules(), Date, module_is_enabled() (+7 more)
 
 ### Community 13 - "Community 13"
-Cohesion: 0.04
-Nodes (10): DocumentTransactionCreated, DocumentTransactionCreating, DocumentTransactionUpdated, DocumentTransactionUpdating, DocumentRecurring, InvoiceShare, DuplicateDocument, RestoreDocument (+2 more)
+Cohesion: 0.06
+Nodes (30): Updates, Item, Install, CreateMediableForExport, getAccountId(), getAccountIdFromCurrency(), getAccountIdFromName(), getAccountIdFromNumber() (+22 more)
 
 ### Community 14 - "Community 14"
-Cohesion: 0.05
-Nodes (12): Model, Categories, UserCompany, UserDashboard, UserRole, ItemTax, Bkwld\Cloner\Cloneable, GeneaLabs\LaravelModelCaching\Traits\Cachable (+4 more)
+Cohesion: 0.07
+Nodes (6): Import, Route, Illuminate\Foundation\Support\Providers\RouteServiceProvider, VendorsTest, CustomersTest, CategoriesTest
 
 ### Community 15 - "Community 15"
-Cohesion: 0.06
-Nodes (9): AccountCreated, AccountUpdated, AccountUpdating, Accounts, Account, Accounts, Account, Account (+1 more)
-
-### Community 16 - "Community 16"
 Cohesion: 0.05
-Nodes (14): Export, Throwable, Recurring, Items, Recurring, Vendors, Customers, Recurring (+6 more)
+Nodes (11): Illuminate\Support\Carbon, Illuminate\Support\Facades\Notification, SettingsTest, BillReminderTest, InvoiceReminderTest, ReportsTest, SourcesTest, FeatureTestCase (+3 more)
 
-### Community 18 - "Community 18"
+### Community 17 - "Community 17"
 Cohesion: 0.05
 Nodes (11): BulkAction, Event, Export, Import, Job, Observer, Report, Scope (+3 more)
 
-### Community 19 - "Community 19"
-Cohesion: 0.04
-Nodes (10): RecurringTransactions, Transactions, Transfers, Bills, BillTransactions, RecurringBills, Invoices, InvoiceTransactions (+2 more)
+### Community 18 - "Community 18"
+Cohesion: 0.06
+Nodes (9): AccountCreated, AccountUpdated, AccountUpdating, Accounts, Account, Accounts, Account, Account (+1 more)
 
-### Community 20 - "Community 20"
+### Community 19 - "Community 19"
 Cohesion: 0.05
-Nodes (3): TransactionTax, DocumentHistory, Illuminate\Database\Eloquent\Builder
+Nodes (16): FormRequest, BulkAction, ContactPerson, ItemTax, Notification, TotalItem, DocumentAddItem, DocumentHistory (+8 more)
 
 ### Community 21 - "Community 21"
 Cohesion: 0.05
-Nodes (20): Event, Authenticated, RoleUpdated, TransactionRecurring, CompanyMadeCurrent, CompanyUpdated, CompanyUpdating, RelationshipCounting (+12 more)
+Nodes (6): ContactCreated, ContactUpdated, ContactUpdating, Contacts, DuplicateContact, Contact
 
 ### Community 22 - "Community 22"
 Cohesion: 0.05
-Nodes (16): LastDashboard, NotUserDashboard, LastCategoryDelete, DeleteInvitation, DeletePermission, DeleteRole, DeleteTransfer, DeleteContact (+8 more)
+Nodes (11): BillItems, BillItemTaxes, RecurringBillHistories, InvoiceHistories, InvoiceItems, InvoiceItemTaxes, RecurringInvoiceHistories, RecurringInvoiceItems (+3 more)
 
 ### Community 23 - "Community 23"
-Cohesion: 0.06
-Nodes (10): Illuminate\Support\Carbon, Illuminate\Support\Facades\Notification, SettingsTest, BillReminderTest, InvoiceReminderTest, ReportsTest, SourcesTest, FeatureTestCase (+2 more)
+Cohesion: 0.05
+Nodes (13): Binding, Blade, Broadcast, Macro, Observer, Validation, ViewComposer, Sswitch (+5 more)
 
 ### Community 24 - "Community 24"
-Cohesion: 0.25
-Nodes (51): a(), Aa(), b(), br(), Bt(), c(), cancelAnimationFrame(), clearTimeout() (+43 more)
+Cohesion: 0.12
+Nodes (17): CreateRole, CreateAccount, CreateReconciliation, CreateTransaction, CreateTransactionTaxes, CreateContactPerson, ContactPerson, CreateContactPersons (+9 more)
 
-### Community 26 - "Community 26"
-Cohesion: 0.07
-Nodes (13): Update, UpdateFinished, Version3013, Version3014, Version3015, Version3016, Version3017, Version307 (+5 more)
-
-### Community 27 - "Community 27"
+### Community 25 - "Community 25"
 Cohesion: 0.07
 Nodes (7): Index, BulkAction, Buttons, Content, Document, MoreButtons, RecurringTemplates
 
+### Community 26 - "Community 26"
+Cohesion: 0.07
+Nodes (38): RedirectIfHitModuleSubscription, Queue, getCloudBankFeedsUrl(), getCloudRolesPageUrl(), isCloud(), getBannersOfModules(), getCategoriesOfModules(), getDataKeyOfModules() (+30 more)
+
+### Community 27 - "Community 27"
+Cohesion: 0.06
+Nodes (11): Export, Throwable, Recurring, Items, Vendors, Customers, Taxes, Maatwebsite\Excel\Concerns\FromCollection (+3 more)
+
 ### Community 28 - "Community 28"
 Cohesion: 0.09
-Nodes (34): Installed, FinishInstallation, applyPermissionsByAction(), applyPermissionsToRoles(), attachDefaultModulePermissions(), attachModuleReportPermissions(), attachModuleSettingPermissions(), attachModuleWidgetPermissions() (+26 more)
+Nodes (13): DocumentItemTax, convert(), convertBetween(), convertFromDefault(), convertToDefault(), getAmount(), getAmountConvertedFromDefault(), getAmountConvertedToDefault() (+5 more)
+
+### Community 29 - "Community 29"
+Cohesion: 0.06
+Nodes (11): Controller, BulkActions, Import, Currencies, InvoiceShare, Taxes, TransactionShare, Home (+3 more)
 
 ### Community 30 - "Community 30"
-Cohesion: 0.09
-Nodes (28): CreateMediableForDownload, CreateMediableForExport, getAccountId(), getAccountIdFromCurrency(), getAccountIdFromName(), getAccountIdFromNumber(), getCategoryId(), getCategoryIdFromName() (+20 more)
+Cohesion: 0.06
+Nodes (6): TransactionUpdated, TransactionUpdating, Transactions, TransactionConnect, MatchBankingDocumentTransaction, SendTransaction
 
 ### Community 31 - "Community 31"
-Cohesion: 0.09
-Nodes (42): as(), ba(), bi(), bs(), cl(), ds(), es(), fr() (+34 more)
+Cohesion: 0.06
+Nodes (6): User, Illuminate\Contracts\Translation\HasLocalePreference, Illuminate\Foundation\Auth\User, Illuminate\Notifications\Notifiable, Laratrust\Traits\LaratrustUserTrait, Staudenmeir\EloquentHasManyDeep\HasRelationships
 
 ### Community 32 - "Community 32"
-Cohesion: 0.09
-Nodes (22): Akaunting\Sortable\Traits\Sortable, Role, Permission, Role, isNotOwnable(), isOwnable(), getSourceAlias(), getSourceName() (+14 more)
+Cohesion: 0.06
+Nodes (6): Model, Categories, UserCompany, UserDashboard, UserRole, ItemTax
 
 ### Community 33 - "Community 33"
 Cohesion: 0.06
-Nodes (12): FormRequest, TransactionConnect, ContactPerson, ItemTax, Notification, TotalItem, DocumentAddItem, DocumentHistory (+4 more)
+Nodes (6): Transactions, DocumentTransactions, Transaction, RecurringTransactions, DocumentTransactions, Transaction
 
 ### Community 34 - "Community 34"
-Cohesion: 0.07
-Nodes (20): DocumentCreated, Invoices, RecurringInvoices, IncreaseNextDocumentNumber, SendDocumentRecurringNotification, SettingFieldCreated, getDocumentFileName(), getDocumentSettingKey() (+12 more)
+Cohesion: 0.06
+Nodes (7): Documents, Document, Document, RecurringBills, Document, RecurringInvoices, Document
 
 ### Community 35 - "Community 35"
-Cohesion: 0.07
-Nodes (8): Translations, Tiles, FinishUpdate, UpdateExtraModules, CreateModuleUpdatedHistory, Module, ModuleHistory, App
+Cohesion: 0.06
+Nodes (3): Categories, Category, Category
 
 ### Community 36 - "Community 36"
 Cohesion: 0.07
-Nodes (11): UpdatePermission, UpdateRole, UpdateUser, DeleteReconciliation, SendTransaction, UpdateReconciliation, Transaction, UpdateTransaction (+3 more)
+Nodes (13): PortalCreating, AddXHeader, AdminMenu, CanInstall, DateFormat, Dropzone, LogoutIfUserDisabled, PortalMenu (+5 more)
 
 ### Community 37 - "Community 37"
-Cohesion: 0.09
-Nodes (33): TransactionCreated, IncreaseNextTransactionNumber, addExpenseType(), addIncomeType(), addTransactionType(), getExpenseTypes(), getIncomeTypes(), getRealTypeOfRecurringTransaction() (+25 more)
+Cohesion: 0.08
+Nodes (6): Dashboards, Dashboard, Dashboards, Dashboard, UpdateDashboard, Dashboard
 
 ### Community 38 - "Community 38"
-Cohesion: 0.10
-Nodes (4): Index, search_string_value(), BulkAction, Buttons
-
-### Community 39 - "Community 39"
-Cohesion: 0.06
-Nodes (4): User, Illuminate\Foundation\Auth\User, Laratrust\Traits\LaratrustUserTrait, Staudenmeir\EloquentHasManyDeep\HasRelationships
-
-### Community 40 - "Community 40"
 Cohesion: 0.09
 Nodes (5): Template, Classic, Ddefault, LineItem, Modern
 
-### Community 41 - "Community 41"
+### Community 39 - "Community 39"
+Cohesion: 0.06
+Nodes (7): RecurringTransactions, Transfers, Bills, BillTransactions, Invoices, InvoiceTransactions, Maatwebsite\Excel\Concerns\WithColumnFormatting
+
+### Community 40 - "Community 40"
 Cohesion: 0.07
-Nodes (10): Widget, getCloudBankFeedsUrl(), getCloudRolesPageUrl(), isCloud(), AccountBalance, BankFeeds, Currencies, ExpensesByCategory (+2 more)
+Nodes (8): Dashboard, Widgets, Widget, CreateDashboard, Dashboard, Widget, UpdateWidget, Widget
+
+### Community 41 - "Community 41"
+Cohesion: 0.09
+Nodes (32): IncreaseNextTransactionNumber, addExpenseType(), addIncomeType(), addTransactionType(), getExpenseTypes(), getIncomeTypes(), getRealTypeOfRecurringTransaction(), getRealTypeOfSplitTransaction() (+24 more)
 
 ### Community 42 - "Community 42"
-Cohesion: 0.09
-Nodes (12): Companies, DeleteCompany, UpdateCompany, UpdateDashboard, getFirstCompanyOfUser(), getLandingPageOfUser(), getPendingInvitation(), hasPendingInvitation() (+4 more)
-
-### Community 43 - "Community 43"
-Cohesion: 0.07
-Nodes (7): Dashboard, Widgets, Widget, Widget, Version303, Version315, Widget
-
-### Community 44 - "Community 44"
 Cohesion: 0.07
 Nodes (5): BillItemTaxes, RecurringBillItemTaxes, InvoiceItemTaxes, RecurringInvoiceItemTaxes, DocumentItem
 
-### Community 46 - "Community 46"
-Cohesion: 0.07
-Nodes (5): VerifyCsrfToken, Notifications, Suggestions, Tips, Illuminate\Foundation\Http\Middleware\VerifyCsrfToken
+### Community 43 - "Community 43"
+Cohesion: 0.12
+Nodes (8): DownloadFailed, ExportCompleted, ExportFailed, ImportFailed, Illuminate\Bus\Queueable, Illuminate\Contracts\Queue\ShouldQueue, Illuminate\Notifications\Messages\MailMessage, Illuminate\Notifications\Notification
 
-### Community 47 - "Community 47"
-Cohesion: 0.08
-Nodes (11): Import, Items, ItemTaxes, Recurring, Taxes, Illuminate\Contracts\Translation\HasLocalePreference, Maatwebsite\Excel\Concerns\SkipsEmptyRows, Maatwebsite\Excel\Concerns\ToModel (+3 more)
-
-### Community 49 - "Community 49"
-Cohesion: 0.07
-Nodes (9): DownloadModule, getModuleLimitOfSubscription(), getModulesLimitOfSubscription(), moduleIsProtected(), is_cloud(), running_in_test(), Info, Versions (+1 more)
-
-### Community 50 - "Community 50"
-Cohesion: 0.07
-Nodes (12): DatesFormating, AddXHeader, AdminMenu, CanInstall, DateFormat, Dropzone, LogoutIfUserDisabled, RedirectIfHitPlanLimits (+4 more)
-
-### Community 51 - "Community 51"
-Cohesion: 0.10
-Nodes (12): RecurringTransactions, Items, Reports, Bills, RecurringBills, Invoices, RecurringInvoices, Maatwebsite\Excel\Concerns\Exportable (+4 more)
-
-### Community 52 - "Community 52"
-Cohesion: 0.08
-Nodes (6): Reports, Report, Reports, Report, Report, Report
-
-### Community 53 - "Community 53"
-Cohesion: 0.07
-Nodes (4): Bills, Document, Invoices, Document
-
-### Community 54 - "Community 54"
-Cohesion: 0.10
-Nodes (27): addCategoryType(), addDirectCostCategoryType(), addExpenseCategoryType(), addIncomeCategoryType(), addItemCategoryType(), addOtherCategoryType(), getCategoryTabs(), getCategoryTypeLabel() (+19 more)
-
-### Community 55 - "Community 55"
+### Community 45 - "Community 45"
 Cohesion: 0.09
-Nodes (5): LandingPageShowing, DeleteUser, AddLandingPages, AddLandingPage, AddLandingPage
+Nodes (8): Reconciliation, Reconciliations, Reconciliation, Reconciliations, Reconciliation, Reconciliation, UpdateReconciliation, Reconciliation
 
-### Community 56 - "Community 56"
+### Community 46 - "Community 46"
 Cohesion: 0.10
 Nodes (4): PaymentController, InvoicePayment, Payment, Payment
 
-### Community 57 - "Community 57"
+### Community 47 - "Community 47"
+Cohesion: 0.11
+Nodes (3): Index, Transaction, search_string_value()
+
+### Community 48 - "Community 48"
 Cohesion: 0.08
-Nodes (5): Dashboards, Dashboard, Dashboards, Dashboard, Dashboard
+Nodes (6): Reports, Report, Reports, Report, Report, Report
+
+### Community 49 - "Community 49"
+Cohesion: 0.10
+Nodes (27): addCategoryType(), addDirectCostCategoryType(), addExpenseCategoryType(), addIncomeCategoryType(), addItemCategoryType(), addOtherCategoryType(), getCategoryTabs(), getCategoryTypeLabel() (+19 more)
+
+### Community 50 - "Community 50"
+Cohesion: 0.10
+Nodes (17): Akaunting\Sortable\Traits\Sortable, Role, Permission, Role, isNotOwnable(), isOwnable(), bootTenants(), isNotTenantable() (+9 more)
+
+### Community 51 - "Community 51"
+Cohesion: 0.09
+Nodes (9): UpdateCacheCleared, UpdateCopied, UpdateDownloaded, UpdateUnzipped, DownloadFile, UnzipFile, getResponse(), getResponseBody() (+1 more)
+
+### Community 52 - "Community 52"
+Cohesion: 0.09
+Nodes (10): UpdatePermission, UpdateRole, SplitTransaction, Transaction, UpdateTransaction, DeleteItem, UpdateContactPerson, UpdateItem (+2 more)
+
+### Community 53 - "Community 53"
+Cohesion: 0.08
+Nodes (4): Taxes, Tax, Tax, Tax
+
+### Community 54 - "Community 54"
+Cohesion: 0.09
+Nodes (11): Items, AddWWWAuthenticateHeader, CheckForReadOnlyMode, DisableQuic, RedirectIfAuthenticated, TrustProxies, ValidateSignature, Illuminate\Http\Middleware\TrustProxies (+3 more)
+
+### Community 55 - "Community 55"
+Cohesion: 0.08
+Nodes (7): Payments, Transaction, PaymentShow, Modules, PaymentMethod, PaymentMethod, CreatePaymentMethod
+
+### Community 56 - "Community 56"
+Cohesion: 0.09
+Nodes (10): Import, Items, ItemTaxes, Taxes, Maatwebsite\Excel\Concerns\SkipsEmptyRows, Maatwebsite\Excel\Concerns\ToModel, Maatwebsite\Excel\Concerns\WithHeadingRow, Maatwebsite\Excel\Concerns\WithLimit (+2 more)
+
+### Community 57 - "Community 57"
+Cohesion: 0.10
+Nodes (11): Companies, DeleteCompany, UpdateCompany, getFirstCompanyOfUser(), getLandingPageOfUser(), getPendingInvitation(), hasPendingInvitation(), isNotUserCompany() (+3 more)
+
+### Community 58 - "Community 58"
+Cohesion: 0.10
+Nodes (9): RecurringTransactions, Items, Bills, RecurringBills, Recurring, Invoices, RecurringInvoices, Maatwebsite\Excel\Concerns\Exportable (+1 more)
 
 ### Community 59 - "Community 59"
-Cohesion: 0.08
-Nodes (7): Settings, Setting, SettingDelete, SettingGet, CreatePaymentMethod, DeletePaymentMethod, UpdatePaymentMethod
+Cohesion: 0.15
+Nodes (29): applyPermissionsByAction(), applyPermissionsToRoles(), attachDefaultModulePermissions(), attachModuleReportPermissions(), attachModuleSettingPermissions(), attachModuleWidgetPermissions(), attachPermission(), attachPermissionsByAction() (+21 more)
 
 ### Community 60 - "Community 60"
-Cohesion: 0.09
-Nodes (9): UpdateCacheCleared, UpdateCopied, RedirectIfHitModuleSubscription, DownloadFile, UnzipFile, getResponse(), getResponseBody(), getResponseData() (+1 more)
-
-### Community 61 - "Community 61"
-Cohesion: 0.09
-Nodes (9): Banners, Free, Installed, Items, Nnew, NoApps, Paid, PreSale (+1 more)
-
-### Community 62 - "Community 62"
-Cohesion: 0.08
-Nodes (14): Module, UninstallModule, attachMedia(), media(), createRecurring(), updateRecurring(), getMedia(), getMediaFolder() (+6 more)
-
-### Community 63 - "Community 63"
-Cohesion: 0.07
-Nodes (5): Transactions, DocumentTransactions, Transaction, RecurringTransactions, Transaction
-
-### Community 64 - "Community 64"
 Cohesion: 0.06
 Nodes (11): Address, General, Advanced, Buttons, Company, Footer, Main, Recurring (+3 more)
 
+### Community 61 - "Community 61"
+Cohesion: 0.09
+Nodes (11): ImportMultipleSheets, RecurringTransactions, Items, Bills, RecurringBills, Invoices, RecurringInvoices, Recurring (+3 more)
+
+### Community 63 - "Community 63"
+Cohesion: 0.09
+Nodes (6): Widget, AccountBalance, Currencies, ExpensesByCategory, Payables, Receivables
+
+### Community 64 - "Community 64"
+Cohesion: 0.09
+Nodes (8): LandingPageShowing, CreateUser, DeleteUser, UpdateUser, AddLandingPages, Illuminate\Support\Facades\Config, AddLandingPage, AddLandingPage
+
+### Community 65 - "Community 65"
+Cohesion: 0.08
+Nodes (10): getModuleLimitOfSubscription(), getModulesLimitOfSubscription(), getSubscription(), loadSubscriptions(), moduleIsProtected(), is_cloud(), running_in_test(), Info (+2 more)
+
 ### Community 66 - "Community 66"
-Cohesion: 0.09
-Nodes (10): BillReminder, CompanySeed, FinishUpdate, InstallRefresh, SampleData, StorageTempClear, UpdateAll, UpdateDb (+2 more)
-
-### Community 67 - "Community 67"
-Cohesion: 0.09
-Nodes (10): RoleCreating, UserCreating, TransactionPrinting, TransferPrinting, DocumentCreating, DocumentPrinting, DocumentTemplates, CategoryCreating (+2 more)
-
-### Community 68 - "Community 68"
-Cohesion: 0.10
-Nodes (26): Ae(), asyncGeneratorStep(), _asyncToGenerator(), Be(), De(), Dn(), Fe(), Gt() (+18 more)
-
-### Community 69 - "Community 69"
 Cohesion: 0.11
 Nodes (9): InvoiceEmails, Document, Transaction, TransactionEmails, CustomMail, SendTransactionAsCustomMail, SendDocumentAsCustomMail, sendEmail() (+1 more)
 
-### Community 70 - "Community 70"
-Cohesion: 0.11
-Nodes (9): Items, AddWWWAuthenticateHeader, CheckForReadOnlyMode, DisableQuic, TrustProxies, ValidateSignature, Illuminate\Http\Middleware\TrustProxies, Illuminate\Http\Request (+1 more)
-
-### Community 71 - "Community 71"
-Cohesion: 0.11
-Nodes (3): Invoices, DeleteDocument, SendDocument
-
-### Community 72 - "Community 72"
+### Community 67 - "Community 67"
 Cohesion: 0.08
-Nodes (5): Documents, Document, Document, RecurringInvoices, Document
+Nodes (8): Bill, Invoice, company_date(), company_date_format(), Create, Receive, Restore, Send
 
-### Community 73 - "Community 73"
-Cohesion: 0.11
-Nodes (6): DownloadFailed, ExportFailed, ImportFailed, InvalidEmail, Illuminate\Bus\Queueable, Illuminate\Contracts\Queue\ShouldQueue
-
-### Community 74 - "Community 74"
+### Community 68 - "Community 68"
 Cohesion: 0.08
 Nodes (26): config, autoloader-suffix, description, homepage, laravel, keywords, license, name (+18 more)
 
-### Community 75 - "Community 75"
+### Community 69 - "Community 69"
+Cohesion: 0.10
+Nodes (6): Settings, Setting, SettingDelete, SettingGet, DeletePaymentMethod, UpdatePaymentMethod
+
+### Community 70 - "Community 70"
+Cohesion: 0.11
+Nodes (5): ExpenseSummary, IncomeExpenseSummary, IncomeSummary, Recurring, ProfitLoss
+
+### Community 71 - "Community 71"
+Cohesion: 0.12
+Nodes (3): Users, Users, user_model_class()
+
+### Community 72 - "Community 72"
+Cohesion: 0.10
+Nodes (18): SendDocumentRecurringNotification, SendDocumentReminderNotification, canNotifyTheContactOfDocument(), getDocumentFileName(), getDocumentSettingKey(), getDocumentStatusesForFuture(), getDocumentTemplates(), getRealTypeOfDocument() (+10 more)
+
+### Community 73 - "Community 73"
+Cohesion: 0.10
+Nodes (9): BillReminder, CompanySeed, FinishUpdate, InstallRefresh, SampleData, StorageTempClear, UpdateDb, UserSeed (+1 more)
+
+### Community 74 - "Community 74"
 Cohesion: 0.09
-Nodes (6): DisableModule, EnableModule, InstallModule, UninstallModule, InstallExtraModules, Console
+Nodes (4): Companies, Companies, Company, Company
+
+### Community 75 - "Community 75"
+Cohesion: 0.10
+Nodes (5): Translations, Tiles, UpdateExtraModules, Module, App
 
 ### Community 76 - "Community 76"
 Cohesion: 0.10
-Nodes (8): SettingController, Company, Defaults, Email, Invoice, Localisation, Schedule, Company
+Nodes (6): Settings, DocumentItemColumns, InvoiceTemplates, TransferTemplates, Setting, Setting
 
 ### Community 77 - "Community 77"
 Cohesion: 0.10
-Nodes (10): ImportMultipleSheets, RecurringTransactions, Items, Bills, RecurringBills, Invoices, RecurringInvoices, Maatwebsite\Excel\Concerns\Importable (+2 more)
-
-### Community 78 - "Community 78"
-Cohesion: 0.12
-Nodes (4): Index, Buttons, Content, MoreButtons
-
-### Community 79 - "Community 79"
-Cohesion: 0.10
-Nodes (6): Settings, DocumentItemColumns, InvoiceTemplates, TransferTemplates, Setting, Setting
-
-### Community 80 - "Community 80"
-Cohesion: 0.10
 Nodes (3): Recurring, Children, Schedule
 
-### Community 81 - "Community 81"
+### Community 78 - "Community 78"
+Cohesion: 0.09
+Nodes (15): assignPermissionsToController(), stripUnknownSearchStringTokens(), cache_prefix(), company(), env_is_build(), env_is_development(), env_is_local(), request_is_api() (+7 more)
+
+### Community 79 - "Community 79"
 Cohesion: 0.08
 Nodes (8): Show, Attachment, Buttons, Content, Create, MoreButtons, Template, Transactions
 
-### Community 83 - "Community 83"
-Cohesion: 0.18
-Nodes (12): Category, Company, Contact, Document, Transaction, applyNotRecurringScope(), applyNotSplitScope(), scopeColumnExists() (+4 more)
+### Community 80 - "Community 80"
+Cohesion: 0.09
+Nodes (3): ItemUpdating, Item, Item
 
-### Community 84 - "Community 84"
+### Community 81 - "Community 81"
+Cohesion: 0.11
+Nodes (7): Login, AuthenticateOnceWithBasicAuth, AuthenticateOnceWithDynamicApi, AuthenticateOnceWithOAuth, Auth, Illuminate\Foundation\Auth\AuthenticatesUsers, Illuminate\Foundation\Support\Providers\AuthServiceProvider
+
+### Community 82 - "Community 82"
+Cohesion: 0.14
+Nodes (4): CreateContact, Contact, DeleteContact, UpdateContact
+
+### Community 85 - "Community 85"
+Cohesion: 0.10
+Nodes (5): DisableModule, EnableModule, InstallModule, UninstallModule, Console
+
+### Community 86 - "Community 86"
 Cohesion: 0.14
 Nodes (3): Transaction, Document, TransactionsTest
 
-### Community 85 - "Community 85"
-Cohesion: 0.14
-Nodes (7): ApiController, Ping, UpdateDocument, Illuminate\Database\Eloquent\Collection, Illuminate\Foundation\Auth\Access\AuthorizesRequests, Illuminate\Foundation\Validation\ValidatesRequests, Symfony\Component\HttpKernel\Exception\HttpException
-
 ### Community 88 - "Community 88"
-Cohesion: 0.12
-Nodes (6): GroupShowing, RowsShowing, AddContacts, AddExpenseCategories, AddIncomeCategories, AddRowsToTax
+Cohesion: 0.16
+Nodes (8): TooManyEmailsSent, Handler, Bugsnag, Illuminate\Foundation\Exceptions\Handler, Illuminate\Http\Response, RuntimeException, Symfony\Component\Mailer\Exception\HttpTransportException, Throwable
 
 ### Community 89 - "Community 89"
 Cohesion: 0.09
-Nodes (5): Transactions, BillItems, RecurringBills, RecurringInvoiceItems, self
+Nodes (5): BillTotals, RecurringBillHistories, RecurringBillItems, InvoiceItems, self
 
 ### Community 90 - "Community 90"
-Cohesion: 0.16
-Nodes (9): Transaction, Contact, Document, DocumentHistory, DocumentItem, DocumentItemTax, DocumentTotal, Setting (+1 more)
+Cohesion: 0.19
+Nodes (12): Category, Company, Contact, Document, Transaction, applyNotRecurringScope(), applyNotSplitScope(), scopeColumnExists() (+4 more)
 
 ### Community 91 - "Community 91"
 Cohesion: 0.15
-Nodes (22): ai(), At(), ci(), Date(), Dt(), En(), fi(), gr() (+14 more)
+Nodes (5): ApiController, Ping, Illuminate\Database\Eloquent\Collection, Illuminate\Foundation\Auth\Access\AuthorizesRequests, Illuminate\Foundation\Validation\ValidatesRequests
 
 ### Community 92 - "Community 92"
-Cohesion: 0.13
-Nodes (3): Updates, Item, Install
-
-### Community 93 - "Community 93"
-Cohesion: 0.11
-Nodes (5): DiscountSummary, ExpenseSummary, IncomeExpenseSummary, IncomeSummary, Recurring
+Cohesion: 0.12
+Nodes (8): RoleCreating, UserCreating, TransactionPrinting, TransferPrinting, DocumentCreating, DocumentTemplates, CategoryCreating, Illuminate\Queue\SerializesModels
 
 ### Community 94 - "Community 94"
 Cohesion: 0.21
 Nodes (19): getDailyDateFormat(), getDatePickerShortcuts(), getFinancialMonth(), getFinancialMonths(), getFinancialQuarter(), getFinancialQuarters(), getFinancialStart(), getFinancialWeek() (+11 more)
 
-### Community 95 - "Community 95"
-Cohesion: 0.15
-Nodes (4): emit(), off(), onAny(), q()
+### Community 96 - "Community 96"
+Cohesion: 0.17
+Nodes (8): Akaunting\Module\Contracts\ActivatorInterface, Akaunting\Module\Module, request_is_install(), running_in_install(), ModuleActivator, Illuminate\Cache\CacheManager, Illuminate\Config\Repository, Illuminate\Container\Container
+
+### Community 97 - "Community 97"
+Cohesion: 0.11
+Nodes (5): Module, UninstallModule, UpdateAll, CreateModuleUpdatedHistory, ModuleHistory
 
 ### Community 98 - "Community 98"
-Cohesion: 0.14
-Nodes (3): Currencies, DeleteCurrency, UpdateCurrency
+Cohesion: 0.11
+Nodes (3): Customers, Vendors, Contact
 
 ### Community 99 - "Community 99"
-Cohesion: 0.10
-Nodes (5): BillItems, RecurringBillItems, InvoiceItems, RecurringInvoiceItems, DocumentItem
+Cohesion: 0.12
+Nodes (5): Forgot, Login, Reset, Profile, Illuminate\Foundation\Http\FormRequest
 
-### Community 101 - "Community 101"
-Cohesion: 0.11
-Nodes (16): assignPermissionsToController(), cache_prefix(), company(), env_is_build(), env_is_development(), env_is_local(), request_is_api(), request_is_auth() (+8 more)
+### Community 100 - "Community 100"
+Cohesion: 0.17
+Nodes (7): Favorite, Profile, Browser, Pins, Illuminate\Contracts\View\View, Illuminate\Support\Facades\Request, Livewire\Component
 
 ### Community 102 - "Community 102"
-Cohesion: 0.10
-Nodes (20): cross-env, laravel-mix, author, description, devDependencies, cross-env, laravel-mix, resolve-url-loader (+12 more)
-
-### Community 104 - "Community 104"
-Cohesion: 0.14
-Nodes (4): Show, Buttons, Content, MoreButtons
-
-### Community 105 - "Community 105"
-Cohesion: 0.15
-Nodes (7): FilterShowing, AddBasis, AddDate, AddDiscount, AddGroup, AddPeriod, Report
-
-### Community 106 - "Community 106"
-Cohesion: 0.13
-Nodes (6): Login, PortalMenu, RedirectIfAuthenticated, Auth, Illuminate\Foundation\Auth\AuthenticatesUsers, Illuminate\Foundation\Support\Providers\AuthServiceProvider
-
-### Community 109 - "Community 109"
 Cohesion: 0.15
 Nodes (3): Buttons, Search, Head
 
-### Community 111 - "Community 111"
-Cohesion: 0.12
-Nodes (6): Account, Transaction, Currencies, Money, Account, Transfer
+### Community 104 - "Community 104"
+Cohesion: 0.17
+Nodes (3): JobShouldQueue, NotifyUser, Illuminate\Queue\InteractsWithQueue
 
-### Community 112 - "Community 112"
+### Community 107 - "Community 107"
 Cohesion: 0.21
 Nodes (4): Uploads, Media, Scripts, Plank\Mediable\Media
 
-### Community 113 - "Community 113"
-Cohesion: 0.12
-Nodes (6): Database, Requirements, Settings, Database, Setting, Illuminate\Routing\Controller
-
-### Community 114 - "Community 114"
+### Community 108 - "Community 108"
 Cohesion: 0.13
-Nodes (5): Forgot, Login, Register, Profile, Illuminate\Foundation\Http\FormRequest
+Nodes (4): getAppType(), getTrackerTags(), Info, Trackers
 
-### Community 115 - "Community 115"
-Cohesion: 0.19
-Nodes (7): Profile, Browser, Pins, Pin, Illuminate\Contracts\View\View, Illuminate\Support\Facades\Request, Livewire\Component
-
-### Community 116 - "Community 116"
-Cohesion: 0.12
-Nodes (6): CreatesApplication, Illuminate\Foundation\Testing\RefreshDatabase, Illuminate\Foundation\Testing\TestCase, N1QueryOptimizationTest, VendorN1QueryTest, TestCase
-
-### Community 117 - "Community 117"
-Cohesion: 0.21
-Nodes (6): Akaunting\Module\Contracts\ActivatorInterface, Akaunting\Module\Module, ModuleActivator, Illuminate\Cache\CacheManager, Illuminate\Config\Repository, Illuminate\Container\Container
-
-### Community 118 - "Community 118"
-Cohesion: 0.15
-Nodes (3): Taxes, DeleteTax, UpdateTax
-
-### Community 119 - "Community 119"
-Cohesion: 0.12
-Nodes (4): Bill, Invoice, company_date(), company_date_format()
-
-### Community 120 - "Community 120"
+### Community 109 - "Community 109"
 Cohesion: 0.14
-Nodes (4): Reconciliations, Reconciliation, Reconciliation, Reconciliation
+Nodes (5): Factory, Module, Company, Illuminate\Validation\Factory, Modules
 
-### Community 121 - "Community 121"
+### Community 110 - "Community 110"
+Cohesion: 0.15
+Nodes (6): SettingController, Defaults, Email, Invoice, Localisation, Schedule
+
+### Community 111 - "Community 111"
+Cohesion: 0.12
+Nodes (4): DataLoaded, DataLoading, TotalCalculated, TotalCalculating
+
+### Community 112 - "Community 112"
+Cohesion: 0.18
+Nodes (6): Document, Recurring, Transaction, RecurringCheck, TransactionCreated, Recurr\RecurrenceCollection
+
+### Community 113 - "Community 113"
 Cohesion: 0.19
 Nodes (11): Dashboard, addMoneyToDonut(), addMoneyToDonutChart(), addToBar(), addToBarChart(), addToDonut(), addToDonutChart(), getBarChart() (+3 more)
 
-### Community 122 - "Community 122"
+### Community 114 - "Community 114"
 Cohesion: 0.14
-Nodes (6): calculation_to_quantity(), PHPUnit\Framework\TestCase, ExampleTest, TransfersImportTest, CalculationToQuantityTest, DateImportParsingTest
+Nodes (6): UpdateDocument, countRelationships(), getPage(), calculation_to_quantity(), Str, CalculationToQuantityTest
 
-### Community 123 - "Community 123"
-Cohesion: 0.14
-Nodes (4): Invitation, Reset, UpdateFailed, Illuminate\Notifications\Notification
-
-### Community 124 - "Community 124"
+### Community 115 - "Community 115"
 Cohesion: 0.15
 Nodes (5): Alert, Border, Danger, Success, Warning
 
-### Community 126 - "Community 126"
+### Community 116 - "Community 116"
+Cohesion: 0.14
+Nodes (4): compiledViewPath(), isolateCompiledViews(), testToken(), ParallelIsolationTest
+
+### Community 118 - "Community 118"
+Cohesion: 0.15
+Nodes (7): attachMedia(), media(), createRecurring(), updateRecurring(), source_name(), user_id(), TooManyEmailsSentTest
+
+### Community 119 - "Community 119"
+Cohesion: 0.18
+Nodes (7): DownloadModule, InstallExtraModules, ajaxDispatch(), dispatch(), dispatchQueue(), getDispatchFunction(), Illuminate\Contracts\Bus\Dispatcher
+
+### Community 120 - "Community 120"
 Cohesion: 0.13
-Nodes (3): GroupApplying, AddAccounts, AddVendors
+Nodes (3): Account, Script, Script
 
-### Community 127 - "Community 127"
-Cohesion: 0.17
-Nodes (4): Invoices, Document, InvoiceShow, Modules
+### Community 121 - "Community 121"
+Cohesion: 0.18
+Nodes (9): Plans, ClearPlansCache, getAnyActionLimitOfPlan(), getCompanyLimitOfPlan(), getInvoiceLimitOfPlan(), getPlanLimitByType(), getPlanLimits(), getUserLimitOfPlan() (+1 more)
 
-### Community 128 - "Community 128"
+### Community 122 - "Community 122"
 Cohesion: 0.24
 Nodes (16): getFirstRecurring(), getLastRecurring(), getNextRecurring(), getRecurringRule(), getRecurringRuleCount(), getRecurringRuleDate(), getRecurringRuleFrequency(), getRecurringRuleInterval() (+8 more)
 
-### Community 131 - "Community 131"
-Cohesion: 0.22
-Nodes (3): JobShouldQueue, NotifyUser, Illuminate\Queue\InteractsWithQueue
-
-### Community 132 - "Community 132"
+### Community 124 - "Community 124"
 Cohesion: 0.13
-Nodes (4): DataLoaded, DataLoading, TotalCalculated, TotalCalculating
+Nodes (6): CreatesApplication, Illuminate\Foundation\Testing\RefreshDatabase, Illuminate\Foundation\Testing\TestCase, N1QueryOptimizationTest, VendorN1QueryTest, TestCase
 
-### Community 134 - "Community 134"
-Cohesion: 0.12
-Nodes (7): Resource, Reconciliation, Transaction, Transfer, Report, Category, Tax
+### Community 126 - "Community 126"
+Cohesion: 0.18
+Nodes (3): Show, Buttons, MoreButtons
 
-### Community 135 - "Community 135"
-Cohesion: 0.14
-Nodes (3): Categories, Categories, Category
+### Community 127 - "Community 127"
+Cohesion: 0.13
+Nodes (7): Resource, Transaction, Transfer, Report, Category, Tax, Symfony\Component\HttpKernel\Exception\HttpException
 
-### Community 136 - "Community 136"
+### Community 128 - "Community 128"
+Cohesion: 0.17
+Nodes (4): Register, Register, UserInvitation, Illuminate\Foundation\Auth\RegistersUsers
+
+### Community 129 - "Community 129"
 Cohesion: 0.17
 Nodes (6): ContactType, DocumentRecurring, DocumentType, PlanLimits, ReadOnlyNotification, Illuminate\View\View
 
-### Community 137 - "Community 137"
-Cohesion: 0.23
-Nodes (9): MatchBankingDocumentTransaction, convert(), convertBetween(), convertFromDefault(), convertToDefault(), getAmount(), getAmountConvertedFromDefault(), getAmountConvertedToDefault() (+1 more)
+### Community 130 - "Community 130"
+Cohesion: 0.20
+Nodes (3): CreateMediableForDownload, CreateZipForDownload, get_storage_path()
 
-### Community 140 - "Community 140"
-Cohesion: 0.17
-Nodes (4): Factory, Module, Illuminate\Validation\Factory, Modules
+### Community 134 - "Community 134"
+Cohesion: 0.25
+Nodes (3): InvalidEmailDetected, DisablePersonDueToInvalidEmail, SendInvalidEmailNotification
 
 ### Community 141 - "Community 141"
-Cohesion: 0.19
-Nodes (3): CategoryDeleted, UpdateCategory, DeleteCategoryDeletedSubCategories
-
-### Community 142 - "Community 142"
-Cohesion: 0.23
-Nodes (5): Document, Recurring, Transaction, RecurringCheck, Recurr\RecurrenceCollection
-
-### Community 149 - "Community 149"
-Cohesion: 0.17
-Nodes (14): addEventListener(), ar(), blur(), e(), ee(), eo(), hn(), Ir() (+6 more)
-
-### Community 150 - "Community 150"
-Cohesion: 0.14
-Nodes (3): Users, Contact, role_model_class()
-
-### Community 152 - "Community 152"
-Cohesion: 0.19
-Nodes (7): Sentry, getAppType(), getTrackerTags(), Sentry\Event, Sentry\EventHint, Sentry\Logs\Log, Sentry\Tracing\SamplingContext
-
-### Community 154 - "Community 154"
 Cohesion: 0.15
-Nodes (3): Currencies, Currency, Currency
+Nodes (4): Language, siteApiRequest(), Bar, Illuminate\Support\Facades\Cache
 
-### Community 155 - "Community 155"
-Cohesion: 0.19
-Nodes (4): Register, CreateInvitation, UserInvitation, Illuminate\Foundation\Auth\RegistersUsers
-
-### Community 156 - "Community 156"
-Cohesion: 0.18
-Nodes (3): Payments, Transaction, PaymentShow
-
-### Community 157 - "Community 157"
+### Community 146 - "Community 146"
 Cohesion: 0.15
 Nodes (3): EmailTemplate, EmailTemplate, HTMLPurifier
 
-### Community 159 - "Community 159"
+### Community 148 - "Community 148"
 Cohesion: 0.24
 Nodes (11): addContactType(), addCustomerType(), addEmployeeType(), addVendorType(), getContactTypes(), getCustomerTypes(), getEmployeeTypes(), getVendorTypes() (+3 more)
 
-### Community 163 - "Community 163"
+### Community 151 - "Community 151"
 Cohesion: 0.17
 Nodes (4): Template, Ddefault, Second, Third
 
-### Community 164 - "Community 164"
-Cohesion: 0.18
-Nodes (3): Accounts, DeleteAccount, UpdateAccount
-
-### Community 165 - "Community 165"
-Cohesion: 0.23
-Nodes (3): Reset, Reset, Illuminate\Foundation\Auth\ResetsPasswords
-
-### Community 168 - "Community 168"
+### Community 154 - "Community 154"
 Cohesion: 0.33
 Nodes (10): IdentifyCompany, getCompanyId(), getCompanyIdFromApi(), getCompanyIdFromHeader(), getCompanyIdFromMcp(), getCompanyIdFromQuery(), getCompanyIdFromRoute(), getCompanyIdFromToken() (+2 more)
 
-### Community 169 - "Community 169"
-Cohesion: 0.19
-Nodes (5): SplitTransaction, getRecurringDocumentTypes(), countRelationships(), getPage(), Str
+### Community 156 - "Community 156"
+Cohesion: 0.23
+Nodes (8): filename(), getMedia(), getMediaFileName(), getMediaFolder(), importMedia(), isLocalStorage(), validateImportedFilePath(), validateUploadedFile()
 
-### Community 175 - "Community 175"
+### Community 160 - "Community 160"
 Cohesion: 0.21
 Nodes (3): NewwCreated, Neww, ShowInNeww
 
-### Community 176 - "Community 176"
-Cohesion: 0.20
-Nodes (3): FilterApplying, AddCustomers, AddSearchString
-
-### Community 180 - "Community 180"
-Cohesion: 0.20
-Nodes (4): Owner, TransactionTax, ContactPerson, Category
-
-### Community 181 - "Community 181"
+### Community 161 - "Community 161"
 Cohesion: 0.21
-Nodes (4): PaymentReceived, is_cloud_storage(), is_local_storage(), Illuminate\Notifications\Messages\MailMessage
+Nodes (5): NotificationsCreated, ShowInNotifications, Notification, Illuminate\Database\Eloquent\MassPrunable, Illuminate\Notifications\DatabaseNotification
 
-### Community 182 - "Community 182"
-Cohesion: 0.17
-Nodes (4): Event, Illuminate\Foundation\Support\Providers\EventServiceProvider, Event, Event
+### Community 162 - "Community 162"
+Cohesion: 0.23
+Nodes (5): LastDashboard, NotUserDashboard, LastCategoryDelete, SendNotificationOnFailure, Exception
 
-### Community 183 - "Community 183"
+### Community 163 - "Community 163"
+Cohesion: 0.23
+Nodes (5): Sentry, Sentry\Event, Sentry\EventHint, Sentry\Logs\Log, Sentry\Tracing\SamplingContext
+
+### Community 164 - "Community 164"
+Cohesion: 0.21
+Nodes (3): Invoices, Document, InvoiceShow
+
+### Community 165 - "Community 165"
 Cohesion: 0.29
 Nodes (10): all(), authorize(), callFactory(), completePurchase(), create(), failure(), getFactory(), purchase() (+2 more)
 
-### Community 185 - "Community 185"
+### Community 167 - "Community 167"
+Cohesion: 0.18
+Nodes (3): Export, should_queue(), Import
+
+### Community 168 - "Community 168"
 Cohesion: 0.20
 Nodes (5): Kernel, SkipScheduleInReadOnlyMode, Illuminate\Console\Events\CommandStarting, Illuminate\Console\Scheduling\Schedule, Illuminate\Foundation\Console\Kernel
 
-### Community 186 - "Community 186"
+### Community 169 - "Community 169"
 Cohesion: 0.20
-Nodes (4): UserDeleted, CompanyDeleted, ClearPlansCache, Illuminate\Events\Dispatcher
+Nodes (3): Installed, FinishInstallation, FinishInstallation
 
-### Community 187 - "Community 187"
+### Community 173 - "Community 173"
 Cohesion: 0.24
-Nodes (3): NotificationsCreated, ShowInNotifications, Menu
+Nodes (4): Database, Requirements, Settings, Illuminate\Routing\Controller
 
-### Community 188 - "Community 188"
-Cohesion: 0.20
-Nodes (3): Language, siteApiRequest(), Bar
-
-### Community 192 - "Community 192"
-Cohesion: 0.24
-Nodes (3): AuthenticateOnceWithBasicAuth, AuthenticateOnceWithDynamicApi, AuthenticateOnceWithOAuth
-
-### Community 193 - "Community 193"
+### Community 178 - "Community 178"
 Cohesion: 0.18
-Nodes (3): Reconciliation, Currency, Tax
+Nodes (4): Event, Illuminate\Foundation\Support\Providers\EventServiceProvider, Event, Event
 
-### Community 196 - "Community 196"
+### Community 179 - "Community 179"
 Cohesion: 0.24
-Nodes (3): InvoiceReminder, DocumentReminded, SendDocumentReminderNotification
+Nodes (4): PHPUnit\Framework\TestCase, ExampleTest, TransfersImportTest, DateImportParsingTest
 
-### Community 197 - "Community 197"
+### Community 183 - "Community 183"
 Cohesion: 0.31
 Nodes (3): DocumentMarkedSent, DocumentSent, MarkDocumentSent
 
-### Community 199 - "Community 199"
+### Community 185 - "Community 185"
 Cohesion: 0.24
 Nodes (3): PaymentMethodShowing, ShowAsPaymentMethod, ShowAsPaymentMethod
 
-### Community 207 - "Community 207"
+### Community 188 - "Community 188"
+Cohesion: 0.29
+Nodes (7): CreateInvitation, getSourceAlias(), getSourceName(), getSourcePrefix(), isNotSourcable(), isSourcable(), running_in_queue()
+
+### Community 190 - "Community 190"
+Cohesion: 0.36
+Nodes (3): Akaunting\MutableObserver\Traits\Mutable, Observer, Transaction
+
+### Community 192 - "Community 192"
+Cohesion: 0.22
+Nodes (4): DocumentCreated, CreateDocumentCreatedHistory, IncreaseNextDocumentNumber, SettingFieldCreated
+
+### Community 193 - "Community 193"
+Cohesion: 0.28
+Nodes (3): DocumentViewed, MarkDocumentViewed, SendDocumentViewNotification
+
+### Community 194 - "Community 194"
 Cohesion: 0.25
 Nodes (3): PaymentReceived, CreateDocumentTransaction, SendDocumentPaymentNotification
 
-### Community 208 - "Community 208"
+### Community 195 - "Community 195"
 Cohesion: 0.28
 Nodes (3): SettingsCreated, ShowInSettings, ShowInSettingsMenu
 
-### Community 211 - "Community 211"
+### Community 200 - "Community 200"
 Cohesion: 0.22
-Nodes (3): Role, User, Company
+Nodes (3): ApiKey, Modules, Module
 
-### Community 212 - "Community 212"
+### Community 202 - "Community 202"
 Cohesion: 0.22
 Nodes (3): Vendors, Customers, Contact
 
-### Community 221 - "Community 221"
+### Community 205 - "Community 205"
+Cohesion: 0.22
+Nodes (3): PaymentReceived, is_cloud_storage(), is_local_storage()
+
+### Community 210 - "Community 210"
 Cohesion: 0.32
 Nodes (3): Akaunting\Firewall\Traits\Helper, TooManyEmailsSent, TellFirewallTooManyEmailsSent
 
-### Community 232 - "Community 232"
+### Community 211 - "Community 211"
+Cohesion: 0.36
+Nodes (3): Response, Items, Illuminate\Contracts\Support\Responsable
+
+### Community 215 - "Community 215"
+Cohesion: 0.36
+Nodes (4): Reports, Maatwebsite\Excel\Concerns\FromView, Maatwebsite\Excel\Concerns\ShouldAutoSize, Maatwebsite\Excel\Concerns\WithTitle
+
+### Community 218 - "Community 218"
+Cohesion: 0.32
+Nodes (3): getNextNumber(), increaseNextNumber(), DocumentNumber
+
+### Community 219 - "Community 219"
+Cohesion: 0.29
+Nodes (3): getNextNumber(), increaseNextNumber(), TransactionNumber
+
+### Community 221 - "Community 221"
 Cohesion: 0.36
 Nodes (3): Contact, Customer, Vendor
 
-### Community 238 - "Community 238"
+### Community 231 - "Community 231"
 Cohesion: 0.29
 Nodes (3): Authenticate, Illuminate\Auth\AuthenticationException, Illuminate\Auth\Middleware\Authenticate
 
-### Community 239 - "Community 239"
-Cohesion: 0.29
-Nodes (3): BulkActions, BulkAction, BulkAction
-
-### Community 243 - "Community 243"
-Cohesion: 0.38
-Nodes (3): Binding, Macro, Illuminate\Support\ServiceProvider
-
-### Community 245 - "Community 245"
+### Community 238 - "Community 238"
 Cohesion: 0.52
 Nodes (6): deleteFiles(), deleteFolders(), getAlias(), getPathByAlias(), runMigration(), runMigrations()
 
-### Community 253 - "Community 253"
+### Community 243 - "Community 243"
 Cohesion: 0.40
 Nodes (3): getDocumentStatuses(), QueueCollection, Illuminate\Support\Collection
 
-### Community 303 - "Community 303"
-Cohesion: 0.60
-Nodes (3): Notification, Illuminate\Database\Eloquent\MassPrunable, Illuminate\Notifications\DatabaseNotification
+### Community 256 - "Community 256"
+Cohesion: 0.33
+Nodes (3): detachPermission(), detachPermissionsByRoleNames(), role_model_class()
 
 ## Knowledge Gaps
-- **31 isolated node(s):** `app`, `autoloader-suffix`, `name`, `description`, `homepage` (+26 more)
+- **14 isolated node(s):** `autoloader-suffix`, `name`, `description`, `homepage`, `laravel` (+9 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **349 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **336 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `Event` connect `Community 21` to `Community 0`, `Community 513`, `Community 514`, `Community 8`, `Community 10`, `Community 12`, `Community 13`, `Community 14`, `Community 15`, `Community 16`, `Community 25`, `Community 26`, `Community 28`, `Community 34`, `Community 36`, `Community 37`, `Community 47`, `Community 50`, `Community 55`, `Community 56`, `Community 60`, `Community 65`, `Community 67`, `Community 71`, `Community 76`, `Community 87`, `Community 88`, `Community 105`, `Community 126`, `Community 132`, `Community 141`, `Community 151`, `Community 175`, `Community 176`, `Community 186`, `Community 187`, `Community 196`, `Community 197`, `Community 198`, `Community 199`, `Community 207`, `Community 208`, `Community 221`, `Community 223`, `Community 237`, `Community 256`, `Community 257`, `Community 258`, `Community 259`, `Community 321`, `Community 322`, `Community 347`, `Community 348`, `Community 349`, `Community 350`, `Community 351`, `Community 352`, `Community 353`, `Community 354`, `Community 355`, `Community 356`, `Community 357`, `Community 358`, `Community 359`, `Community 360`, `Community 361`, `Community 362`, `Community 363`, `Community 364`, `Community 365`, `Community 366`, `Community 367`, `Community 368`, `Community 369`, `Community 370`, `Community 371`, `Community 372`, `Community 373`, `Community 374`, `Community 375`, `Community 376`, `Community 377`, `Community 378`, `Community 379`, `Community 380`, `Community 381`, `Community 382`, `Community 383`, `Community 384`, `Community 385`, `Community 386`, `Community 387`, `Community 388`, `Community 389`, `Community 390`, `Community 391`, `Community 392`, `Community 393`, `Community 394`, `Community 395`, `Community 396`, `Community 397`, `Community 398`, `Community 399`, `Community 400`, `Community 401`, `Community 402`, `Community 403`, `Community 404`, `Community 405`, `Community 406`, `Community 407`, `Community 408`, `Community 409`, `Community 410`, `Community 411`, `Community 412`, `Community 413`, `Community 414`, `Community 415`, `Community 416`, `Community 417`, `Community 418`, `Community 419`, `Community 420`, `Community 421`, `Community 422`, `Community 423`, `Community 424`, `Community 425`, `Community 426`, `Community 427`, `Community 428`, `Community 429`?**
-  _High betweenness centrality (0.111) - this node is a cross-community bridge._
-- **Why does `Route` connect `Community 7` to `Community 0`, `Community 5`, `Community 6`, `Community 8`, `Community 11`, `Community 12`, `Community 13`, `Community 15`, `Community 17`, `Community 23`, `Community 27`, `Community 28`, `Community 29`, `Community 30`, `Community 32`, `Community 33`, `Community 37`, `Community 39`, `Community 41`, `Community 42`, `Community 43`, `Community 45`, `Community 46`, `Community 48`, `Community 52`, `Community 53`, `Community 54`, `Community 56`, `Community 57`, `Community 58`, `Community 59`, `Community 61`, `Community 63`, `Community 69`, `Community 70`, `Community 72`, `Community 73`, `Community 76`, `Community 79`, `Community 84`, `Community 87`, `Community 92`, `Community 100`, `Community 103`, `Community 106`, `Community 107`, `Community 108`, `Community 109`, `Community 112`, `Community 113`, `Community 114`, `Community 116`, `Community 119`, `Community 120`, `Community 123`, `Community 130`, `Community 135`, `Community 136`, `Community 138`, `Community 139`, `Community 143`, `Community 145`, `Community 147`, `Community 148`, `Community 153`, `Community 154`, `Community 160`, `Community 161`, `Community 162`, `Community 165`, `Community 166`, `Community 167`, `Community 170`, `Community 172`, `Community 174`, `Community 177`, `Community 178`, `Community 179`, `Community 181`, `Community 184`, `Community 187`, `Community 188`, `Community 189`, `Community 190`, `Community 191`, `Community 195`, `Community 200`, `Community 201`, `Community 205`, `Community 207`, `Community 209`, `Community 210`, `Community 216`, `Community 218`, `Community 219`, `Community 220`, `Community 223`, `Community 225`, `Community 227`, `Community 232`, `Community 233`, `Community 234`, `Community 238`, `Community 242`, `Community 251`, `Community 257`, `Community 283`, `Community 325`, `Community 342`, `Community 465`, `Community 481`?**
-  _High betweenness centrality (0.109) - this node is a cross-community bridge._
-- **Why does `Component` connect `Community 2` to `Community 129`, `Community 6`, `Community 271`, `Community 272`, `Community 17`, `Community 273`, `Community 147`, `Community 274`, `Community 148`, `Community 275`, `Community 276`, `Community 277`, `Community 146`, `Community 278`, `Community 27`, `Community 279`, `Community 29`, `Community 160`, `Community 163`, `Community 38`, `Community 40`, `Community 170`, `Community 171`, `Community 46`, `Community 48`, `Community 306`, `Community 307`, `Community 309`, `Community 310`, `Community 311`, `Community 312`, `Community 313`, `Community 314`, `Community 187`, `Community 188`, `Community 61`, `Community 315`, `Community 316`, `Community 317`, `Community 318`, `Community 319`, `Community 320`, `Community 205`, `Community 78`, `Community 81`, `Community 82`, `Community 339`, `Community 340`, `Community 341`, `Community 86`, `Community 343`, `Community 216`, `Community 344`, `Community 223`, `Community 97`, `Community 104`, `Community 233`, `Community 109`, `Community 110`, `Community 112`, `Community 252`, `Community 246`, `Community 247`, `Community 124`, `Community 253`?**
-  _High betweenness centrality (0.079) - this node is a cross-community bridge._
-- **Are the 370 inferred relationships involving `Route` (e.g. with `.response()` and `.getFinishUrl()`) actually correct?**
-  _`Route` has 370 INFERRED edges - model-reasoned connections that need verification._
+- **Why does `Event` connect `Community 0` to `Community 1`, `Community 4`, `Community 7`, `Community 18`, `Community 20`, `Community 21`, `Community 27`, `Community 30`, `Community 32`, `Community 36`, `Community 46`, `Community 51`, `Community 56`, `Community 62`, `Community 64`, `Community 80`, `Community 84`, `Community 92`, `Community 110`, `Community 111`, `Community 112`, `Community 134`, `Community 142`, `Community 160`, `Community 161`, `Community 169`, `Community 182`, `Community 183`, `Community 184`, `Community 185`, `Community 192`, `Community 193`, `Community 194`, `Community 195`, `Community 210`, `Community 214`, `Community 226`, `Community 250`, `Community 251`, `Community 252`, `Community 253`, `Community 328`, `Community 329`, `Community 353`, `Community 354`, `Community 355`, `Community 356`, `Community 357`, `Community 358`, `Community 359`, `Community 360`, `Community 361`, `Community 362`, `Community 363`, `Community 364`, `Community 365`, `Community 366`, `Community 367`, `Community 368`, `Community 369`, `Community 370`, `Community 371`, `Community 372`, `Community 373`, `Community 374`, `Community 375`, `Community 376`, `Community 377`, `Community 378`, `Community 379`, `Community 380`, `Community 381`, `Community 382`, `Community 383`, `Community 384`, `Community 385`, `Community 386`, `Community 387`, `Community 388`, `Community 389`, `Community 390`, `Community 391`, `Community 392`, `Community 393`, `Community 394`, `Community 395`, `Community 396`, `Community 397`, `Community 398`, `Community 399`, `Community 400`, `Community 401`, `Community 402`, `Community 403`, `Community 404`, `Community 405`, `Community 406`, `Community 407`, `Community 408`, `Community 409`, `Community 410`, `Community 411`, `Community 412`, `Community 413`, `Community 480`?**
+  _High betweenness centrality (0.118) - this node is a cross-community bridge._
+- **Why does `Route` connect `Community 14` to `Community 1`, `Community 3`, `Community 6`, `Community 8`, `Community 9`, `Community 11`, `Community 13`, `Community 15`, `Community 16`, `Community 18`, `Community 19`, `Community 21`, `Community 25`, `Community 26`, `Community 29`, `Community 30`, `Community 31`, `Community 33`, `Community 34`, `Community 35`, `Community 37`, `Community 40`, `Community 41`, `Community 44`, `Community 45`, `Community 46`, `Community 48`, `Community 49`, `Community 50`, `Community 53`, `Community 54`, `Community 57`, `Community 63`, `Community 66`, `Community 67`, `Community 69`, `Community 71`, `Community 74`, `Community 76`, `Community 80`, `Community 81`, `Community 86`, `Community 88`, `Community 93`, `Community 97`, `Community 98`, `Community 99`, `Community 101`, `Community 102`, `Community 103`, `Community 107`, `Community 110`, `Community 114`, `Community 117`, `Community 124`, `Community 129`, `Community 130`, `Community 131`, `Community 132`, `Community 133`, `Community 136`, `Community 137`, `Community 138`, `Community 139`, `Community 140`, `Community 141`, `Community 143`, `Community 144`, `Community 145`, `Community 149`, `Community 150`, `Community 155`, `Community 158`, `Community 161`, `Community 166`, `Community 171`, `Community 172`, `Community 174`, `Community 175`, `Community 176`, `Community 180`, `Community 181`, `Community 186`, `Community 189`, `Community 194`, `Community 197`, `Community 198`, `Community 199`, `Community 200`, `Community 205`, `Community 206`, `Community 208`, `Community 209`, `Community 214`, `Community 216`, `Community 221`, `Community 222`, `Community 223`, `Community 231`, `Community 233`, `Community 234`, `Community 242`, `Community 251`, `Community 291`, `Community 308`, `Community 309`, `Community 319`, `Community 320`, `Community 343`, `Community 344`, `Community 347`, `Community 431`, `Community 446`?**
+  _High betweenness centrality (0.101) - this node is a cross-community bridge._
+- **Why does `Component` connect `Community 3` to `Community 131`, `Community 4`, `Community 6`, `Community 8`, `Community 137`, `Community 138`, `Community 141`, `Community 270`, `Community 271`, `Community 16`, `Community 15`, `Community 272`, `Community 273`, `Community 274`, `Community 149`, `Community 275`, `Community 151`, `Community 276`, `Community 25`, `Community 155`, `Community 157`, `Community 161`, `Community 38`, `Community 44`, `Community 47`, `Community 311`, `Community 55`, `Community 313`, `Community 314`, `Community 315`, `Community 316`, `Community 189`, `Community 317`, `Community 318`, `Community 319`, `Community 320`, `Community 321`, `Community 322`, `Community 323`, `Community 324`, `Community 325`, `Community 72`, `Community 78`, `Community 79`, `Community 206`, `Community 83`, `Community 214`, `Community 87`, `Community 348`, `Community 349`, `Community 350`, `Community 351`, `Community 93`, `Community 222`, `Community 102`, `Community 105`, `Community 106`, `Community 107`, `Community 108`, `Community 239`, `Community 240`, `Community 243`, `Community 115`, `Community 120`, `Community 123`, `Community 126`?**
+  _High betweenness centrality (0.085) - this node is a cross-community bridge._
+- **Are the 371 inferred relationships involving `Route` (e.g. with `.response()` and `.getFinishUrl()`) actually correct?**
+  _`Route` has 371 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 14 inferred relationships involving `Event` (e.g. with `.headings()` and `.prepareRows()`) actually correct?**
   _`Event` has 14 INFERRED edges - model-reasoned connections that need verification._
-- **What connects `app`, `autoloader-suffix`, `name` to the rest of the system?**
-  _31 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **What connects `autoloader-suffix`, `name`, `description` to the rest of the system?**
+  _14 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `Community 0` be split into smaller, more focused modules?**
-  _Cohesion score 0.023734592184631524 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.02203856749311295 - nodes in this community are weakly interconnected._
