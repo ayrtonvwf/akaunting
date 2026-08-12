@@ -317,11 +317,10 @@ GET    /api/reconciliations/{id}/report   – Get reconciliation report
 | Create job | `app/Jobs/Banking/CreateReconciliation.php` |
 | Request validation | `app/Http/Requests/Banking/Reconciliation.php` |
 | API resource | `app/Http/Resources/Banking/Reconciliation.php` |
-| Events | `app/Events/Banking/Reconciliation*.php` |
 
 ## Testing
 
-**Feature tests**: `/tests/Feature/Banking/Reconciliation.php`
+**Feature tests**: `/tests/Feature/Banking/ReconciliationsTest.php`
 
 Key test cases:
 - Create reconciliation

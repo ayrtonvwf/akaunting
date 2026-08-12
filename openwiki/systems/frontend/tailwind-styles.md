@@ -283,7 +283,7 @@ line-through   → text-decoration: line-through
 
 ## Custom CSS
 
-**File**: `resources/assets/css/app.css`
+**File**: `resources/assets/sass/app.css`
 
 ### Adding Custom Utilities
 

@@ -321,7 +321,7 @@ $recurring->update([
 
 ## Testing
 
-**Feature tests**: `/tests/Feature/Documents/Recurring.php`
+**Feature tests**: `/tests/Feature/Commands/RecurringCheckTest.php`
 
 Key test cases:
 - Create recurring invoice with frequency and count limit

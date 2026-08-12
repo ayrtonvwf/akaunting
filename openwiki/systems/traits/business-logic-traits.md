@@ -409,16 +409,7 @@ config/type.php         # Permission definitions
 
 ```bash
 # Test permission trait
-php artisan test tests/Feature/Auth/PermissionTraitTest.php
-
-# Test tenants trait
-php artisan test tests/Feature/Traits/TenantsTraitTest.php
-
-# Test multi-company isolation
-php artisan test tests/Feature/MultiTenancy/IsolationTest.php
-
-# Test category filtering
-php artisan test tests/Feature/Traits/CategoriesTraitTest.php
+php artisan test tests/Feature/Auth/UsersTest.php
 ```
 
 ## Common Patterns

@@ -250,7 +250,7 @@ When reconciling, both outflow and inflow transactions should be matched to thei
 
 ## Testing
 
-**Feature tests**: `/tests/Feature/Banking/Transfers.php`
+**Feature tests**: `/tests/Feature/Banking/TransfersTest.php`
 
 Key test cases:
 - Create transfer between accounts

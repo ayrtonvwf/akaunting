@@ -54,47 +54,6 @@ resources/
    └─ {locale}/               # Backend translations
 ```
 
-## Vue.js Architecture
-
-### Entry Point
-
-**File**: `resources/assets/js/app.js`
-
-```javascript
-import Vue from 'vue'
-import App from './App.vue'
-import router from './router'
-import store from './store'
-
-Vue.config.productionTip = false
-
-new Vue({
-  router,
-  store,
-  render: h => h(App)
-}).$mount('#app')
-```
-
-### Root Component
-
-**File**: `resources/assets/js/App.vue`
-
-```vue
-<template>
-  <div id="app">
-    <Navigation />
-    <router-view />
-    <Notifications />
-  </div>
-</template>
-
-<script>
-export default {
-  name: 'App'
-}
-</script>
-```
-
 ## Vue Components
 
 **Location**: `resources/assets/js/components/`
@@ -193,7 +152,7 @@ module.exports = {
 
 ### Asset Files
 
-**CSS**: `resources/assets/css/app.css`
+**CSS**: `resources/assets/sass/app.css`
 
 ```css
 @tailwind base;
@@ -220,9 +179,8 @@ module.exports = {
 const mix = require('laravel-mix');
 
 mix
-  .js('resources/assets/js/app.js', 'public/js')
   .vue({ version: 2 })
-  .postCss('resources/assets/css/app.css', 'public/css', [
+  .postCss('resources/assets/sass/app.css', 'public/css', [
     require('tailwindcss'),
     require('autoprefixer'),
   ])
@@ -268,7 +226,7 @@ public/
 
 ### Main Layout
 
-**File**: `resources/views/layouts/app.blade.php`
+**File**: `resources/views/components/layouts/admin.blade.php`
 
 ```blade
 <!DOCTYPE html>
@@ -297,7 +255,7 @@ public/
 
 ### Form Component
 
-**File**: `resources/views/components/form.blade.php`
+**File**: `resources/views/components/form/index.blade.php`
 
 ```blade
 <form method="{{ $method ?? 'POST' }}" action="{{ $action }}" class="space-y-4">

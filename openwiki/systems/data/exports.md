@@ -456,19 +456,6 @@ Console/Commands/
 └─ Export*.php
 ```
 
-## Testing & Validation
-
-```bash
-# Test export pipeline
-php artisan test tests/Feature/Export/
-
-# Test document export
-php artisan test tests/Feature/Export/ExportDocumentsTest.php
-
-# Test export formatting
-php artisan test tests/Feature/Export/ExportFormattingTest.php
-```
-
 ## Common Patterns
 
 ### Export with totals

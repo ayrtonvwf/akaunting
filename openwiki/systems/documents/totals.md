@@ -358,7 +358,7 @@ total:          $1225.13
 
 ## Testing
 
-**Unit tests**: `/tests/Unit/Documents/Calculation.php`
+**Unit tests**: `/tests/Unit/Utilities/CalculationToQuantityTest.php`
 
 Test cases:
 - Single item, single tax

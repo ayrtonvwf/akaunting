@@ -355,7 +355,7 @@ Excel::import($import, 'items.csv');
 
 ## Testing
 
-**Feature tests**: `/tests/Feature/Common/Items.php`
+**Feature tests**: `/tests/Feature/Common/ItemsTest.php`
 
 Key test cases:
 - Create item with single/multiple taxes

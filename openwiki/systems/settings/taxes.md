@@ -276,7 +276,7 @@ Tax::create([
 |---------|------|
 | Tax model | `app/Models/Setting/Tax.php` |
 | Settings controller | `app/Http/Controllers/Settings/Taxes.php` |
-| Request validation | `app/Http/Requests/Settings/Tax.php` |
+| Request validation | `app/Http/Requests/Setting/Tax.php` |
 | Config | `config/money.php`, `config/type.php` |
 
 ---

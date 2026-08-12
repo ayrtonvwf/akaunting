@@ -73,7 +73,6 @@ class ContactForm extends Component
 ### Component Blade Template
 
 ```blade
-<!-- resources/views/livewire/contact-form.blade.php -->
 <div class="form-container">
     @if (session()->has('message'))
         <div class="alert alert-success">
@@ -422,9 +421,6 @@ resources/views/livewire/
 ## Testing & Validation
 
 ```bash
-# Test Livewire component
-php artisan test tests/Feature/Livewire/
-
 # Run component-specific tests
 php artisan test --filter=ContactFormTest
 ```

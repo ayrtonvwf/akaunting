@@ -381,7 +381,7 @@ POST   /api/documents/{id}/transactions  – Link transaction to document
 
 ## Rate Limiting
 
-**Configuration**: `config/api.php` and `config/throttle`
+**Configuration**: `config/api.php` and `app/Http/Kernel.php:169`
 
 **Default**: 60 requests per minute per authenticated user
 

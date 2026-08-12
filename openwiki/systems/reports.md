@@ -451,13 +451,13 @@ routes/api.php
 
 ```bash
 # Test report generation
-php artisan test tests/Feature/Reports/
+php artisan test tests/Feature/Common/ReportsTest.php
 
 # Test report calculation
-php artisan test tests/Feature/Reports/IncomeReportTest.php
+php artisan test tests/Feature/Common/ReportsTest.php
 
 # Test dashboard widgets
-php artisan test tests/Feature/Reports/DashboardTest.php
+php artisan test tests/Feature/Common/DashboardsTest.php
 ```
 
 ## Common Patterns

@@ -345,15 +345,3 @@ app/Models/Document/
 └─ DocumentItem.php
 ```
 
-## Testing & Validation
-
-```bash
-# Test document traits
-php artisan test tests/Feature/Traits/DocumentsTraitTest.php
-
-# Test recurring
-php artisan test tests/Feature/Traits/RecurringTraitTest.php
-
-# Test transaction tracking
-php artisan test tests/Feature/Traits/TransactionsTraitTest.php
-```

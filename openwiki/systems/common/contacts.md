@@ -346,8 +346,6 @@ Excel::import($import, 'contacts.xlsx');
 
 ## Testing
 
-**Feature tests**: `/tests/Feature/Common/Contacts.php`
-
 Key test cases:
 - Create customer/vendor
 - Add contact persons

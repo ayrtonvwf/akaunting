@@ -13,7 +13,7 @@ This workflow documents the complete lifecycle of an invoice from creation throu
 
 ### User Action: Create Invoice Form
 
-**Route**: `GET /admin/sales/invoices/create`
+**Route**: `GET {company_id}/sales/invoices/create`
 
 **Controller**: `App\Http\Controllers\Sales\Invoices@create`
 
@@ -31,7 +31,7 @@ This workflow documents the complete lifecycle of an invoice from creation throu
 
 ### User Submits Form
 
-**Route**: `POST /admin/sales/invoices`
+**Route**: `POST {company_id}/sales/invoices`
 
 **Controller**: `App\Http\Controllers\Sales\Invoices@store`
 
@@ -142,7 +142,7 @@ event(new DocumentCreating($request));
     "amount": 1500.00,
     "created_at": "2024-01-15T10:00:00Z"
   },
-  "redirect": "/admin/sales/invoices/42"
+  "redirect": "{company_id}/sales/invoices/42"
 }
 ```
 
@@ -156,7 +156,7 @@ event(new DocumentCreating($request));
 
 ### View Invoice
 
-**Route**: `GET /admin/sales/invoices/{id}`
+**Route**: `GET {company_id}/sales/invoices/{id}`
 
 **Controller**: `App\Http\Controllers\Sales\Invoices@show`
 
@@ -183,7 +183,7 @@ $invoice->load([
 
 ### Edit Invoice
 
-**Route**: `PATCH /admin/sales/invoices/{id}`
+**Route**: `PATCH {company_id}/sales/invoices/{id}`
 
 **Restrictions**: Only if `status == 'draft'`
 
@@ -199,7 +199,7 @@ $invoice->load([
 
 ### User Action: Send Invoice
 
-**Route**: `GET /admin/sales/invoices/{id}/email`
+**Route**: `GET {company_id}/sales/invoices/{id}/email`
 
 **Controller**: `App\Http\Controllers\Sales\Invoices@emailInvoice`
 
@@ -272,7 +272,7 @@ https://app.example.com/signed/invoices/{id}?signature=...
 
 **Route**: `GET /signed/invoices/{id}`
 
-**Controller**: `App\Http\Controllers\Portal\Invoices@show`
+**Controller**: `App\Http\Controllers\Portal\Invoices@signed`
 
 **Display** (read-only):
 - Invoice header
@@ -299,7 +299,7 @@ After payment:
 
 **User Action**: Create income transaction in Banking section
 
-**Route**: `POST /admin/banking/transactions`
+**Route**: `POST {company_id}/banking/transactions`
 
 **Form**:
 - Account: Select account payment received into
@@ -462,7 +462,7 @@ Invoice appears in:
 
 ### Duplicate Invoice
 
-**Route**: `GET /admin/sales/invoices/{id}/duplicate`
+**Route**: `GET {company_id}/sales/invoices/{id}/duplicate`
 
 **Job**: `App\Jobs\Document\DuplicateDocument`
 

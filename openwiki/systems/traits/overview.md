@@ -331,19 +331,6 @@ app/Traits/
 └─ ... (other traits)
 ```
 
-## Testing & Validation
-
-```bash
-# Test trait behavior
-php artisan test tests/Feature/Traits/
-
-# Test document trait
-php artisan test tests/Feature/Traits/DocumentsTraitTest.php
-
-# Test multi-tenancy
-php artisan test tests/Feature/Traits/TenantsTraitTest.php
-```
-
 ## Common Patterns
 
 ### Adding a trait to existing model

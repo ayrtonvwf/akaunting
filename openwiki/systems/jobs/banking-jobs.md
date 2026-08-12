@@ -430,13 +430,10 @@ app/Jobs/Banking/
 php artisan test tests/Feature/Banking/
 
 # Test transaction creation
-php artisan test tests/Feature/Banking/CreateTransactionTest.php
-
-# Test balance calculations
-php artisan test tests/Feature/Banking/BalanceTest.php
+php artisan test tests/Feature/Banking/TransactionsTest.php
 
 # Test reconciliation
-php artisan test tests/Feature/Banking/ReconciliationTest.php
+php artisan test tests/Feature/Banking/ReconciliationsTest.php
 ```
 
 ## Common Patterns

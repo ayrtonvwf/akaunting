@@ -4,12 +4,42 @@ title: Module System - Built-in & Third-Party Extensions
 description: Modular architecture for extending Akaunting with plugins, modules, and custom functionality.
 tags: [modules, extensions, plugins, extensibility]
 openwiki:
-  source_paths: [modules, app/Traits/Modules.php]
+  source_paths: [modules, composer.json, config/module.php, overrides/akaunting/laravel-module/Commands, app/Traits/Modules.php, app/Traits/SiteApi.php]
 ---
 
 # Module System - Built-in & Third-Party Extensions
 
 The module system enables extending Akaunting with built-in and third-party modules. Modules are full Laravel applications with their own routes, controllers, models, and views.
+
+## How Modules Are Registered
+
+Module registration is not implemented in this application's own code — it runs through the vendor package `akaunting/laravel-module` (`^4.0`, declared in `composer.json`), with three repository-specific integration points:
+
+**1. Composer `installer-paths`** (`composer.json`) places the two bundled first-party modules at their expected directories when their Composer packages are installed:
+
+```json
+"installer-paths": {
+    "modules/OfflinePayments": ["akaunting/module-offline-payments"],
+    "modules/PaypalStandard": ["akaunting/module-paypal-standard"]
+}
+```
+
+**2. `config/module.php`** configures the vendor package: the `Modules` namespace, the `modules/` and public asset paths, and the stub files used when scaffolding a new module.
+
+**3. Command overrides in `overrides/akaunting/laravel-module/Commands/`** replace the vendor package's install/enable/disable/delete command implementations. `composer.json` autoloads them under the `Akaunting\Module\Commands\` namespace (in place of `vendor/akaunting/laravel-module/src/Commands/`, which is explicitly excluded from the classmap) so the repository's versions run instead. Their verified signatures:
+
+| Command | Signature |
+|---------|-----------|
+| Install | `module:install {alias} {company} {locale=en-GB}` |
+| Enable | `module:enable {alias} {company} {locale=en-GB}` |
+| Disable | `module:disable {alias} {company} {locale=en-GB}` |
+| Delete | `module:delete {alias} {company} {locale=en-GB}` |
+
+Note these commands take a `company` argument — module installation/enablement is scoped per company, not global.
+
+### `app/Traits/Modules.php` is not the registration mechanism
+
+Despite living under `app/Traits/`, this trait is **not** part of how modules get registered or bootstrapped. Reading it shows methods like `checkToken()`, `getModules()`, `getModule()`, `getModuleReviews()`, `getModuleTestimonials()`, and `getBannersOfModules()`, all built on `App\Traits\SiteApi` (which it `use`s). Together these implement the **Akaunting App Store HTTP API client**: browsing/searching store listings, fetching reviews and testimonials, checking API tokens, and loading store banners/suggestions/notifications from `https://api.akaunting.com/`. It is the data source behind the in-app "Apps"/App Store screens, not the mechanism that discovers, installs, or activates a module on disk.
 
 ## Module Architecture
 
@@ -153,44 +183,18 @@ class OfflinePaymentController extends Controller
 4. Enable module
 5. Configure settings
 
-### From Composer
+### First-Party Bundled Modules
 
-```bash
-composer require akaunting/module-name
-php artisan module:discover
-php artisan module:install module-name
-```
-
-### Manually
-
-1. Download module
-2. Extract to `modules/ModuleName/`
-3. Run `php artisan module:discover`
-4. Run `php artisan module:install module-name`
+The two modules shipped with this repository, OfflinePayments and PaypalStandard, are pulled in as Composer packages (`akaunting/module-offline-payments`, `akaunting/module-paypal-standard`) and placed at `modules/OfflinePayments/` and `modules/PaypalStandard/` via the `installer-paths` entries in `composer.json` (see "How Modules Are Registered" above).
 
 ## Module Commands
 
+See "How Modules Are Registered" above for the verified command signatures (`module:install`, `module:enable`, `module:disable`, `module:delete`), all of which take `{alias} {company} {locale=en-GB}`. For example:
+
 ```bash
-# List all modules
-php artisan module:list
-
-# Install module
-php artisan module:install offline-payments
-
-# Enable module
-php artisan module:enable offline-payments
-
-# Disable module
-php artisan module:disable offline-payments
-
-# Update module
-php artisan module:update offline-payments
-
-# Uninstall module
-php artisan module:uninstall offline-payments
-
-# Generate new module
-php artisan make:module MyModule
+php artisan module:install offline-payments 1
+php artisan module:enable offline-payments 1
+php artisan module:disable offline-payments 1
 ```
 
 ## Module File Structure
@@ -388,7 +392,6 @@ php artisan make:module PaymentGateway
 ### 2. Create Module Structure
 
 ```bash
-cd modules/PaymentGateway
 mkdir -p Http/Controllers Models Routes Resources/views
 touch module.json composer.json
 ```
@@ -507,22 +510,14 @@ class OfflinePaymentTest extends TestCase
 
 ## Source Map
 
-```
-modules/
-├─ OfflinePayments/
-├─ PaypalStandard/
-└─ {CustomModule}/
-   ├─ Http/Controllers/
-   ├─ Models/
-   ├─ Routes/
-   ├─ Resources/views/
-   ├─ Database/Migrations/
-   ├─ Tests/
-   ├─ module.json
-   └─ composer.json
-
-app/Traits/Modules.php
-```
+| Concept | File |
+|---------|------|
+| Bundled modules | `modules/OfflinePayments/`, `modules/PaypalStandard/` |
+| Vendor module package dependency | `composer.json` (`akaunting/laravel-module`) |
+| Bundled-module install locations | `composer.json` (`extra.installer-paths`) |
+| Module package/namespace/asset configuration | `config/module.php` |
+| Install/enable/disable/delete command overrides | `overrides/akaunting/laravel-module/Commands/` |
+| Akaunting App Store API client (not registration) | `app/Traits/Modules.php` (uses `app/Traits/SiteApi.php`) |
 
 ## Resources
 
