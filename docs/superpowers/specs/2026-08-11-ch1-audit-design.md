@@ -182,7 +182,11 @@ Any of the following stops the run and writes no output file:
 - a package the classifier cannot place in exactly one of the four classifications;
 - a file in the coverage report that cannot be assigned exactly one surface and one domain;
 - bucketed line totals that do not sum to the Clover total;
-- a file in `<source>` scope missing from the coverage output.
+- a file named in the coverage report that is absent from `app/` on disk.
+
+A file in `<source>` scope missing from the coverage output is not a hard failure: Clover legitimately
+omits files with no executable statements, so those are recorded in `files_without_coverage_data`
+rather than treated as an error.
 
 ## Verification
 

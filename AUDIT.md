@@ -27,8 +27,8 @@ raises.
 
 Two further dates from the same two sources, for scale. The PHP release in active support today is
 8.4, whose own active support runs to 31 Dec 2026 and security support to 31 Dec 2028. The current
-Laravel major is 13, released 17 March 2026; Laravel 12, this audit's target, is itself already past
-its bug-fix date of 13 August 2026 and carries security fixes only until 24 February 2027.
+Laravel major is 13, released 17 March 2026; Laravel 12, this audit's target, itself
+reaches its bug-fix date of 13 August 2026 and carries security fixes only until 24 February 2027.
 
 ## 2. The CI gap
 
@@ -147,12 +147,26 @@ The plan in `specs/northstar/PLAN.md` records twelve first-party `akaunting/*` p
 
 The table above records what each package *declares*. The resolver probes in
 `audit-out/probe-l11.txt` and `audit-out/probe-l12.txt` record what Composer *does* when asked to
-move. Neither probe resolves. Both produce eight `Problem` blocks — identical apart from the target
-major — in which `laravel/framework` is available at the requested version but seven currently locked
-direct packages are not moved by a probe that names only `laravel/framework`, and their locked
-versions cap out below 11. The Laravel 12 transcript additionally carries a
-`composer why-not laravel/framework 12` cross-check, which names 19 further direct packages and 17
-transitive-only ones — counting distinct names in that transcript, and setting aside
+move, each run with:
+
+    composer update --dry-run --no-scripts --no-audit --no-interaction -W laravel/framework
+
+against `laravel/framework:^11` and `laravel/framework:^12` respectively, on a throwaway branch with
+the constraint edited directly (see `docs/superpowers/plans/2026-08-11-ch1-audit.md`). Neither probe
+resolves. Both produce eight `Problem` blocks — identical apart from the target major — in which
+`laravel/framework` is available at the requested version but seven currently locked direct packages
+are not moved by a probe that names only `laravel/framework`. Of those seven, only three actually cap
+out below 11 at their locked version: `akaunting/laravel-mutable-observer` and
+`akaunting/laravel-sortable` (both `laravel/framework ^9.0|^10.0`) and `santigarcor/laratrust`
+(`~6.0|~7.0|~8.0|^9.0|^10.0`) — each block reads *"conflicts with your root composer.json require"*.
+The other four — `akaunting/laravel-firewall`, `akaunting/laravel-language`,
+`akaunting/laravel-setting`, `akaunting/laravel-version` — declare constraints at their locked version
+that already admit 11 and 12; each block reads only *"an update of this package was not requested"*,
+meaning the probe held them at their lock rather than finding them incompatible. The Laravel 12
+transcript additionally carries a `composer why-not laravel/framework 12` cross-check, which names 19
+direct packages in total — 16 beyond the seven the `Problem` blocks already name, since
+`akaunting/laravel-mutable-observer`, `akaunting/laravel-sortable` and `santigarcor/laratrust` appear
+in both — and 17 transitive-only ones. Counting distinct names in that transcript, and setting aside
 `laravel/framework` itself, the root package, and the `illuminate/*` subsplits that appear there as
 requirement targets rather than as packages of their own.
 
@@ -161,8 +175,10 @@ Where table and probe disagree, both readings are kept:
 - `akaunting/laravel-firewall` — table says `supports-12` (ceiling 13), probe blocks the move,
   because the locked 2.3.0 requires `laravel/framework ^9.0|^10.0|^11.0|^12.0` and the probe does not
   move it.
-- `akaunting/laravel-language` — table says `supports-12` (ceiling 12), probe blocks, because locked
-  1.0.22 is well behind its own latest 2.0.0.
+- `akaunting/laravel-language` — table says `supports-12` (ceiling 12), probe blocks, but not because
+  locked 1.0.22 is incompatible: it requires `laravel/framework >=5.4.0`, which already admits 11, 12
+  and 13. The block reads only "an update of this package was not requested" — the lock, not the
+  package, is what needs to move.
 - `akaunting/laravel-mutable-observer` — table says `supports-12` (ceiling 12), probe blocks, because
   locked 2.0.1 requires `laravel/framework ^9.0|^10.0`.
 - `akaunting/laravel-setting` — table says `supports-12` (ceiling 13), probe blocks, because locked
@@ -207,7 +223,7 @@ transitive dependency holding a direct one back. Those are named here:
   row rather than contradicting it.
 - `laravel/prompts` (locked v0.1.25; `laravel/framework` v12.0.0 requires `^0.3.0`) holds back
   `laravel/framework` itself, and is also required, more loosely, by `livewire/livewire`.
-- In the same self-referential category: `nesbot/carbon`, `nunomaduro/termwind` and ten `symfony/*`
+- In the same self-referential category: `nesbot/carbon`, `nunomaduro/termwind` and eleven `symfony/*`
   sub-packages are `laravel/framework`'s own requirements, needed at newer versions by v12.0.0 than
   what is locked here. None of them is a direct dependency, so none appears in the table.
 
@@ -236,7 +252,9 @@ codebase unnoticed. There are 31 surface buckets and 9 domain buckets; `cross-cu
 the 1,062 files.
 
 The untested-file column is the more useful one for choosing what Ch2 writes first. A percentage is a
-headline; a count of files with zero covered statements is a worklist.
+headline; a count of files that have executable statements but none of them covered is a worklist.
+Files with no executable statements at all — an interface with no method bodies, say — do not count as
+untested, since there is nothing there for a test to cover.
 
 ### Coverage by framework surface
 
@@ -312,11 +330,12 @@ consequence of the counting rule as much as of new tests.
 of stopping there is set out below rather than argued away.
 
 **On feasibility.** The two resolver probes fail, but they do not fail for the reason the failure
-looks like. Both were run as a single-package update naming only `laravel/framework`, so every other
-package stays pinned at its locked version by construction. `-W` would not have changed this and its
-absence is not the gap it looks like: `-W` widens an update to the named package's *dependencies*, and
-the seven packages below are its *dependents*. Nothing short of naming them, or updating everything,
-moves them. Read the eight `Problem` blocks in
+looks like. Both were run as a single-package update naming only `laravel/framework`, with `-W`
+(`--with-all-dependencies`), so every other package stays pinned at its locked version by
+construction. `-W` did not change that, and its presence in the command is not the gap it looks like:
+`-W` widens an update to the named package's *dependencies*, and the seven packages below are its
+*dependents* — `-W` never had permission to move them. Nothing short of naming them, or updating
+everything, moves them. Read the eight `Problem` blocks in
 `audit-out/probe-l11.txt` against section 3's ceiling column and the picture inverts: four of the
 seven named packages — `akaunting/laravel-language`, `akaunting/laravel-setting`,
 `akaunting/laravel-version`, `akaunting/laravel-firewall` — declare constraints at their *locked*
@@ -365,7 +384,7 @@ a finishable piece of work into a longer one. One horizon at a time.
 That is a deliberate choice, and the rest of this subsection is what it costs, stated plainly so that
 nobody arriving later mistakes the stop at 12 for an oversight.
 
-**The cost.** Laravel 12's bug-fix window closed on 13 August 2026. It is security-only until
+**The cost.** Laravel 12's bug-fix window closes on 13 August 2026. It is security-only until
 24 February 2027, and upstream is already shipping 13.25.0. So Ch3 will land this fork on a release
 that is *already leaving active support*, and it will arrive with most of the support clock spent —
 whatever remains of a window that closes in February 2027, minus however long Ch3 takes. The honest
@@ -539,8 +558,8 @@ they are not the reason this step is expensive.
 - `doctrine/dbal` can be dropped afterwards; the framework no longer depends on it.
 
 The framework's own transitive requirements — `laravel/prompts` ^0.3, `nesbot/carbon`,
-`nunomaduro/termwind` and ten `symfony/*` sub-packages, all named in the probes — resolve on their own
-once the direct pins are relaxed and need no separate action.
+`nunomaduro/termwind` and eleven `symfony/*` sub-packages, all named in the probes — resolve on their
+own once the direct pins are relaxed and need no separate action.
 
 Cost: **moderate, and concentrated in migrations rather than in application structure.** Upstream's 15
 minutes is for a clean application; the 38 floating-point columns, the 6 `->change()` calls and the
