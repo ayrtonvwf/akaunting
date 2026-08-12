@@ -111,8 +111,6 @@ fabric.properties
 !/.claude/skills/writing-plans/**
 !/.claude/skills/writing-skills/
 !/.claude/skills/writing-skills/**
-!/.claude/skills/graphify/
-!/.claude/skills/graphify/**
 /.vagrant
 Homestead.json
 Homestead.yaml
