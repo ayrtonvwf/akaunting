@@ -6,4 +6,13 @@ RUN apt-get update \
     && docker-php-ext-install -j"$(nproc)" bcmath gd intl mbstring pdo_mysql zip \
     && rm -rf /var/lib/apt/lists/*
 
+# PCOV for the Ch1 coverage map. Installed but disabled by default: the coverage run turns it on
+# per-invocation with -d pcov.enabled=1, so nothing else in the container pays for instrumentation.
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends $PHPIZE_DEPS \
+    && pecl install pcov \
+    && docker-php-ext-enable pcov \
+    && printf 'pcov.enabled=0\n' > /usr/local/etc/php/conf.d/zz-pcov-disabled.ini \
+    && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /var/www/html
