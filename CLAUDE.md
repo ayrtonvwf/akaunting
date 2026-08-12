@@ -6,7 +6,7 @@
 
 This repository has a generated `openwiki/` evidence index. It is optional just-in-time context, not required startup reading.
 
-- Treat source code and tests as authoritative. A brief's unknowns and review items are verification gaps, not automatic requirements.
+- Treat source code and tests as authoritative. Items under "Outstanding Critic Items" in `openwiki/log.md` are verification gaps, not automatic requirements.
 - Prefer the narrowest quiet validation that proves the changed behavior. Preserve complete failure output.
 
 The scheduled OpenWiki GitHub Actions workflow refreshes the repository wiki. Do not hand-edit generated OpenWiki pages unless explicitly asked; prefer updating source code/docs and letting OpenWiki regenerate.
@@ -58,5 +58,9 @@ Repository-specific constraints:
 - Use the locked local query command for reproducible checks: `uv run --project tools/graphify --locked graphify query "<question>" --graph graphify-out/graph.json`.
 - Rebuild prerequisites are Python 3.10+, `uv`, and Composer modules at `modules/OfflinePayments/composer.json` and `modules/PaypalStandard/composer.json`.
 - The graph scope is `app/`, `modules/`, `config/`, `routes/`, and `tests/`; exclude vendor, frontend, documentation, and generated assets.
-- Treat Graphify as structural evidence: `EXTRACTED` is source-derived; `INFERRED` and `AMBIGUOUS` require source inspection.
+- Treat Graphify as structural evidence: edges are 86.9% `EXTRACTED` (source-derived, confidence 1.0) and 13.1% `INFERRED` (verify in source). No edge currently carries `AMBIGUOUS`, so do not wait for that label to justify a source check.
 - Graphify requires no API key, and this repository does not install its hooks or MCP integration.
+- Routes and config resolve at file level only: every `routes/*.php` is one node at `loc=L1` with no edges to controllers, and every `config/*.php` is one node with no keys. Grep those directories directly. Querying `"routes/admin.php"` returns the OfflinePayments file, not the root one.
+- `overrides/` and the root `composer.json` / `package.json` are outside the graph scope and are unmentioned by OpenWiki. For dependency-coupling questions, read `overrides/` directly; neither evidence layer can answer.
+- `graphify query` seeds by token-matching node labels, not by meaning. Query with symbol names; prose questions misfire silently and return irrelevant nodes at full confidence.
+- Pass `--budget 6000` as a floor. The default 2000 truncates correct answers, which reads to an agent as absence.
