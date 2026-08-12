@@ -83,9 +83,13 @@ Undocumented today, so an agent spends a query discovering it (audit finding 5).
 ### A2. Two pieces of dead guidance are removed
 
 - **`AMBIGUOUS`.** Zero edges carry the label; the real split is 86.9% `EXTRACTED` / 13.1%
-  `INFERRED`. It is removed from `AGENTS.md` and the `'AMBIGUOUS confidence label'` entry is removed
-  from the `$requiredPatterns` list in `tools/graphify/Test-GraphifyGuidance.ps1`. These two changes
-  must land in the same commit or the script goes red. The replacement text states the actual split.
+  `INFERRED`. `AGENTS.md` stops instructing agents to treat `AMBIGUOUS` edges as requiring source
+  inspection, and instead states the real distribution and that no edge currently carries the label.
+  This is the audit's second option ("state that it is currently unexercised") rather than its first
+  ("drop it from `AGENTS.md` and `Test-GraphifyGuidance.ps1`), chosen after finding that
+  `tools/agents/Test-AgentHarness.ps1:21` asserts the token as well: deletion is a three-file change
+  that leaves an agent with no guidance at all if the label ever fires, while the replacement
+  sentence keeps both scripts green and carries more information.
 - **"a brief's unknowns and review items"** (`AGENTS.md` line 9). That vocabulary exists nowhere in
   the bundle; the nearest real thing is `openwiki/log.md`'s "Outstanding Critic Items". The sentence
   is rewritten to name that, or dropped.
@@ -105,6 +109,9 @@ The rule becomes `!modules/**/*.php` **plus an explicit `!modules/**/composer.js
 suggested `*.php`-only narrowing overshoots: the module manifests are neither frontend nor generated
 assets, and both validation scripts depend on them existing. This change lands before the rebuild so
 one rebuild covers it.
+
+`tools/graphify/Test-GraphifyConfig.ps1` pins `.graphifyignore` byte-for-byte against an
+`$expectedIgnoreEntries` list, so that list changes in the same commit or the script goes red.
 
 ### A4. The manifest precondition is split, not deleted
 
@@ -128,8 +135,14 @@ workflow. An agent that loads the skill without also reading `AGENTS.md` follows
 Both are replaced with a short repo-locked skill covering: the locked query command, the committed
 baseline under `graphify-out/`, the rebuild wrapper and its prerequisites, the capability boundaries
 from A1, and the `--budget` floor. Upstream guidance on the `query`, `path` and `explain` subcommands
-is carried over deliberately rather than lost by accident. The two copies stay byte-identical to each
-other, and `Test-GraphifyGuidance.ps1`'s existence check for the Claude Code path must still pass.
+is carried over deliberately rather than lost by accident — **inline, not by keeping
+`references/query.md`**, because that file is itself contradictory here: it documents `save-result`,
+`reflect`, `LESSONS.md` and a `graphify-out/.graphify_python` interpreter path, none of which this
+repository uses. The whole `references/` directory is removed from both copies.
+
+The two copies stay byte-identical to each other, and `Test-GraphifyGuidance.ps1`'s existence check
+for the Claude Code path must still pass. `graphify` is added to the `$projectSkills` list in
+`tools/agents/Sync-ProjectSkills.ps1` so the mirror is generated rather than hand-maintained.
 
 ## Workstream B — the wiki correction pass
 
