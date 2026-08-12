@@ -1,0 +1,2 @@
+Run `composer require laravel/framework` or `composer require laravel/framework:12` instead to replace the constraint
+The temporary constraint "12" for "laravel/framework" must be a subset of the constraint in your composer.json (^10.0)
