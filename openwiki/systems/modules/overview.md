@@ -4,7 +4,7 @@ title: Module System - Built-in & Third-Party Extensions
 description: Modular architecture for extending Akaunting with plugins, modules, and custom functionality.
 tags: [modules, extensions, plugins, extensibility]
 openwiki:
-  source_paths: [modules, composer.json, config/module.php, overrides/akaunting/laravel-module/Commands, app/Traits/Modules.php, app/Traits/SiteApi.php]
+  source_paths: [modules, composer.json, config/module.php, overrides/akaunting/laravel-module/Commands, app/Console/Commands/UninstallModule.php, app/Traits/Modules.php, app/Traits/SiteApi.php, app/Utilities/ModuleActivator.php, app/Http/Middleware/IdentifyCompany.php, app/Providers/Queue.php]
 ---
 
 # Module System - Built-in & Third-Party Extensions
@@ -37,9 +37,13 @@ Module registration is not implemented in this application's own code — it run
 
 Note these commands take a `company` argument — module installation/enablement is scoped per company, not global.
 
-### `app/Traits/Modules.php` is not the registration mechanism
+A fifth command, `module:uninstall`, is real but lives outside the overrides mechanism above — it's the application's own command, `app/Console/Commands/UninstallModule.php`, autoloaded via `app/Console/Kernel.php`'s `$this->load(__DIR__ . '/Commands')`, not a vendor-package override. Its signature is the same shape as the others: `module:uninstall {alias} {company} {locale=en-GB}`.
 
-Despite living under `app/Traits/`, this trait is **not** part of how modules get registered or bootstrapped. Reading it shows methods like `checkToken()`, `getModules()`, `getModule()`, `getModuleReviews()`, `getModuleTestimonials()`, and `getBannersOfModules()`, all built on `App\Traits\SiteApi` (which it `use`s). Together these implement the **Akaunting App Store HTTP API client**: browsing/searching store listings, fetching reviews and testimonials, checking API tokens, and loading store banners/suggestions/notifications from `https://api.akaunting.com/`. It is the data source behind the in-app "Apps"/App Store screens, not the mechanism that discovers, installs, or activates a module on disk.
+### `app/Traits/Modules.php` is mostly the App Store API client — but not entirely
+
+Most of this trait is **not** part of how modules get installed. Reading it shows methods like `checkToken()`, `getModules()`, `getModule()`, `getModuleReviews()`, `getModuleTestimonials()`, and `getBannersOfModules()`, all built on `App\Traits\SiteApi` (which it `use`s). Together these implement the **Akaunting App Store HTTP API client**: browsing/searching store listings, fetching reviews and testimonials, checking API tokens, and loading store banners/suggestions/notifications from `https://api.akaunting.com/`. This part is the data source behind the in-app "Apps"/App Store screens, not the mechanism that discovers or installs a module on disk.
+
+One method in the same trait is different: `registerModules()` (`app/Traits/Modules.php:670`) calls `app(\Akaunting\Module\Contracts\ActivatorInterface::class)->register()`, which resolves to `app/Utilities/ModuleActivator.php`'s `register()` — that method loads module state and runs `app()->register(\Akaunting\Module\Providers\Bootstrap::class, true)`. `registerModules()` is called from `app/Http/Middleware/IdentifyCompany.php:54` on every web request and from `app/Providers/Queue.php:78` for queued jobs. So while **installation** (getting a module's files onto disk and its Composer package registered) is entirely the vendor package's job — see "How Modules Are Registered" above — **activation** (bootstrapping an already-installed module's service provider on each request/job so its routes, views and bindings are live) runs through this trait's `registerModules()` on every request, not through `akaunting/laravel-module` directly. The two are complementary stages, not competing mechanisms: `laravel-module` + its overridden commands get a module onto disk and toggle its enabled state; `Modules::registerModules()` is what makes an enabled module's code actually run on a given request.
 
 ## Module Architecture
 
@@ -189,12 +193,13 @@ The two modules shipped with this repository, OfflinePayments and PaypalStandard
 
 ## Module Commands
 
-See "How Modules Are Registered" above for the verified command signatures (`module:install`, `module:enable`, `module:disable`, `module:delete`), all of which take `{alias} {company} {locale=en-GB}`. For example:
+See "How Modules Are Registered" above for the verified command signatures (`module:install`, `module:enable`, `module:disable`, `module:delete`, `module:uninstall`), all of which take `{alias} {company} {locale=en-GB}`. For example:
 
 ```bash
 php artisan module:install offline-payments 1
 php artisan module:enable offline-payments 1
 php artisan module:disable offline-payments 1
+php artisan module:uninstall offline-payments 1
 ```
 
 ## Module File Structure
@@ -517,7 +522,9 @@ class OfflinePaymentTest extends TestCase
 | Bundled-module install locations | `composer.json` (`extra.installer-paths`) |
 | Module package/namespace/asset configuration | `config/module.php` |
 | Install/enable/disable/delete command overrides | `overrides/akaunting/laravel-module/Commands/` |
-| Akaunting App Store API client (not registration) | `app/Traits/Modules.php` (uses `app/Traits/SiteApi.php`) |
+| Uninstall command (app-owned, not an override) | `app/Console/Commands/UninstallModule.php` |
+| Akaunting App Store API client | `app/Traits/Modules.php` (uses `app/Traits/SiteApi.php`) |
+| Per-request module activation | `app/Traits/Modules.php::registerModules()`, called from `app/Http/Middleware/IdentifyCompany.php:54` and `app/Providers/Queue.php:78`, resolving to `app/Utilities/ModuleActivator.php::register()` |
 
 ## Resources
 

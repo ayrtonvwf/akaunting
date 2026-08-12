@@ -23,94 +23,88 @@ Livewire is a Laravel library for building dynamic interfaces without building J
 
 ### Basic Component
 
-```php
-namespace App\Http\Livewire;
+There is no Livewire component in this codebase named `ContactForm`, and contact creation is not
+implemented as a Livewire component — the real contact form is a set of non-Livewire Blade
+components under `resources/views/components/contacts/form/`. Below is a real, verified Akaunting
+Livewire component instead: `App\Http\Livewire\Common\Search` (`app/Http/Livewire/Common/Search.php`),
+the global navbar search box.
 
+```php
+namespace App\Http\Livewire\Common;
+
+use App\Events\Common\GlobalSearched;
+use App\Models\Banking\Account;
 use Livewire\Component;
 
-class ContactForm extends Component
+class Search extends Component
 {
-    // Public properties (reactive state)
-    public $name = '';
-    public $email = '';
-    public $phone = '';
-    
-    // Validation rules
-    protected $rules = [
-        'name' => 'required|min:3',
-        'email' => 'required|email',
-        'phone' => 'nullable|regex:/^[\d\s\-\+\(\)]+$/',
-    ];
-    
-    /**
-     * Handle form submission
-     */
-    public function submit()
-    {
-        // Validate
-        $this->validate();
-        
-        // Create contact
-        Contact::create($this->all());
-        
-        // Reset form
-        $this->reset();
-        
-        // Flash message
-        session()->flash('message', 'Contact created successfully!');
-    }
-    
-    /**
-     * Render the component view
-     */
+    public $user = null;
+
+    public $keyword = '';
+
+    public $results = [];
+
+    protected $listeners = ['resetKeyword'];
+
     public function render()
     {
-        return view('livewire.contact-form');
+        $this->user = user();
+
+        $this->search();
+
+        return view('livewire.common.search');
+    }
+
+    public function search()
+    {
+        $this->results = [];
+
+        if (empty($this->keyword)) {
+            return;
+        }
+
+        $this->searchOnAccounts();
+        // ...and searchOnItems(), searchOnInvoices(), searchOnCustomers(),
+        // searchOnBills(), searchOnVendors() — one method per searchable model.
+
+        $this->dispatchGlobalSearched();
+    }
+
+    public function resetKeyword()
+    {
+        $this->keyword = '';
     }
 }
 ```
 
+Each `searchOn*()` method checks a permission (e.g. `$this->user->can('read-banking-accounts')`)
+before querying, so results are automatically scoped to what the current user can see — see the
+full file for all six `searchOn*()` methods.
+
 ### Component Blade Template
 
+The real template, `resources/views/livewire/common/search.blade.php`, renders the input and a
+results dropdown. Trimmed to its essential structure:
+
 ```blade
-<div class="form-container">
-    @if (session()->has('message'))
-        <div class="alert alert-success">
-            {{ session('message') }}
-        </div>
+<form wire:click.stop class="navbar-search ...">
+    <input type="text" name="search" wire:model.live.debounce.500ms="keyword" ...>
+
+    @if ($results)
+    <div class="dropdown-menu ...">
+        @foreach($results as $result)
+        <a href="{{ $result->href }}">
+            <div class="name">{{ $result->name }}</div>
+            <span class="type">{{ $result->type }}</span>
+        </a>
+        @endforeach
+    </div>
     @endif
-    
-    <form wire:submit.prevent="submit">
-        <div class="form-group">
-            <label>Name</label>
-            <input 
-                type="text" 
-                wire:model="name"
-                class="form-control"
-            >
-            @error('name') 
-                <span class="text-danger">{{ $message }}</span> 
-            @enderror
-        </div>
-        
-        <div class="form-group">
-            <label>Email</label>
-            <input 
-                type="email" 
-                wire:model="email"
-                class="form-control"
-            >
-            @error('email') 
-                <span class="text-danger">{{ $message }}</span> 
-            @enderror
-        </div>
-        
-        <button type="submit" class="btn btn-primary">
-            Save
-        </button>
-    </form>
-</div>
+</form>
 ```
+
+Note the `wire:model.live.debounce.500ms` binding syntax — this project uses Livewire 3.x
+(`livewire/livewire: ^3.0` in `composer.json`).
 
 ## Data Binding
 
@@ -224,25 +218,13 @@ Shared UI utilities
 
 ### Multi-Tenancy in Livewire
 
-```php
-class ContactForm extends Component
-{
-    public function mount()
-    {
-        // Current company is automatically available
-        $this->company = auth()->user()->currentCompany();
-    }
-    
-    public function submit()
-    {
-        // Queries automatically scoped to company
-        Contact::create([
-            'company_id' => $this->company->id,
-            'name' => $this->name,
-        ]);
-    }
-}
-```
+No verified Livewire component in this codebase demonstrates explicit company-scoping in its
+`mount()`/action methods (the real search component, above, scopes results implicitly through
+each model's existing query scopes and the user's permissions, not by reading
+`currentCompany()` directly). In general, per this codebase's multi-tenancy pattern documented in
+`workflows/multi-tenancy.md`, a Livewire component's Eloquent queries are scoped the same way any
+other request-cycle code is: through the `Tenants` trait's global scope on the model, not through
+manual company-ID filtering inside the component.
 
 ### Permission Checking
 
@@ -271,35 +253,16 @@ public function updatedEmail()
 
 ## Lifecycle Hooks
 
-```php
-class ContactForm extends Component
-{
-    public function mount()
-    {
-        // Called when component is first rendered
-    }
-    
-    public function hydrate()
-    {
-        // Called before every update
-    }
-    
-    public function updating($name, $value)
-    {
-        // Called before any property changes
-    }
-    
-    public function updated($name, $value)
-    {
-        // Called after any property changes
-    }
-    
-    public function dehydrate()
-    {
-        // Called before sending response to browser
-    }
-}
-```
+These are Livewire 3.x framework hooks (from `livewire/livewire`, not Akaunting-specific code —
+none of the built-in Akaunting components in this codebase currently implement all of them):
+
+| Hook | Called |
+|------|--------|
+| `mount()` | When the component is first rendered |
+| `hydrate()` | Before every update |
+| `updating($name, $value)` | Before any property changes |
+| `updated($name, $value)` | After any property changes |
+| `dehydrate()` | Before sending the response to the browser |
 
 ## Common Use Cases
 
@@ -420,10 +383,8 @@ resources/views/livewire/
 
 ## Testing & Validation
 
-```bash
-# Run component-specific tests
-php artisan test --filter=ContactFormTest
-```
+No dedicated Livewire component test suite exists in this repository (there is no
+`tests/Feature/Livewire` directory and no test file targets a Livewire component directly).
 
 ## Resources
 
