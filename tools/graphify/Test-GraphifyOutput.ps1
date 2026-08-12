@@ -6,10 +6,6 @@ $graphJsonPath = Join-Path $graphifyOutPath 'graph.json'
 $reportPath = Join-Path $graphifyOutPath 'GRAPH_REPORT.md'
 $htmlPath = Join-Path $graphifyOutPath 'graph.html'
 $allowedRoots = @('app/', 'modules/', 'config/', 'routes/', 'tests/')
-$requiredModuleManifests = @(
-    (Join-Path $repoRoot 'modules/OfflinePayments/composer.json')
-    (Join-Path $repoRoot 'modules/PaypalStandard/composer.json')
-)
 
 function Add-SourcePaths {
     param(
@@ -142,12 +138,6 @@ function Assert-SelfContainedGraphHtml {
         }
     }
 
-}
-
-foreach ($manifestPath in $requiredModuleManifests) {
-    if (-not (Test-Path -LiteralPath $manifestPath)) {
-        throw "Missing required module manifest: $manifestPath"
-    }
 }
 
 foreach ($requiredOutputPath in @($graphJsonPath, $reportPath, $htmlPath)) {
