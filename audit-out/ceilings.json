@@ -1,0 +1,804 @@
+{
+    "generated_at": "2026-08-12T09:24:47+00:00",
+    "source": "https://packagist.org/packages/{name}.json",
+    "target_laravel_major": 12,
+    "summary": {
+        "abandoned": 2,
+        "ceiling-below": 2,
+        "framework-agnostic": 23,
+        "supports-12": 30
+    },
+    "packages": [
+        {
+            "name": "akaunting/laravel-apexcharts",
+            "section": "require",
+            "first_party": true,
+            "installed": "3.2.0",
+            "latest": "4.0.0",
+            "latest_released_at": "2026-05-17T19:32:55+00:00",
+            "laravel_constraints": {
+                "illuminate/support": "^10.0|^11.0|^12.0|^13.0"
+            },
+            "ceiling": 13,
+            "classification": "supports-12",
+            "abandoned_replacement": null
+        },
+        {
+            "name": "akaunting/laravel-debugbar-collector",
+            "section": "require",
+            "first_party": true,
+            "installed": "2.1.1",
+            "latest": "2.1.1",
+            "latest_released_at": "2023-06-02T07:22:01+00:00",
+            "laravel_constraints": [],
+            "ceiling": null,
+            "classification": "framework-agnostic",
+            "abandoned_replacement": null
+        },
+        {
+            "name": "akaunting/laravel-firewall",
+            "section": "require",
+            "first_party": true,
+            "installed": "2.3.0",
+            "latest": "3.0.0",
+            "latest_released_at": "2026-05-16T16:07:09+00:00",
+            "laravel_constraints": {
+                "laravel/framework": "^10.0|^11.0|^12.0|^13.0"
+            },
+            "ceiling": 13,
+            "classification": "supports-12",
+            "abandoned_replacement": null
+        },
+        {
+            "name": "akaunting/laravel-language",
+            "section": "require",
+            "first_party": true,
+            "installed": "1.0.22",
+            "latest": "2.0.0",
+            "latest_released_at": "2025-12-16T00:31:44+00:00",
+            "laravel_constraints": {
+                "laravel/framework": "^5.8|^6.0|^7.0|^8.0|^9.0|^10.0|^11.0|^12.0"
+            },
+            "ceiling": 12,
+            "classification": "supports-12",
+            "abandoned_replacement": null
+        },
+        {
+            "name": "akaunting/laravel-menu",
+            "section": "require",
+            "first_party": true,
+            "installed": "3.1.2",
+            "latest": "3.1.2",
+            "latest_released_at": "2023-10-25T12:43:24+00:00",
+            "laravel_constraints": {
+                "illuminate/config": "^9.0|^10.0",
+                "illuminate/support": "^9.0|^10.0",
+                "illuminate/view": "^9.0|^10.0"
+            },
+            "ceiling": 10,
+            "classification": "ceiling-below",
+            "abandoned_replacement": null
+        },
+        {
+            "name": "akaunting/laravel-module",
+            "section": "require",
+            "first_party": true,
+            "installed": "4.0.3",
+            "latest": "4.0.3",
+            "latest_released_at": "2024-12-05T04:55:26+00:00",
+            "laravel_constraints": [],
+            "ceiling": null,
+            "classification": "framework-agnostic",
+            "abandoned_replacement": null
+        },
+        {
+            "name": "akaunting/laravel-money",
+            "section": "require",
+            "first_party": true,
+            "installed": "5.2.2",
+            "latest": "6.0.3",
+            "latest_released_at": "2026-03-24T11:04:40+00:00",
+            "laravel_constraints": {
+                "illuminate/contracts": "^10.0|^11.0|^12|^13",
+                "illuminate/support": "^10.0|^11.0|^12|^13",
+                "illuminate/validation": "^10.0|^11.0|^12|^13",
+                "illuminate/view": "^10.0|^11.0|^12|^13"
+            },
+            "ceiling": 13,
+            "classification": "supports-12",
+            "abandoned_replacement": null
+        },
+        {
+            "name": "akaunting/laravel-mutable-observer",
+            "section": "require",
+            "first_party": true,
+            "installed": "2.0.1",
+            "latest": "3.0.0",
+            "latest_released_at": "2025-12-16T01:23:37+00:00",
+            "laravel_constraints": {
+                "laravel/framework": "^9.0|^10.0|^11.0|^12.0"
+            },
+            "ceiling": 12,
+            "classification": "supports-12",
+            "abandoned_replacement": null
+        },
+        {
+            "name": "akaunting/laravel-setting",
+            "section": "require",
+            "first_party": true,
+            "installed": "1.2.9",
+            "latest": "1.2.9",
+            "latest_released_at": "2023-11-02T08:32:45+00:00",
+            "laravel_constraints": {
+                "laravel/framework": ">=5.3"
+            },
+            "ceiling": 13,
+            "classification": "supports-12",
+            "abandoned_replacement": null
+        },
+        {
+            "name": "akaunting/laravel-sortable",
+            "section": "require",
+            "first_party": true,
+            "installed": "2.0.2",
+            "latest": "3.0.0",
+            "latest_released_at": "2026-05-17T19:51:07+00:00",
+            "laravel_constraints": {
+                "laravel/framework": "^10.0|^11.0|^12.0|^13.0"
+            },
+            "ceiling": 13,
+            "classification": "supports-12",
+            "abandoned_replacement": null
+        },
+        {
+            "name": "akaunting/laravel-version",
+            "section": "require",
+            "first_party": true,
+            "installed": "1.0.4",
+            "latest": "1.0.4",
+            "latest_released_at": "2021-03-05T11:00:11+00:00",
+            "laravel_constraints": {
+                "laravel/framework": ">=5.2.0"
+            },
+            "ceiling": 13,
+            "classification": "supports-12",
+            "abandoned_replacement": null
+        },
+        {
+            "name": "akaunting/module-offline-payments",
+            "section": "require",
+            "first_party": true,
+            "installed": "3.0.4",
+            "latest": "3.0.4",
+            "latest_released_at": "2024-04-30T13:19:29+00:00",
+            "laravel_constraints": [],
+            "ceiling": null,
+            "classification": "framework-agnostic",
+            "abandoned_replacement": null
+        },
+        {
+            "name": "akaunting/module-paypal-standard",
+            "section": "require",
+            "first_party": true,
+            "installed": "3.0.3",
+            "latest": "3.0.3",
+            "latest_released_at": "2026-07-12T13:07:26+00:00",
+            "laravel_constraints": [],
+            "ceiling": null,
+            "classification": "framework-agnostic",
+            "abandoned_replacement": null
+        },
+        {
+            "name": "barryvdh/laravel-debugbar",
+            "section": "require",
+            "first_party": false,
+            "installed": "v3.16.5",
+            "latest": "v4.4.1",
+            "latest_released_at": "2026-08-03T06:23:16+00:00",
+            "laravel_constraints": {
+                "illuminate/routing": "^11|^12|^13.0",
+                "illuminate/session": "^11|^12|^13.0",
+                "illuminate/support": "^11|^12|^13.0"
+            },
+            "ceiling": 13,
+            "classification": "supports-12",
+            "abandoned_replacement": null
+        },
+        {
+            "name": "barryvdh/laravel-dompdf",
+            "section": "require",
+            "first_party": false,
+            "installed": "v2.2.0",
+            "latest": "v3.1.2",
+            "latest_released_at": "2026-02-21T08:51:10+00:00",
+            "laravel_constraints": {
+                "illuminate/support": "^9|^10|^11|^12|^13.0"
+            },
+            "ceiling": 13,
+            "classification": "supports-12",
+            "abandoned_replacement": null
+        },
+        {
+            "name": "barryvdh/laravel-ide-helper",
+            "section": "require",
+            "first_party": false,
+            "installed": "v2.15.1",
+            "latest": "v3.7.0",
+            "latest_released_at": "2026-03-17T14:12:51+00:00",
+            "laravel_constraints": {
+                "illuminate/console": "^11.15 || ^12 || ^13.0",
+                "illuminate/database": "^11.15 || ^12 || ^13.0",
+                "illuminate/filesystem": "^11.15 || ^12 || ^13.0",
+                "illuminate/support": "^11.15 || ^12 || ^13.0"
+            },
+            "ceiling": 13,
+            "classification": "supports-12",
+            "abandoned_replacement": null
+        },
+        {
+            "name": "beyondcode/laravel-dump-server",
+            "section": "require-dev",
+            "first_party": false,
+            "installed": "1.9.0",
+            "latest": "2.1.0",
+            "latest_released_at": "2025-02-26T08:27:59+00:00",
+            "laravel_constraints": {
+                "illuminate/console": "5.6.*|5.7.*|5.8.*|^6.0|^7.0|^8.0|^9.0|^10.0|^11.0|^12.0",
+                "illuminate/http": "5.6.*|5.7.*|5.8.*|^6.0|^7.0|^8.0|^9.0|^10.0|^11.0|^12.0",
+                "illuminate/support": "5.6.*|5.7.*|5.8.*|^6.0|^7.0|^8.0|^9.0|^10.0|^11.0|^12.0"
+            },
+            "ceiling": 12,
+            "classification": "supports-12",
+            "abandoned_replacement": null
+        },
+        {
+            "name": "bkwld/cloner",
+            "section": "require",
+            "first_party": false,
+            "installed": "3.15.0",
+            "latest": "3.15.0",
+            "latest_released_at": "2026-05-27T16:34:53+00:00",
+            "laravel_constraints": {
+                "illuminate/support": "^5.5|^6.0|^7.0|^8.0|^9.0|^10.0|^11.0|^12.0|^13.0"
+            },
+            "ceiling": 13,
+            "classification": "supports-12",
+            "abandoned_replacement": null
+        },
+        {
+            "name": "brianium/paratest",
+            "section": "require-dev",
+            "first_party": false,
+            "installed": "v7.3.2",
+            "latest": "v7.24.0",
+            "latest_released_at": "2026-08-07T13:03:48+00:00",
+            "laravel_constraints": [],
+            "ceiling": null,
+            "classification": "framework-agnostic",
+            "abandoned_replacement": null
+        },
+        {
+            "name": "bugsnag/bugsnag-laravel",
+            "section": "require",
+            "first_party": false,
+            "installed": "v2.30.0",
+            "latest": "v2.30.0",
+            "latest_released_at": "2026-04-08T12:33:28+00:00",
+            "laravel_constraints": {
+                "illuminate/contracts": "^5.0|^6.0|^7.0|^8.0|^9.0|^10.0|^11.0|^12.0|^13.0",
+                "illuminate/support": "^5.0|^6.0|^7.0|^8.0|^9.0|^10.0|^11.0|^12.0|^13.0"
+            },
+            "ceiling": 13,
+            "classification": "supports-12",
+            "abandoned_replacement": null
+        },
+        {
+            "name": "doctrine/dbal",
+            "section": "require",
+            "first_party": false,
+            "installed": "3.10.5",
+            "latest": "4.4.4",
+            "latest_released_at": "2026-07-21T14:34:40+00:00",
+            "laravel_constraints": [],
+            "ceiling": null,
+            "classification": "framework-agnostic",
+            "abandoned_replacement": null
+        },
+        {
+            "name": "fakerphp/faker",
+            "section": "require-dev",
+            "first_party": false,
+            "installed": "v1.24.1",
+            "latest": "v1.24.1",
+            "latest_released_at": "2024-11-21T13:46:39+00:00",
+            "laravel_constraints": [],
+            "ceiling": null,
+            "classification": "framework-agnostic",
+            "abandoned_replacement": null
+        },
+        {
+            "name": "genealabs/laravel-model-caching",
+            "section": "require",
+            "first_party": false,
+            "installed": "0.13.9",
+            "latest": "13.1.7",
+            "latest_released_at": "2026-08-01T15:56:33+00:00",
+            "laravel_constraints": {
+                "illuminate/cache": "^11.0|^12.0|^13.0",
+                "illuminate/config": "^11.0|^12.0|^13.0",
+                "illuminate/console": "^11.0|^12.0|^13.0",
+                "illuminate/container": "^11.0|^12.0|^13.0",
+                "illuminate/database": "^11.0|^12.0|^13.0",
+                "illuminate/http": "^11.0|^12.0|^13.0",
+                "illuminate/support": "^11.0|^12.0|^13.0"
+            },
+            "ceiling": 13,
+            "classification": "abandoned",
+            "abandoned_replacement": "mike-bronner/laravel-model-caching"
+        },
+        {
+            "name": "graham-campbell/markdown",
+            "section": "require",
+            "first_party": false,
+            "installed": "v15.3.0",
+            "latest": "v16.1.0",
+            "latest_released_at": "2026-03-19T20:52:58+00:00",
+            "laravel_constraints": {
+                "illuminate/contracts": "^10.44 || ^11.0 || ^12.0 || ^13.0",
+                "illuminate/filesystem": "^10.44 || ^11.0 || ^12.0 || ^13.0",
+                "illuminate/support": "^10.44 || ^11.0 || ^12.0 || ^13.0",
+                "illuminate/view": "^10.44 || ^11.0 || ^12.0 || ^13.0"
+            },
+            "ceiling": 13,
+            "classification": "supports-12",
+            "abandoned_replacement": null
+        },
+        {
+            "name": "guzzlehttp/guzzle",
+            "section": "require",
+            "first_party": false,
+            "installed": "7.15.1",
+            "latest": "8.0.2",
+            "latest_released_at": "2026-08-05T19:50:26+00:00",
+            "laravel_constraints": [],
+            "ceiling": null,
+            "classification": "framework-agnostic",
+            "abandoned_replacement": null
+        },
+        {
+            "name": "intervention/image",
+            "section": "require",
+            "first_party": false,
+            "installed": "2.7.2",
+            "latest": "4.2.1",
+            "latest_released_at": "2026-08-08T07:55:25+00:00",
+            "laravel_constraints": [],
+            "ceiling": null,
+            "classification": "framework-agnostic",
+            "abandoned_replacement": null
+        },
+        {
+            "name": "intervention/imagecache",
+            "section": "require",
+            "first_party": false,
+            "installed": "2.6.0",
+            "latest": "2.6.0",
+            "latest_released_at": "2023-02-25T19:40:47+00:00",
+            "laravel_constraints": {
+                "illuminate/cache": "^5.5|~6|~7|~8|~9|~10",
+                "illuminate/filesystem": "^5.5|~6|~7|~8|~9|~10"
+            },
+            "ceiling": 10,
+            "classification": "abandoned",
+            "abandoned_replacement": null
+        },
+        {
+            "name": "laracasts/flash",
+            "section": "require",
+            "first_party": false,
+            "installed": "3.2.6",
+            "latest": "3.2.6",
+            "latest_released_at": "2026-03-25T17:55:04+00:00",
+            "laravel_constraints": {
+                "illuminate/support": "~5.0|^6.0|^7.0|^8.0|^9.0|^10.0|^11.0|^12.0|^13.0"
+            },
+            "ceiling": 13,
+            "classification": "supports-12",
+            "abandoned_replacement": null
+        },
+        {
+            "name": "laravel/framework",
+            "section": "require",
+            "first_party": false,
+            "installed": "10.50.2",
+            "latest": "v13.25.0",
+            "latest_released_at": "2026-08-11T13:56:22+00:00",
+            "laravel_constraints": {
+                "laravel/framework": "(itself)"
+            },
+            "ceiling": 13,
+            "classification": "supports-12",
+            "abandoned_replacement": null
+        },
+        {
+            "name": "laravel/sanctum",
+            "section": "require",
+            "first_party": false,
+            "installed": "v3.3.3",
+            "latest": "v4.3.3",
+            "latest_released_at": "2026-06-23T18:26:55+00:00",
+            "laravel_constraints": {
+                "illuminate/console": "^11.0|^12.0|^13.0",
+                "illuminate/contracts": "^11.0|^12.0|^13.0",
+                "illuminate/database": "^11.0|^12.0|^13.0",
+                "illuminate/support": "^11.0|^12.0|^13.0"
+            },
+            "ceiling": 13,
+            "classification": "supports-12",
+            "abandoned_replacement": null
+        },
+        {
+            "name": "laravel/slack-notification-channel",
+            "section": "require",
+            "first_party": false,
+            "installed": "v2.5.0",
+            "latest": "v3.10.0",
+            "latest_released_at": "2026-07-24T20:53:54+00:00",
+            "laravel_constraints": {
+                "illuminate/http": "^9.0|^10.0|^11.0|^12.0|^13.0",
+                "illuminate/notifications": "^9.0|^10.0|^11.0|^12.0|^13.0",
+                "illuminate/support": "^9.0|^10.0|^11.0|^12.0|^13.0"
+            },
+            "ceiling": 13,
+            "classification": "supports-12",
+            "abandoned_replacement": null
+        },
+        {
+            "name": "laravel/tinker",
+            "section": "require",
+            "first_party": false,
+            "installed": "v2.11.1",
+            "latest": "v3.0.2",
+            "latest_released_at": "2026-03-17T14:54:13+00:00",
+            "laravel_constraints": {
+                "illuminate/console": "^8.0|^9.0|^10.0|^11.0|^12.0|^13.0",
+                "illuminate/contracts": "^8.0|^9.0|^10.0|^11.0|^12.0|^13.0",
+                "illuminate/support": "^8.0|^9.0|^10.0|^11.0|^12.0|^13.0"
+            },
+            "ceiling": 13,
+            "classification": "supports-12",
+            "abandoned_replacement": null
+        },
+        {
+            "name": "laravel/ui",
+            "section": "require",
+            "first_party": false,
+            "installed": "v4.6.3",
+            "latest": "v4.6.3",
+            "latest_released_at": "2026-03-17T13:41:52+00:00",
+            "laravel_constraints": {
+                "illuminate/console": "^9.21|^10.0|^11.0|^12.0|^13.0",
+                "illuminate/filesystem": "^9.21|^10.0|^11.0|^12.0|^13.0",
+                "illuminate/support": "^9.21|^10.0|^11.0|^12.0|^13.0",
+                "illuminate/validation": "^9.21|^10.0|^11.0|^12.0|^13.0"
+            },
+            "ceiling": 13,
+            "classification": "supports-12",
+            "abandoned_replacement": null
+        },
+        {
+            "name": "league/flysystem-aws-s3-v3",
+            "section": "require",
+            "first_party": false,
+            "installed": "3.35.2",
+            "latest": "3.35.2",
+            "latest_released_at": "2026-07-01T23:25:49+00:00",
+            "laravel_constraints": [],
+            "ceiling": null,
+            "classification": "framework-agnostic",
+            "abandoned_replacement": null
+        },
+        {
+            "name": "league/oauth2-client",
+            "section": "require",
+            "first_party": false,
+            "installed": "2.9.0",
+            "latest": "2.9.0",
+            "latest_released_at": "2025-11-25T22:17:17+00:00",
+            "laravel_constraints": [],
+            "ceiling": null,
+            "classification": "framework-agnostic",
+            "abandoned_replacement": null
+        },
+        {
+            "name": "league/omnipay",
+            "section": "require",
+            "first_party": false,
+            "installed": "v3.2.1",
+            "latest": "v3.2.1",
+            "latest_released_at": "2021-06-05T11:34:12+00:00",
+            "laravel_constraints": [],
+            "ceiling": null,
+            "classification": "framework-agnostic",
+            "abandoned_replacement": null
+        },
+        {
+            "name": "livewire/livewire",
+            "section": "require",
+            "first_party": false,
+            "installed": "v3.8.2",
+            "latest": "v4.4.0",
+            "latest_released_at": "2026-08-10T15:24:22+00:00",
+            "laravel_constraints": {
+                "illuminate/database": "^10.0|^11.0|^12.0|^13.0",
+                "illuminate/routing": "^10.0|^11.0|^12.0|^13.0",
+                "illuminate/support": "^10.0|^11.0|^12.0|^13.0",
+                "illuminate/validation": "^10.0|^11.0|^12.0|^13.0"
+            },
+            "ceiling": 13,
+            "classification": "supports-12",
+            "abandoned_replacement": null
+        },
+        {
+            "name": "lorisleiva/laravel-search-string",
+            "section": "require",
+            "first_party": false,
+            "installed": "v1.3.0",
+            "latest": "v1.3.0",
+            "latest_released_at": "2023-03-11T10:11:33+00:00",
+            "laravel_constraints": {
+                "illuminate/support": "^9.0|^10.0"
+            },
+            "ceiling": 10,
+            "classification": "ceiling-below",
+            "abandoned_replacement": null
+        },
+        {
+            "name": "maatwebsite/excel",
+            "section": "require",
+            "first_party": false,
+            "installed": "3.1.69",
+            "latest": "3.1.69",
+            "latest_released_at": "2026-04-30T20:03:58+00:00",
+            "laravel_constraints": {
+                "illuminate/support": "5.8.*||^6.0||^7.0||^8.0||^9.0||^10.0||^11.0||^12.0||^13.0"
+            },
+            "ceiling": 13,
+            "classification": "supports-12",
+            "abandoned_replacement": null
+        },
+        {
+            "name": "mnsami/composer-custom-directory-installer",
+            "section": "require",
+            "first_party": false,
+            "installed": "2.0.0",
+            "latest": "2.2.1",
+            "latest_released_at": "2026-05-20T07:57:55+00:00",
+            "laravel_constraints": [],
+            "ceiling": null,
+            "classification": "framework-agnostic",
+            "abandoned_replacement": null
+        },
+        {
+            "name": "mockery/mockery",
+            "section": "require-dev",
+            "first_party": false,
+            "installed": "1.6.12",
+            "latest": "1.6.12",
+            "latest_released_at": "2024-05-16T03:13:13+00:00",
+            "laravel_constraints": [],
+            "ceiling": null,
+            "classification": "framework-agnostic",
+            "abandoned_replacement": null
+        },
+        {
+            "name": "nunomaduro/collision",
+            "section": "require-dev",
+            "first_party": false,
+            "installed": "v7.12.0",
+            "latest": "v8.9.5",
+            "latest_released_at": "2026-07-15T19:09:14+00:00",
+            "laravel_constraints": [],
+            "ceiling": null,
+            "classification": "framework-agnostic",
+            "abandoned_replacement": null
+        },
+        {
+            "name": "phpunit/phpunit",
+            "section": "require-dev",
+            "first_party": false,
+            "installed": "10.5.64",
+            "latest": "13.3.0",
+            "latest_released_at": "2026-08-07T07:37:01+00:00",
+            "laravel_constraints": [],
+            "ceiling": null,
+            "classification": "framework-agnostic",
+            "abandoned_replacement": null
+        },
+        {
+            "name": "plank/laravel-mediable",
+            "section": "require",
+            "first_party": false,
+            "installed": "5.9.1",
+            "latest": "7.0.0",
+            "latest_released_at": "2026-07-13T02:44:49+00:00",
+            "laravel_constraints": {
+                "illuminate/database": "^12.0|^13.0",
+                "illuminate/filesystem": "^12.0|^13.0",
+                "illuminate/support": "^12.0|^13.0"
+            },
+            "ceiling": 13,
+            "classification": "supports-12",
+            "abandoned_replacement": null
+        },
+        {
+            "name": "riverskies/laravel-mobile-detect",
+            "section": "require",
+            "first_party": false,
+            "installed": "1.3",
+            "latest": "1.3",
+            "latest_released_at": "2017-09-02T08:11:53+00:00",
+            "laravel_constraints": [],
+            "ceiling": null,
+            "classification": "framework-agnostic",
+            "abandoned_replacement": null
+        },
+        {
+            "name": "santigarcor/laratrust",
+            "section": "require",
+            "first_party": false,
+            "installed": "7.2.1",
+            "latest": "8.5.5",
+            "latest_released_at": "2026-03-06T14:10:22+00:00",
+            "laravel_constraints": {
+                "laravel/framework": "^10.0|^11.0|^12.0|^13.0"
+            },
+            "ceiling": 13,
+            "classification": "supports-12",
+            "abandoned_replacement": null
+        },
+        {
+            "name": "sentry/sentry-laravel",
+            "section": "require",
+            "first_party": false,
+            "installed": "4.27.0",
+            "latest": "4.27.0",
+            "latest_released_at": "2026-07-15T14:47:03+00:00",
+            "laravel_constraints": {
+                "illuminate/support": "^6.0 | ^7.0 | ^8.0 | ^9.0 | ^10.0 | ^11.0 | ^12.0 | ^13.0"
+            },
+            "ceiling": 13,
+            "classification": "supports-12",
+            "abandoned_replacement": null
+        },
+        {
+            "name": "simple-icons/simple-icons",
+            "section": "require",
+            "first_party": false,
+            "installed": "9.21.0",
+            "latest": "16.28.0",
+            "latest_released_at": "2026-08-02T01:27:30+00:00",
+            "laravel_constraints": [],
+            "ceiling": null,
+            "classification": "framework-agnostic",
+            "abandoned_replacement": null
+        },
+        {
+            "name": "simshaun/recurr",
+            "section": "require",
+            "first_party": false,
+            "installed": "v5.0.3",
+            "latest": "v6.0.0",
+            "latest_released_at": "2025-10-04T10:09:28+00:00",
+            "laravel_constraints": [],
+            "ceiling": null,
+            "classification": "framework-agnostic",
+            "abandoned_replacement": null
+        },
+        {
+            "name": "spatie/laravel-ignition",
+            "section": "require-dev",
+            "first_party": false,
+            "installed": "2.9.1",
+            "latest": "2.12.0",
+            "latest_released_at": "2026-03-17T12:20:04+00:00",
+            "laravel_constraints": {
+                "illuminate/support": "^11.0|^12.0|^13.0"
+            },
+            "ceiling": 13,
+            "classification": "supports-12",
+            "abandoned_replacement": null
+        },
+        {
+            "name": "staudenmeir/belongs-to-through",
+            "section": "require",
+            "first_party": false,
+            "installed": "v2.15.1",
+            "latest": "v2.18",
+            "latest_released_at": "2026-02-28T16:25:30+00:00",
+            "laravel_constraints": {
+                "illuminate/database": "^13.0"
+            },
+            "ceiling": 13,
+            "classification": "supports-12",
+            "abandoned_replacement": null
+        },
+        {
+            "name": "staudenmeir/eloquent-has-many-deep",
+            "section": "require",
+            "first_party": false,
+            "installed": "1.19.5",
+            "latest": "v1.22.1",
+            "latest_released_at": "2026-03-14T10:53:06+00:00",
+            "laravel_constraints": {
+                "illuminate/database": "^13.0"
+            },
+            "ceiling": 13,
+            "classification": "supports-12",
+            "abandoned_replacement": null
+        },
+        {
+            "name": "symfony/http-client",
+            "section": "require",
+            "first_party": false,
+            "installed": "v6.4.42",
+            "latest": "v8.1.4",
+            "latest_released_at": "2026-08-06T21:11:24+00:00",
+            "laravel_constraints": [],
+            "ceiling": null,
+            "classification": "framework-agnostic",
+            "abandoned_replacement": null
+        },
+        {
+            "name": "symfony/mailgun-mailer",
+            "section": "require",
+            "first_party": false,
+            "installed": "v6.4.42",
+            "latest": "v8.1.4",
+            "latest_released_at": "2026-07-31T12:43:13+00:00",
+            "laravel_constraints": [],
+            "ceiling": null,
+            "classification": "framework-agnostic",
+            "abandoned_replacement": null
+        },
+        {
+            "name": "symfony/postmark-mailer",
+            "section": "require",
+            "first_party": false,
+            "installed": "v6.4.41",
+            "latest": "v8.1.0",
+            "latest_released_at": "2026-05-29T05:06:50+00:00",
+            "laravel_constraints": [],
+            "ceiling": null,
+            "classification": "framework-agnostic",
+            "abandoned_replacement": null
+        },
+        {
+            "name": "symfony/sendgrid-mailer",
+            "section": "require",
+            "first_party": false,
+            "installed": "v6.4.24",
+            "latest": "v8.1.4",
+            "latest_released_at": "2026-08-01T16:08:50+00:00",
+            "laravel_constraints": [],
+            "ceiling": null,
+            "classification": "framework-agnostic",
+            "abandoned_replacement": null
+        },
+        {
+            "name": "wnx/laravel-stats",
+            "section": "require-dev",
+            "first_party": false,
+            "installed": "v2.13.2",
+            "latest": "v2.20.0",
+            "latest_released_at": "2026-07-29T06:50:00+00:00",
+            "laravel_constraints": {
+                "illuminate/console": "^12.0 | ^13.0",
+                "illuminate/support": "^12.0 | ^13.0"
+            },
+            "ceiling": 13,
+            "classification": "supports-12",
+            "abandoned_replacement": null
+        }
+    ]
+}

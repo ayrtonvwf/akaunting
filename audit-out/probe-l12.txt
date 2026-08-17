@@ -1,0 +1,111 @@
+Loading composer repositories with package information
+Updating dependencies
+Your requirements could not be resolved to an installable set of packages.
+
+  Problem 1
+    - Root composer.json requires laravel/framework ^12, found laravel/framework[v12.0.0, ..., v12.66.0] but these were not loaded, likely because it conflicts with another require.
+  Problem 2
+    - akaunting/laravel-firewall is locked to version 2.3.0 and an update of this package was not requested.
+    - akaunting/laravel-firewall 2.3.0 requires laravel/framework ^9.0|^10.0|^11.0|^12.0 -> found laravel/framework[v9.0.0, ..., v9.52.22, v10.0.0, ..., v10.50.3, v11.0.0, ..., v11.55.1, v12.0.0, ..., v12.66.0] but these were not loaded, likely because it conflicts with another require.
+  Problem 3
+    - akaunting/laravel-language is locked to version 1.0.22 and an update of this package was not requested.
+    - akaunting/laravel-language 1.0.22 requires laravel/framework >=5.4.0 -> found laravel/framework[v5.4.0, ..., v5.8.38, v6.0.0, ..., v6.20.45, v7.0.0, ..., v7.30.7, v8.0.0, ..., v8.83.29, v9.0.0, ..., v9.52.22, v10.0.0, ..., v10.50.3, v11.0.0, ..., v11.55.1, v12.0.0, ..., v12.66.0, v13.0.0, ..., v13.25.0] but these were not loaded, likely because it conflicts with another require.
+  Problem 4
+    - akaunting/laravel-mutable-observer is locked to version 2.0.1 and an update of this package was not requested.
+    - akaunting/laravel-mutable-observer 2.0.1 requires laravel/framework ^9.0|^10.0 -> found laravel/framework[v9.0.0, ..., v9.52.22, v10.0.0, ..., v10.50.3] but it conflicts with your root composer.json require (^12).
+  Problem 5
+    - akaunting/laravel-setting is locked to version 1.2.9 and an update of this package was not requested.
+    - akaunting/laravel-setting 1.2.9 requires laravel/framework >=5.3 -> found laravel/framework[v5.3.0, ..., v5.8.38, v6.0.0, ..., v6.20.45, v7.0.0, ..., v7.30.7, v8.0.0, ..., v8.83.29, v9.0.0, ..., v9.52.22, v10.0.0, ..., v10.50.3, v11.0.0, ..., v11.55.1, v12.0.0, ..., v12.66.0, v13.0.0, ..., v13.25.0] but these were not loaded, likely because it conflicts with another require.
+  Problem 6
+    - akaunting/laravel-sortable is locked to version 2.0.2 and an update of this package was not requested.
+    - akaunting/laravel-sortable 2.0.2 requires laravel/framework ^9.0|^10.0 -> found laravel/framework[v9.0.0, ..., v9.52.22, v10.0.0, ..., v10.50.3] but it conflicts with your root composer.json require (^12).
+  Problem 7
+    - akaunting/laravel-version is locked to version 1.0.4 and an update of this package was not requested.
+    - akaunting/laravel-version 1.0.4 requires laravel/framework >=5.2.0 -> found laravel/framework[v5.2.0, ..., v5.8.38, v6.0.0, ..., v6.20.45, v7.0.0, ..., v7.30.7, v8.0.0, ..., v8.83.29, v9.0.0, ..., v9.52.22, v10.0.0, ..., v10.50.3, v11.0.0, ..., v11.55.1, v12.0.0, ..., v12.66.0, v13.0.0, ..., v13.25.0] but these were not loaded, likely because it conflicts with another require.
+  Problem 8
+    - santigarcor/laratrust is locked to version 7.2.1 and an update of this package was not requested.
+    - santigarcor/laratrust 7.2.1 requires laravel/framework ~6.0|~7.0|~8.0|^9.0|^10.0 -> found laravel/framework[v6.0.0, ..., v6.20.45, v7.0.0, ..., v7.30.7, v8.0.0, ..., v8.83.29, v9.0.0, ..., v9.52.22, v10.0.0, ..., v10.50.3] but it conflicts with your root composer.json require (^12).
+
+akaunting/akaunting                          dev-master requires         laravel/framework (^10.0)                                        
+akaunting/laravel-menu                       3.1.2      requires         illuminate/config (^9.0|^10.0)                                   
+akaunting/laravel-menu                       3.1.2      requires         illuminate/support (^9.0|^10.0)                                  
+akaunting/laravel-menu                       3.1.2      requires         illuminate/view (^9.0|^10.0)                                     
+akaunting/laravel-money                      5.2.2      requires         illuminate/contracts (^9.0|^10.0|^11.0)                          
+akaunting/laravel-money                      5.2.2      requires         illuminate/support (^9.0|^10.0|^11.0)                            
+akaunting/laravel-money                      5.2.2      requires         illuminate/validation (^9.0|^10.0|^11.0)                         
+akaunting/laravel-money                      5.2.2      requires         illuminate/view (^9.0|^10.0|^11.0)                               
+akaunting/laravel-mutable-observer           2.0.1      requires         laravel/framework (^9.0|^10.0)                                   
+akaunting/laravel-sortable                   2.0.2      requires         laravel/framework (^9.0|^10.0)                                   
+barryvdh/laravel-dompdf                      v2.2.0     requires         illuminate/support (^6|^7|^8|^9|^10|^11)                         
+barryvdh/laravel-ide-helper                  v2.15.1    requires         illuminate/console (^9 || ^10)                                   
+barryvdh/laravel-ide-helper                  v2.15.1    requires         illuminate/filesystem (^9 || ^10)                                
+barryvdh/laravel-ide-helper                  v2.15.1    requires         illuminate/support (^9 || ^10)                                   
+beyondcode/laravel-dump-server               1.9.0      requires         illuminate/console (5.6.*|5.7.*|5.8.*|^6.0|^7.0|^8.0|^9.0|^10.0) 
+beyondcode/laravel-dump-server               1.9.0      requires         illuminate/http (5.6.*|5.7.*|5.8.*|^6.0|^7.0|^8.0|^9.0|^10.0)    
+beyondcode/laravel-dump-server               1.9.0      requires         illuminate/support (5.6.*|5.7.*|5.8.*|^6.0|^7.0|^8.0|^9.0|^10.0) 
+genealabs/laravel-model-caching              0.13.9     requires         illuminate/cache (^10.0)                                         
+genealabs/laravel-model-caching              0.13.9     requires         illuminate/config (^10.0)                                        
+genealabs/laravel-model-caching              0.13.9     requires         illuminate/console (^10.0)                                       
+genealabs/laravel-model-caching              0.13.9     requires         illuminate/container (^10.0)                                     
+genealabs/laravel-model-caching              0.13.9     requires         illuminate/database (^10.0)                                      
+genealabs/laravel-model-caching              0.13.9     requires         illuminate/http (^10.0)                                          
+genealabs/laravel-model-caching              0.13.9     requires         illuminate/support (^10.0)                                       
+genealabs/laravel-pivot-events               10.0.1     requires         illuminate/database (^8.0|^9.0|^10.0)                            
+genealabs/laravel-pivot-events               10.0.1     requires         illuminate/support (^8.0|^9.0|^10.0)                             
+graham-campbell/markdown                     v15.3.0    requires         illuminate/contracts (^8.75 || ^9.0 || ^10.0 || ^11.0)           
+graham-campbell/markdown                     v15.3.0    requires         illuminate/filesystem (^8.75 || ^9.0 || ^10.0 || ^11.0)          
+graham-campbell/markdown                     v15.3.0    requires         illuminate/support (^8.75 || ^9.0 || ^10.0 || ^11.0)             
+graham-campbell/markdown                     v15.3.0    requires         illuminate/view (^8.75 || ^9.0 || ^10.0 || ^11.0)                
+intervention/imagecache                      2.6.0      requires         illuminate/cache (^5.5|~6|~7|~8|~9|~10)                          
+intervention/imagecache                      2.6.0      requires         illuminate/filesystem (^5.5|~6|~7|~8|~9|~10)                     
+laravel/prompts                              v0.1.25    requires         illuminate/collections (^10.0|^11.0)                             
+laravel/sanctum                              v3.3.3     requires         illuminate/console (^9.21|^10.0)                                 
+laravel/sanctum                              v3.3.3     requires         illuminate/contracts (^9.21|^10.0)                               
+laravel/sanctum                              v3.3.3     requires         illuminate/database (^9.21|^10.0)                                
+laravel/sanctum                              v3.3.3     requires         illuminate/support (^9.21|^10.0)                                 
+laravel/slack-notification-channel           v2.5.0     requires         illuminate/notifications (~5.8.0|^6.0|^7.0|^8.0|^9.0|^10.0)      
+laravelcollective/html                       v6.4.1     requires         illuminate/http (^6.0|^7.0|^8.0|^9.0|^10.0)                      
+laravelcollective/html                       v6.4.1     requires         illuminate/routing (^6.0|^7.0|^8.0|^9.0|^10.0)                   
+laravelcollective/html                       v6.4.1     requires         illuminate/session (^6.0|^7.0|^8.0|^9.0|^10.0)                   
+laravelcollective/html                       v6.4.1     requires         illuminate/support (^6.0|^7.0|^8.0|^9.0|^10.0)                   
+laravelcollective/html                       v6.4.1     requires         illuminate/view (^6.0|^7.0|^8.0|^9.0|^10.0)                      
+lorisleiva/laravel-search-string             v1.3.0     requires         illuminate/support (^9.0|^10.0)                                  
+nunomaduro/collision                         v7.12.0    conflicts        laravel/framework (>=11.0.0)                                     
+plank/laravel-mediable                       5.9.1      requires         illuminate/database (^8.83.3|^9.0|^10.0)                         
+plank/laravel-mediable                       5.9.1      requires         illuminate/filesystem (^8.83.3|^9.0|^10.0)                       
+plank/laravel-mediable                       5.9.1      requires         illuminate/support (^8.83.3|^9.0|^10.0)                          
+santigarcor/laratrust                        7.2.1      requires         laravel/framework (~6.0|~7.0|~8.0|^9.0|^10.0)                    
+staudenmeir/belongs-to-through               v2.15.1    requires         illuminate/database (^10.0)                                      
+staudenmeir/eloquent-has-many-deep           1.19.5     requires         illuminate/database (^10.0)                                      
+staudenmeir/eloquent-has-many-deep-contracts v1.1       requires         illuminate/database (^10.0)                                      
+wnx/laravel-stats                            v2.13.2    requires         illuminate/console (^9.0 | ^10.0 | ^11.0)                        
+wnx/laravel-stats                            v2.13.2    requires         illuminate/support (^9.0 | ^10.0| ^11.0)                         
+laravel/framework                            v12.0.0    requires         laravel/prompts (^0.3.0)                                         
+akaunting/akaunting                          dev-master does not require laravel/prompts (but v0.1.25 is installed)                       
+laravel/framework                            v12.0.0    requires         nesbot/carbon (^3.8.4)                                           
+akaunting/akaunting                          dev-master does not require nesbot/carbon (but 2.73.0 is installed)                          
+laravel/framework                            v12.0.0    requires         nunomaduro/termwind (^2.0)                                       
+akaunting/akaunting                          dev-master does not require nunomaduro/termwind (but v1.17.0 is installed)                   
+laravel/framework                            v12.0.0    requires         symfony/console (^7.2.0)                                         
+akaunting/akaunting                          dev-master does not require symfony/console (but v6.4.42 is installed)                       
+laravel/framework                            v12.0.0    requires         symfony/error-handler (^7.2.0)                                   
+akaunting/akaunting                          dev-master does not require symfony/error-handler (but v6.4.36 is installed)                 
+laravel/framework                            v12.0.0    requires         symfony/finder (^7.2.0)                                          
+akaunting/akaunting                          dev-master does not require symfony/finder (but v6.4.42 is installed)                        
+laravel/framework                            v12.0.0    requires         symfony/http-foundation (^7.2.0)                                 
+akaunting/akaunting                          dev-master does not require symfony/http-foundation (but v6.4.42 is installed)               
+laravel/framework                            v12.0.0    requires         symfony/http-kernel (^7.2.0)                                     
+akaunting/akaunting                          dev-master does not require symfony/http-kernel (but v6.4.42 is installed)                   
+laravel/framework                            v12.0.0    requires         symfony/mailer (^7.2.0)                                          
+akaunting/akaunting                          dev-master does not require symfony/mailer (but v6.4.40 is installed)                        
+laravel/framework                            v12.0.0    requires         symfony/mime (^7.2.0)                                            
+akaunting/akaunting                          dev-master does not require symfony/mime (but v6.4.41 is installed)                          
+laravel/framework                            v12.0.0    requires         symfony/process (^7.2.0)                                         
+akaunting/akaunting                          dev-master does not require symfony/process (but v6.4.41 is installed)                       
+laravel/framework                            v12.0.0    requires         symfony/routing (^7.2.0)                                         
+akaunting/akaunting                          dev-master does not require symfony/routing (but v6.4.41 is installed)                       
+laravel/framework                            v12.0.0    requires         symfony/uid (^7.2.0)                                             
+akaunting/akaunting                          dev-master does not require symfony/uid (but v6.4.32 is installed)                           
+laravel/framework                            v12.0.0    requires         symfony/var-dumper (^7.2.0)                                      
+akaunting/akaunting                          dev-master does not require symfony/var-dumper (but v6.4.42 is installed)                    
+Not finding what you were looking for? Try calling `composer require "laravel/framework:12" --dry-run` to get another view on the problem.
