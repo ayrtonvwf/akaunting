@@ -323,9 +323,6 @@ app/Http/Resources/
 ## Testing & Validation
 
 ```bash
-# Test API response structure
-php artisan test tests/Feature/Api/Document/DocumentsTest.php
-
-# Validate resource transformation
-php artisan test --filter=DocumentResourceTest
+# Test document feature coverage (no dedicated resource-transformation tests exist)
+php artisan test tests/Feature/Document/
 ```

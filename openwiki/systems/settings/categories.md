@@ -247,7 +247,7 @@ Typically restricted to company owner/admin.
 |---------|------|
 | Category model | `app/Models/Setting/Category.php` |
 | Settings controller | `app/Http/Controllers/Settings/Categories.php` |
-| Request validation | `app/Http/Requests/Settings/Category.php` |
+| Request validation | `app/Http/Requests/Setting/Category.php` |
 
 ---
 

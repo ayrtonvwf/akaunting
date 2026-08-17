@@ -4,12 +4,46 @@ title: Module System - Built-in & Third-Party Extensions
 description: Modular architecture for extending Akaunting with plugins, modules, and custom functionality.
 tags: [modules, extensions, plugins, extensibility]
 openwiki:
-  source_paths: [modules, app/Traits/Modules.php]
+  source_paths: [modules, composer.json, config/module.php, overrides/akaunting/laravel-module/Commands, app/Console/Commands/UninstallModule.php, app/Traits/Modules.php, app/Traits/SiteApi.php, app/Utilities/ModuleActivator.php, app/Http/Middleware/IdentifyCompany.php, app/Providers/Queue.php]
 ---
 
 # Module System - Built-in & Third-Party Extensions
 
 The module system enables extending Akaunting with built-in and third-party modules. Modules are full Laravel applications with their own routes, controllers, models, and views.
+
+## How Modules Are Registered
+
+Module registration is not implemented in this application's own code — it runs through the vendor package `akaunting/laravel-module` (`^4.0`, declared in `composer.json`), with three repository-specific integration points:
+
+**1. Composer `installer-paths`** (`composer.json`) places the two bundled first-party modules at their expected directories when their Composer packages are installed:
+
+```json
+"installer-paths": {
+    "modules/OfflinePayments": ["akaunting/module-offline-payments"],
+    "modules/PaypalStandard": ["akaunting/module-paypal-standard"]
+}
+```
+
+**2. `config/module.php`** configures the vendor package: the `Modules` namespace, the `modules/` and public asset paths, and the stub files used when scaffolding a new module.
+
+**3. Command overrides in `overrides/akaunting/laravel-module/Commands/`** replace the vendor package's install/enable/disable/delete command implementations. `composer.json` autoloads them under the `Akaunting\Module\Commands\` namespace, and its `exclude-from-classmap` list explicitly excludes the four corresponding vendor files (`vendor/akaunting/laravel-module/src/Commands/DeleteCommand.php`, `DisableCommand.php`, `EnableCommand.php`, `InstallCommand.php`) so the repository's versions run instead. Their verified signatures:
+
+| Command | Signature |
+|---------|-----------|
+| Install | `module:install {alias} {company} {locale=en-GB}` |
+| Enable | `module:enable {alias} {company} {locale=en-GB}` |
+| Disable | `module:disable {alias} {company} {locale=en-GB}` |
+| Delete | `module:delete {alias} {company} {locale=en-GB}` |
+
+Note these commands take a `company` argument — module installation/enablement is scoped per company, not global.
+
+A fifth command, `module:uninstall`, is real but lives outside the overrides mechanism above — it's the application's own command, `app/Console/Commands/UninstallModule.php`, autoloaded via `app/Console/Kernel.php`'s `$this->load(__DIR__ . '/Commands')`, not a vendor-package override. Its signature is the same shape as the others: `module:uninstall {alias} {company} {locale=en-GB}`.
+
+### `app/Traits/Modules.php` is mostly the App Store API client — but not entirely
+
+Most of this trait is **not** part of how modules get installed. Reading it shows methods like `checkToken()`, `getModules()`, `getModule()`, `getModuleReviews()`, `getModuleTestimonials()`, and `getBannersOfModules()`, all built on `App\Traits\SiteApi` (which it `use`s). Together these implement the **Akaunting App Store HTTP API client**: browsing/searching store listings, fetching reviews and testimonials, checking API tokens, and loading store banners/suggestions/notifications from `https://api.akaunting.com/`. This part is the data source behind the in-app "Apps"/App Store screens, not the mechanism that discovers or installs a module on disk.
+
+One method in the same trait is different: `registerModules()` (`app/Traits/Modules.php:670`) calls `app(\Akaunting\Module\Contracts\ActivatorInterface::class)->register()`, which resolves to `app/Utilities/ModuleActivator.php`'s `register()` — that method loads module state and runs `app()->register(\Akaunting\Module\Providers\Bootstrap::class, true)`. `registerModules()` is called from `app/Http/Middleware/IdentifyCompany.php:54` on every web request and from `app/Providers/Queue.php:78` for queued jobs. So while **installation** (getting a module's files onto disk and its Composer package registered) is entirely the vendor package's job — see "How Modules Are Registered" above — **activation** (bootstrapping an already-installed module's service provider on each request/job so its routes, views and bindings are live) runs through this trait's `registerModules()` on every request, not through `akaunting/laravel-module` directly. The two are complementary stages, not competing mechanisms: `laravel-module` + its overridden commands get a module onto disk and toggle its enabled state; `Modules::registerModules()` is what makes an enabled module's code actually run on a given request.
 
 ## Module Architecture
 
@@ -153,44 +187,19 @@ class OfflinePaymentController extends Controller
 4. Enable module
 5. Configure settings
 
-### From Composer
+### First-Party Bundled Modules
 
-```bash
-composer require akaunting/module-name
-php artisan module:discover
-php artisan module:install module-name
-```
-
-### Manually
-
-1. Download module
-2. Extract to `modules/ModuleName/`
-3. Run `php artisan module:discover`
-4. Run `php artisan module:install module-name`
+The two modules shipped with this repository, OfflinePayments and PaypalStandard, are pulled in as Composer packages (`akaunting/module-offline-payments`, `akaunting/module-paypal-standard`) and placed at `modules/OfflinePayments/` and `modules/PaypalStandard/` via the `installer-paths` entries in `composer.json` (see "How Modules Are Registered" above).
 
 ## Module Commands
 
+See "How Modules Are Registered" above for the verified command signatures (`module:install`, `module:enable`, `module:disable`, `module:delete`, `module:uninstall`), all of which take `{alias} {company} {locale=en-GB}`. For example:
+
 ```bash
-# List all modules
-php artisan module:list
-
-# Install module
-php artisan module:install offline-payments
-
-# Enable module
-php artisan module:enable offline-payments
-
-# Disable module
-php artisan module:disable offline-payments
-
-# Update module
-php artisan module:update offline-payments
-
-# Uninstall module
-php artisan module:uninstall offline-payments
-
-# Generate new module
-php artisan make:module MyModule
+php artisan module:install offline-payments 1
+php artisan module:enable offline-payments 1
+php artisan module:disable offline-payments 1
+php artisan module:uninstall offline-payments 1
 ```
 
 ## Module File Structure
@@ -379,6 +388,8 @@ Modules define their own permissions:
 
 ## Creating Custom Module
 
+The steps below illustrate building a new, from-scratch module (not one of the two shipped with this repository), following the `akaunting/laravel-module` package's documented conventions. Unlike the verified `module:install` / `module:enable` / `module:disable` / `module:delete` signatures above, `make:module` itself is **unverified in this repo** — there is no local `vendor/` install to confirm it against (the same reason `make:module MyModule` was dropped from the "Module Commands" list above). Treat this whole section as an illustrative walkthrough, not a confirmed command reference.
+
 ### 1. Generate Module Scaffolding
 
 ```bash
@@ -388,7 +399,6 @@ php artisan make:module PaymentGateway
 ### 2. Create Module Structure
 
 ```bash
-cd modules/PaymentGateway
 mkdir -p Http/Controllers Models Routes Resources/views
 touch module.json composer.json
 ```
@@ -507,22 +517,16 @@ class OfflinePaymentTest extends TestCase
 
 ## Source Map
 
-```
-modules/
-├─ OfflinePayments/
-├─ PaypalStandard/
-└─ {CustomModule}/
-   ├─ Http/Controllers/
-   ├─ Models/
-   ├─ Routes/
-   ├─ Resources/views/
-   ├─ Database/Migrations/
-   ├─ Tests/
-   ├─ module.json
-   └─ composer.json
-
-app/Traits/Modules.php
-```
+| Concept | File |
+|---------|------|
+| Bundled modules | `modules/OfflinePayments/`, `modules/PaypalStandard/` |
+| Vendor module package dependency | `composer.json` (`akaunting/laravel-module`) |
+| Bundled-module install locations | `composer.json` (`extra.installer-paths`) |
+| Module package/namespace/asset configuration | `config/module.php` |
+| Install/enable/disable/delete command overrides | `overrides/akaunting/laravel-module/Commands/` |
+| Uninstall command (app-owned, not an override) | `app/Console/Commands/UninstallModule.php` |
+| Akaunting App Store API client | `app/Traits/Modules.php` (uses `app/Traits/SiteApi.php`) |
+| Per-request module activation | `app/Traits/Modules.php::registerModules()`, called from `app/Http/Middleware/IdentifyCompany.php:54` and `app/Providers/Queue.php:78`, resolving to `app/Utilities/ModuleActivator.php::register()` |
 
 ## Resources
 

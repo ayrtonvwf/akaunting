@@ -65,6 +65,12 @@ Route::post('/invoices', [InvoiceController::class, 'store'])
     ->middleware('permission:create-sales-invoices');
 ```
 
+The `permission` middleware alias is registered in `app/Http/Kernel.php:197`:
+
+```php
+'permission' => \Laratrust\Middleware\LaratrustPermission::class,
+```
+
 **When request arrives**:
 
 ```
@@ -365,10 +371,10 @@ if (Gate::allows('send-invoice', $invoice)) {
 | Permission model | `app/Models/Auth/Permission.php` |
 | Role model | `app/Models/Auth/Role.php` |
 | User model | `app/Models/Auth/User.php` |
-| Permission middleware | `\Laratrust\Middleware\LaratrustPermission` (via `config/Kernel.php` alias) |
-| RBAC integration | `app/Models/Auth/Traits/LaratrustUserTrait` |
+| Permission middleware | `\Laratrust\Middleware\LaratrustPermission` (aliased in `app/Http/Kernel.php:197`) |
+| RBAC integration | `Laratrust\Traits\LaratrustUserTrait` (vendor trait, used via `app/Models/Auth/User.php:19`) |
 | Config | `config/type.php` (permission key) |
-| Tests | `tests/Feature/Auth/Permissions*.php` |
+| Tests | `tests/Feature/Auth/UsersTest.php` |
 
 ## Related Pages
 

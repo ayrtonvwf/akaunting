@@ -491,10 +491,6 @@ Add to `config/type.php` and use in middleware/policies.
 
 Create via seeder or admin panel; attach permissions via pivot.
 
-### Custom Policy
-
-Create policy class in `app/Policies/`, authorize in controller.
-
 ### Custom Guards
 
 Additional auth guards can be defined in `config/auth.php` for special scenarios (e.g., API-only).

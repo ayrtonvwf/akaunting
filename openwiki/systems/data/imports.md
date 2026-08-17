@@ -417,19 +417,6 @@ Console/Commands/
 └─ Import*.php
 ```
 
-## Testing & Validation
-
-```bash
-# Test import pipeline
-php artisan test tests/Feature/Import/
-
-# Test document import
-php artisan test tests/Feature/Import/ImportDocumentsTest.php
-
-# Test import validation
-php artisan test tests/Feature/Import/ImportValidationTest.php
-```
-
 ## Common Patterns
 
 ### Import with error recovery

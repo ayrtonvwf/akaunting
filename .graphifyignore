@@ -2,7 +2,9 @@
 !app/
 !app/**
 !modules/
-!modules/**
+!modules/**/
+!modules/**/*.php
+!modules/**/composer.json
 !config/
 !config/**
 !routes/

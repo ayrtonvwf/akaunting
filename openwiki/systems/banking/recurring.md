@@ -229,7 +229,7 @@ DELETE /api/transactions/{id}                         – Delete recurring
 
 ## Testing
 
-**Feature tests**: `/tests/Feature/Banking/RecurringTransactions.php`
+**Feature tests**: `/tests/Feature/Banking/TransactionsTest.php`
 
 Key test cases:
 - Create recurring income/expense

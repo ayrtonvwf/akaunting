@@ -179,4 +179,20 @@
 
 ---
 
+## Manual Correction Pass — 2026-08-12
+
+**Type**: Manual correction pass (not a generator run)
+**Source**: `specs/northstar/OPENWIKI-GRAPHIFY-AUDIT.md`
+
+A verified dead-citation list from the audit above was applied by hand: cited paths that do not exist on disk were replaced with the correct real path where one was identified, or the citation (and, where it was the sole content of a list row/bullet, the row/bullet itself) was removed where no real equivalent exists. Fabricated APIs and code examples with no equivalent in this repository or its dependencies (e.g. an invented `Illuminate\Testing\Benchmark\Benchmark`, `assertGreater()`, `dumpSql()`, `ray()`, `CurrencyService::convert()`, a fabricated Vue Router/Vuex entry point, a fabricated Livewire contact-form view) were removed rather than replaced with guesses. Citations already correct, changelog entries, and known glob-truncation artifacts (e.g. `Account*.php`-style globs) were left untouched.
+
+**Pages changed**:
+- `testing.md` — corrected the test-directory tree (previously showed 4 files; the repository has 36 `*Test.php` files across 12 `tests/Feature/` subdirectories), removed the five fabricated APIs and their dependent examples, corrected the CI test command (`php artisan test --parallel`, not `--coverage` — `phpunit.xml` has no `<coverage>` element) and the primary seeder citation.
+- `workflows/permissions-workflow.md` — corrected three dead Source Map citations, noted `LaratrustUserTrait` is a vendor trait rather than a repo path, and added the `permission` middleware alias registration site (`app/Http/Kernel.php:197`).
+- `workflows/invoice-workflow.md` — corrected all eight occurrences of the nonexistent `/admin/` route prefix to the real `{company_id}/` prefix (verified at `app/Providers/Route.php:57-60`), and corrected the signed-invoice route's controller method (`Portal\Invoices@signed`, not `@show`).
+- `systems/modules/overview.md` — corrected the mischaracterization of `app/Traits/Modules.php` as the module-registration mechanism (it is the Akaunting App Store HTTP API client, built on `app/Traits/SiteApi.php`); added a verified "How Modules Are Registered" section grounded in `composer.json` (`akaunting/laravel-module`, `installer-paths`), `config/module.php`, and `overrides/akaunting/laravel-module/Commands/`; corrected `openwiki.source_paths` frontmatter; removed unverifiable/placeholder command and path examples.
+- `systems/api/overview.md`, `systems/api/responses.md`, `systems/auth/overview.md`, `systems/banking/reconciliation.md`, `systems/banking/recurring.md`, `systems/banking/transactions.md`, `systems/banking/transfers.md`, `systems/common/contacts.md`, `systems/common/items.md`, `systems/data/exports.md`, `systems/data/imports.md`, `systems/documents/invoices.md`, `systems/documents/recurring.md`, `systems/documents/totals.md`, `systems/frontend/overview.md`, `systems/frontend/tailwind-styles.md`, `systems/http/livewire.md`, `systems/http/resources.md`, `systems/jobs/auth-jobs.md`, `systems/jobs/banking-jobs.md`, `systems/reports.md`, `systems/settings/categories.md`, `systems/settings/taxes.md`, `systems/traits/business-logic-traits.md`, `systems/traits/document-traits.md`, `systems/traits/overview.md` — dead test/asset/request-class citations replaced with the correct real path, or removed where no real equivalent exists.
+
+---
+
 *This wiki provides comprehensive, source-grounded documentation of the Akaunting accounting software, enabling developers and AI agents to understand, navigate, and safely modify the codebase.*

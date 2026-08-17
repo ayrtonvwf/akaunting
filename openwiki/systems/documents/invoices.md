@@ -319,7 +319,7 @@ $duplicate = $this->dispatch(new DuplicateDocument($invoice));
 
 ## Testing
 
-**Feature tests**: `/tests/Feature/Documents/Invoices.php`
+**Feature tests**: `/tests/Feature/Sales/InvoicesTest.php`
 
 Key test cases:
 - Create invoice with items and taxes

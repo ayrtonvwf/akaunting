@@ -353,10 +353,10 @@ app/Jobs/Auth/
 php artisan test tests/Feature/Auth/
 
 # Test specific job
-php artisan test tests/Feature/Auth/CreateUserTest.php
+php artisan test tests/Feature/Auth/UsersTest.php
 
 # Test permission checking
-php artisan test tests/Feature/Auth/PermissionTest.php
+php artisan test tests/Feature/Auth/UsersTest.php
 ```
 
 ## Common Patterns

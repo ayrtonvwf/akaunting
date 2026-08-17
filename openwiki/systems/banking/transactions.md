@@ -379,7 +379,7 @@ $transaction = $this->dispatch(new CreateTransaction(
 
 ## Testing
 
-**Feature tests**: `/tests/Feature/Banking/Transactions.php`
+**Feature tests**: `/tests/Feature/Banking/TransactionsTest.php`
 
 Key test cases:
 - Create income transaction
