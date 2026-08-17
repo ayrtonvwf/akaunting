@@ -280,9 +280,11 @@ first.
 - **The Laravel 11 skeleton migration is optional, not required.** The plan states Ch3 must collapse
   `app/Console/Kernel.php` and `app/Http/Kernel.php` into `bootstrap/app.php`. Laravel's 11 upgrade
   guide explicitly *recommends against* migrating an existing application's structure, and heads the
-  whole guide *Estimated Upgrade Time: 15 Minutes*. `AUDIT.md` carries the correction; the plan was
-  left as-is by the author's decision — so **anyone reading `PLAN.md` without `AUDIT.md` still gets
-  the wrong answer.**
+  whole guide *Estimated Upgrade Time: 15 Minutes*. `AUDIT.md` carries the correction, and the plan
+  was initially left as-is by the author's decision. **`PLAN.md` has since been corrected** in all
+  three places that carried the error — the extension-surface paragraph, the Ch3 Rector section, and
+  the chapter's *Exercises* line — so it can now be read on its own. Note that `AUDIT.md` §5 step 9
+  still describes the plan as carrying the error, which was true when the audit was written.
 - **Removing that false cost exposed the real one.** With the skeleton migration priced out, what
   remains on the 10 → 11 High Impact list is: PHP 8.2 required, 6 `->change()` calls that must now
   restate every modifier (silent and data-destructive if missed), **38 float/double migration
@@ -331,10 +333,11 @@ audit makes itself.
 
 ### 7.1 Immediate — before any code
 
-- **Fix `PLAN.md`.** The audit found the plan wrongly treats the Laravel 11 skeleton migration as
-  required, wrote the correction into `AUDIT.md`, and left the plan uncorrected by decision. That
-  leaves a live trap: anyone reading `PLAN.md` alone budgets for work upstream advises against. The
-  cheapest fix in the backlog.
+- ~~**Fix `PLAN.md`.**~~ **Done.** The audit found the plan wrongly treats the Laravel 11 skeleton
+  migration as required, wrote the correction into `AUDIT.md`, and initially left the plan
+  uncorrected. `PLAN.md` now carries the correction in all three affected places, and the Ch3 section
+  states what the High Impact work actually is — the 38 float/double columns, the 6 `->change()`
+  calls, and the Sanctum middleware retarget — in place of the skeleton collapse.
 - **Decide the `akaunting/laravel-menu` disposition.** §5 step 3 says start earliest — not because the
   work is slow but because the fork option *needs a home and a maintenance owner decided before it is
   used*. A human decision with lead time, parallelisable with everything else.
@@ -402,5 +405,8 @@ start by checking whether the vendor has released for 13 since.
   shows waiting buys nothing: the vendor releases actively for everything except the one package that
   blocks. But rerunning `ceilings.php` is nearly free, so re-measuring before Ch3 starts is worth
   doing regardless of the wait decision.
-- **Anyone reading `PLAN.md`** should read §5 of `AUDIT.md` alongside it for as long as the
-  skeleton-migration error remains in the plan.
+- **`PLAN.md` still carries two other stale figures** that Ch1 corrected and this pass did not touch,
+  since both are narrower than the skeleton error and neither changes a schedule: it says twelve
+  first-party `akaunting/*` packages where there are **13**, and its suite baseline (34 / 213 / 179,
+  measured 2026-08-05) has moved to 37 / 232 / 494. Worth a follow-up sweep rather than a separate
+  chapter.

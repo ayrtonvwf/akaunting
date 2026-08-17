@@ -130,9 +130,12 @@ rule out touching functionality. Invoices, bills, reconciliation and the chart o
 exactly what they mean today when Ch3 finishes. A framework upgrade does not move the domain.
 
 **The extension-surface half can, and that is worth saying out loud.** Module registration, service
-providers and `module.json` are code-adjacent, and Ch3 collapses `app/Console/Kernel.php` and
-`app/Http/Kernel.php` into `bootstrap/app.php` in a codebase with its own provider and module
-layering. That is exactly the surface that moves. So it gets one revisit at the end of Ch3, which
+providers and `module.json` are code-adjacent, and they rest on framework bootstrapping that a major
+upgrade disturbs: Sanctum 4 retargets middleware this application overrides, and the bundled modules
+register providers against whatever the framework major expects. (An earlier version of this
+paragraph said Ch3 collapses `app/Console/Kernel.php` and `app/Http/Kernel.php` into
+`bootstrap/app.php`. Ch1 corrected that — the migration is optional and Ch3 does not plan it. See
+`AUDIT.md` §5 step 9.) That is still exactly the surface that moves. So it gets one revisit at the end of Ch3, which
 makes it the first real test of whether tiering by provenance actually helps: the half that could not
 drift will not have, and the half that could will show where.
 
@@ -390,15 +393,32 @@ history is the entire value of doing this in public. And **dry run first, always
 proposed changes before applying them. The PHP level sets carry the bulk of Half A; Laravel-specific
 rules help in Half B.
 
-What Rector will not do is the Laravel 11 skeleton migration. Collapsing `app/Console/Kernel.php` and
-`app/Http/Kernel.php` into `bootstrap/app.php` is a structural change against a codebase with its own
-provider and module layering, and that part is hand work.
+**Ch1 corrected what the hand work in Half B actually is, and this section carried the error until it
+did.** The Laravel 11 slim skeleton is what *new* applications get. The upgrade guide states under
+Application Structure that it does **not recommend** migrating a Laravel 10 application's structure,
+because 11 was tuned to support the 10 structure as-is, and the whole 10 → 11 guide is headed
+*Estimated Upgrade Time: 15 Minutes*. So collapsing `app/Console/Kernel.php` and
+`app/Http/Kernel.php` into `bootstrap/app.php` is **optional work, not required work**. The 28
+middleware files and 12 service providers stay where they are, and any schedule built on the collapse
+being mandatory is budgeting for something upstream advises against doing.
 
-This is where the internals stop being optional. Laravel 11's slim skeleton removes
-`app/Console/Kernel.php` and `app/Http/Kernel.php` in favour of `bootstrap/app.php`, and this
-codebase has 12 service providers and a module autoloading system layered on top of the framework's
-own bootstrapping. There is no way through that does not involve understanding what those providers
-are doing.
+What Rector will not do is the work that does apply, and it is mostly migrations. The guide's High
+Impact list, filtered to this codebase by `AUDIT.md` §5 step 9: PHP 8.2, which Half A already covers;
+6 `->change()` calls across 3 migration files, each of which must now restate every modifier it wants
+to keep, since anything omitted is silently dropped; **38 `double`/`float` migration columns** across
+6 files, all using the `(total, places)` argument form that Laravel 11 rewrote — on a double-entry
+accounting application these are the money columns, which makes this the highest-consequence item in
+the chapter; SQLite 3.26+, which lands on the test environment rather than production; and
+Sanctum 3 → 4, which needs its migrations published and the middleware keys in `config/sanctum.php`
+rewritten against overridden `App\Http\Middleware` classes. Worth budgeting alongside them: Carbon 3's
+`diffIn*` now returns floating-point and signed values, a real hazard in a codebase with recurring
+transactions, and it stops being optional at 12.
+
+The internals still stop being optional here, for a different reason than this section used to give.
+This codebase has 12 service providers and a module autoloading system layered on top of the
+framework's own bootstrapping, and that layering is what the extension surface rests on. Nothing in
+Ch1's coverage map guards it — `modules/` is unmeasured. There is no way through that does not
+involve understanding what those providers are doing.
 
 Every breakage gets documented as it is found, including the ones that turn out to be my mistake.
 This chapter is also the first real verdict on Ch2: the interesting failures are the ones the test
@@ -413,7 +433,8 @@ exists and names every blocker with its cost and the evidence behind it. The mod
 condition that matters most in the first case, because anything short of it means the upgrade broke
 the extension surface.
 
-*Exercises:* service providers, console kernel, framework bootstrapping, Rector, deprecation triage.
+*Exercises:* service providers, module bootstrapping, schema migration semantics, Rector, deprecation
+triage.
 
 ### Ch4 - Renovate, and a report on top of it
 
